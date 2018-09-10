@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ DayTime:9/7/18 12:25 PM :
+  ~ Year:2018 :
+  ~ Author:bini :
+  -->
+<resources>
+    <color name="sanguineRed">#F97242</color>
+
+    <color name="carrotOrange">#FA961F</color>
+
+    <color name="seaFoam">#9DBDBE</color>
+
+    <color name="lakeBlue">#5894BC</color>
+    <color name="winterBlue">#9BE7FF</color>
+
+    <color name="agateBlue">#255766</color>
+
+    <color name="purpleDark">#000000</color>
+    <color name="purpleLight">#2D3551</color>
+    <color name="purple">#040E29</color>
+    <color name="purple_87">#DE040E29</color>
+    <color name="purple_54">#8A040E29</color>
+    <color name="purple_38">#61040E29</color>
+
+    <color name="eerieBlack">#111319</color>
+    <color name="raisinBlack">#222222</color>
+    <color name="darkGunmetal">#1D212B</color>
+    <color name="darkGunmetal_87">#DE1D212B</color>
+    <color name="darkGunmetal_54">#8A1D212B</color>
+    <color name="darkGunmetal_38">#611D212B</color>
+    <color name="gunmetal">#2A2F3D</color>
+    <color name="onyx">#333C37</color>
+    <color name="onyx_87">#DE333C37</color>
+    <color name="onyx_54">#8A333C37</color>
+    <color name="onyx_38">#61333C37</color>
+
+    <color name="gray">#9e9e9e</color>
+    <color name="gray_87">#DE9e9e9e</color>
+    <color name="gray_54">#8A9e9e9e</color>
+    <color name="gray_38">#8A9e9e9e</color>
+
+    <color name="lightGray">#F1F1F1</color>
+    <color name="lightGray_87">#F1F1F1</color>
+    <color name="lightGray_54">#8AF1F1F1</color>
+
+    <color name="whiteSmoke">#F5F5F5</color>
+
+    <color name="white">#FFFFFF</color>
+    <color name="white_87">#DEFFFFFF</color>
+    <color name="white_54">#8AFFFFFF</color>
+    <color name="white_38">#61FFFFFF</color>
+
+    <color name="eggshell">#F2E6DE</color>
+    <color name="eggshell_87">#DEF2E6DE</color>
+    <color name="eggshell_54">#8AF2E6DE</color>
+    <color name="eggshell_38">#61F2E6DE</color>
+
+    <color name="putty">#C1B8B2</color>
+</resources>

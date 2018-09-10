@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ DayTime:9/7/18 12:40 PM :
+  ~ Year:2018 :
+  ~ Author:bini :
+  -->
+
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="Theme.Illini" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowTranslucentStatus" tools:targetApi="kitkat">true</item>
+        <!-- General theme colors -->
+        <item name="colorPrimary">@color/illiniColorPrimary</item>
+        <item name="colorPrimaryDark">@color/illiniColorPrimaryDark</item>
+        <item name="colorAccent">@color/illiniColorAccent</item>
+        <item name="android:colorBackground">@color/illiniBackground</item>
+        <item name="android:colorForeground">@color/illiniForeground</item>
+        <!-- Text Appearance styles -->
+        <item name="android:textViewStyle">@style/TextViewStyle.Condensed</item>
+        <item name="android:textColorPrimary">@color/illiniTextColorPrimary</item>
+        <item name="android:textColorSecondary">@color/illiniTextColorSecondary</item>
+        <item name="android:textColorTertiary">@color/illiniTextColorTertiary</item>
+        <item name="android:textColorLink">@color/illiniTextColorLink</item>
+        <item name="android:textColorHint">@color/illiniTextColorTertiary</item>
+        <item name="android:textColorPrimaryInverse">@color/illiniTextColorPrimaryInverse</item>
+        <item name="android:textColorSecondaryInverse">@color/illiniTextColorSecondaryInverse</item>
+        <item name="android:textColorTertiaryInverse">@color/illiniTextColorTertiaryInverse</item>
+        <item name="android:textColorLinkInverse">@color/illiniTextColorLinkInverse</item>
+        <item name="android:textColorHintInverse">@color/illiniTextColorTertiaryInverse</item>
+        <!-- Custom attributes defined in attrs.xml -->
+
+        <item name="dividerColor">@color/illiniDividerColor</item>
+        <item name="themeName">@string/theme_name_illini</item>
+        <item name="themeDescription">@string/theme_desc_illini</item>
+        <item name="tabLayoutStyle">@style/TabStyle.Dark</item>
+    </style>
+
+    <style name="Theme.SeaFoam" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowTranslucentStatus" tools:targetApi="kitkat">true</item>
+        <!-- General theme colors -->
+        <item name="colorPrimary">@color/seaFoamColorPrimary</item>
+        <item name="colorPrimaryDark">@color/seaFoamColorPrimaryDark</item>
+        <item name="colorAccent">@color/seaFoamColorAccent</item>
+        <item name="android:colorBackground">@color/seaFoamBackground</item>
+        <item name="android:colorForeground">@color/seaFoamForeground</item>
+        <!-- Text Appearance styles -->
+        <item name="android:textViewStyle">@style/TextViewStyle.Serif</item>
+        <item name="android:textColorPrimary">@color/seaFoamTextColorPrimary</item>
+        <item name="android:textColorSecondary">@color/seaFoamTextColorSecondary</item>
+        <item name="android:textColorTertiary">@color/seaFoamTextColorTertiary</item>
+        <item name="android:textColorLink">@color/seaFoamTextColorLink</item>
+        <item name="android:textColorHint">@color/seaFoamTextColorTertiary</item>
+        <item name="android:textColorPrimaryInverse">@color/seaFoamTextColorPrimaryInverse</item>
+        <item name="android:textColorSecondaryInverse">@color/seaFoamTextColorSecondaryInverse</item>
+        <item name="android:textColorTertiaryInverse">@color/seaFoamTextColorTertiaryInverse</item>
+        <item name="android:textColorLinkInverse">@color/seaFoamTextColorLinkInverse</item>
+        <item name="android:textColorHintInverse">@color/seaFoamTextColorTertiaryInverse</item>
+        <!-- Custom attributes defined in attrs.xml -->
+        <item name="dividerColor">@color/seaFoamDividerColor</item>
+        <item name="themeName">@string/theme_name_sea_foam</item>
+        <item name="themeDescription">@string/theme_desc_sea_foam</item>
+        <item name="tabLayoutStyle">@style/TabStyle.Dark.Serif</item>
+    </style>
+
+    <style name="Theme.Tokyo" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowTranslucentStatus" tools:targetApi="kitkat">true</item>
+        <!-- General theme colors -->
+        <item name="colorPrimary">@color/tokyoColorPrimary</item>
+        <item name="colorPrimaryDark">@color/tokyoColorPrimaryDark</item>
+        <item name="colorAccent">@color/tokyoColorAccent</item>
+        <item name="colorControlNormal">@color/tokyoColorNormal</item>
+        <!-- Text Appearance styles -->
+        <item name="android:colorBackground">@color/tokyoBackground</item>
+        <item name="android:colorForeground">@color/tokyoForeground</item>
+        <item name="android:textColorLink">@color/tokyoTextColorLink</item>
+        <item name="android:textColorLinkInverse">@color/tokyoTextColorLinkInverse</item>
+        <!-- Custom attributes defined in attrs.xml -->
+
+        <item name="dividerColor">@color/tokyoDividerColor</item>
+        <item name="themeName">@string/theme_name_tokyo</item>
+        <item name="themeDescription">@string/theme_desc_tokyo</item>
+        <item name="tabLayoutStyle">@style/TabStyle.Light</item>
+    </style>
+
+    <style name="ThemeOverlay.Illini" parent="ThemeOverlay.AppCompat.Dark">
+        <item name="colorPrimary">@color/illiniColorPrimary</item>
+        <item name="colorPrimaryDark">@color/illiniColorPrimaryDark</item>
+        <item name="colorAccent">@color/illiniColorAccent</item>
+        <item name="android:colorBackground">@color/illiniBackground</item>
+        <item name="android:colorForeground">@color/illiniForeground</item>
+        <item name="android:textViewStyle">@style/TextViewStyle.Condensed</item>
+        <item name="android:textColorPrimary">@color/illiniTextColorPrimary</item>
+        <item name="android:textColorSecondary">@color/illiniTextColorSecondary</item>
+        <item name="android:textColorTertiary">@color/illiniTextColorTertiary</item>
+        <item name="android:textColorLink">@color/illiniTextColorLink</item>
+        <item name="android:textColorHint">@color/illiniTextColorTertiary</item>
+        <item name="android:textColorPrimaryInverse">@color/illiniTextColorPrimaryInverse</item>
+        <item name="android:textColorSecondaryInverse">@color/illiniTextColorSecondaryInverse</item>
+        <item name="android:textColorTertiaryInverse">@color/illiniTextColorTertiaryInverse</item>
+        <item name="android:textColorLinkInverse">@color/illiniTextColorLinkInverse</item>
+        <item name="android:textColorHintInverse">@color/illiniTextColorTertiaryInverse</item>
+        <item name="themeName">@string/theme_name_illini</item>
+        <item name="themeDescription">@string/theme_desc_illini</item>
+    </style>
+
+    <style name="ThemeOverlay.SeaFoam" parent="ThemeOverlay.AppCompat.Light">
+        <item name="colorPrimary">@color/seaFoamColorPrimary</item>
+        <item name="colorPrimaryDark">@color/seaFoamColorPrimaryDark</item>
+        <item name="colorAccent">@color/seaFoamColorAccent</item>
+        <item name="android:textViewStyle">@style/TextViewStyle.Serif</item>
+        <item name="android:colorBackground">@color/seaFoamBackground</item>
+        <item name="android:colorForeground">@color/seaFoamForeground</item>
+        <item name="android:textColorPrimary">@color/seaFoamTextColorPrimary</item>
+        <item name="android:textColorSecondary">@color/seaFoamTextColorSecondary</item>
+        <item name="android:textColorTertiary">@color/seaFoamTextColorTertiary</item>
+        <item name="android:textColorLink">@color/seaFoamTextColorLink</item>
+        <item name="android:textColorHint">@color/seaFoamTextColorTertiary</item>
+        <item name="android:textColorPrimaryInverse">@color/seaFoamTextColorPrimaryInverse</item>
+        <item name="android:textColorSecondaryInverse">@color/seaFoamTextColorSecondaryInverse</item>
+        <item name="android:textColorTertiaryInverse">@color/seaFoamTextColorTertiaryInverse</item>
+        <item name="android:textColorLinkInverse">@color/seaFoamTextColorLinkInverse</item>
+        <item name="android:textColorHintInverse">@color/seaFoamTextColorTertiaryInverse</item>
+        <item name="themeName">@string/theme_name_sea_foam</item>
+        <item name="themeDescription">@string/theme_desc_sea_foam</item>
+    </style>
+
+    <style name="ThemeOverlay.Tokyo" parent="ThemeOverlay.AppCompat.Light">
+        <item name="colorPrimary">@color/tokyoColorPrimary</item>
+        <item name="colorPrimaryDark">@color/tokyoColorPrimaryDark</item>
+        <item name="colorAccent">@color/tokyoColorAccent</item>
+        <item name="colorControlNormal">@color/tokyoColorNormal</item>
+        <item name="android:colorBackground">@color/tokyoBackground</item>
+        <item name="android:colorForeground">@color/tokyoForeground</item>
+        <item name="android:textColorLink">@color/tokyoTextColorLink</item>
+        <item name="android:textColorLinkInverse">@color/tokyoTextColorLinkInverse</item>
+        <item name="themeName">@string/theme_name_tokyo</item>
+        <item name="themeDescription">@string/theme_desc_tokyo</item>
+    </style>
+
+</resources>
