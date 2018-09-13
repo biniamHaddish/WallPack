@@ -1,10 +1,11 @@
 /*
- * DayTime:9/5/18 4:07 PM :
+ * DayTime:9/13/18 12:04 PM :
  * Year:2018 :
- * Author:biniam.Haddish :
+ * Author:bini :
  */
 
-package com.berhane.biniam.wallpack.wallpack.utils
+
+package com.berhane.biniam.wallpack.wallpack.utils.adapter
 
 import android.animation.ObjectAnimator
 import android.content.Context
@@ -17,6 +18,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.berhane.biniam.wallpack.wallpack.R
 import com.berhane.biniam.wallpack.wallpack.model.data.Photos
+import com.berhane.biniam.wallpack.wallpack.utils.image_utills.ColorShifter
 import com.bumptech.glide.GenericTransitionOptions
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.transition.ViewPropertyTransition
@@ -62,6 +64,7 @@ class WallPackPhotoAdapter(wallPackList: List<Photos>, context: Context) :
         val displayMetrics = context.getResources().getDisplayMetrics()
         val imageHeight: Float = displayMetrics.widthPixels / (wallPackPhotos.width.toFloat() / wallPackPhotos.height.toFloat())
 
+
         Glide.with(context)
                 .load(wallPackPhotos.urls.regular)
                 .transition(GenericTransitionOptions.with(fadeAnimation))
@@ -69,18 +72,6 @@ class WallPackPhotoAdapter(wallPackList: List<Photos>, context: Context) :
         holder.image_preview.minimumHeight = imageHeight.toInt()
 
 
-//        val colorFrom = ColorShifter.computeCardBackgroundColor(context, wallPackPhotos.color)
-//        val colorTo: Int
-//
-//        if(wallPackPhotos.color != null) {
-//            colorTo = Color.parseColor(wallPackPhotos.color)
-//        } else {
-//            colorTo = colorFrom
-//        }
-//        val colorAnimation = ValueAnimator.ofObject(ArgbEvaluator(), colorFrom, colorTo)
-//        colorAnimation.duration = 500
-//        colorAnimation.addUpdateListener { animator -> holder.image_preview.setBackgroundColor(animator.animatedValue as Int) }
-//        colorAnimation.start()
     }
 
     class WallPackHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -88,7 +79,6 @@ class WallPackPhotoAdapter(wallPackList: List<Photos>, context: Context) :
         var image_preview: ImageView = itemView.findViewById(R.id.image_preview)
         var authorName: TextView = itemView.findViewById(R.id.author)
         var author_image: ImageView = itemView.findViewById(R.id.author_image)
-        // var publishDate: TextView = itemView.findViewById(R.id.Date)
     }
 
 
@@ -104,3 +94,4 @@ class WallPackPhotoAdapter(wallPackList: List<Photos>, context: Context) :
         notifyDataSetChanged()
     }
 }
+

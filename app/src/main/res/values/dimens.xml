@@ -3,4 +3,5 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="photo_info_base_view_height">400dp</dimen>
+    <dimen name="image_margin_left">20dp</dimen>
 </resources>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ DayTime:9/12/18 1:31 PM :
+  ~ Year:2018 :
+  ~ Author:bini :
+  -->
+    <selector xmlns:android="http://schemas.android.com/apk/res/android">
+        <item
+            android:state_checked="true"
+            android:color="@color/raisinBlack" />
+        <item
+            android:state_checked="false"
+            android:color="@color/white"
+            />
+    </selector>

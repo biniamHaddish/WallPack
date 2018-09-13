@@ -1,10 +1,16 @@
 /*
+ * DayTime:9/13/18 12:05 PM :
+ * Year:2018 :
+ * Author:bini :
+ */
+
+/*
  * DayTime:9/6/18 6:31 PM :
  * Year:2018 :
  * Author:bini :
  */
 
-package com.berhane.biniam.wallpack.wallpack.utils
+package com.berhane.biniam.wallpack.wallpack.utils.image_utills
 
 import android.content.Context
 import android.content.res.Configuration

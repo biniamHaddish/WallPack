@@ -1,8 +1,10 @@
 <resources>
     <string name="app_name">WallPack</string>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="photo_collections">Collection</string>
+    <string name="trending">Trending</string>
+    <string name="photo_search">Search</string>
+
 
     <string name="theme_name_tokyo">Tokyo</string>
     <string name="theme_name_illini">Illini</string>
@@ -29,4 +31,6 @@
     <string name="sample_text_secondary_inverse">android:textColorSecondaryInverse</string>
     <string name="sample_text_tertiary_inverse">android:textColorTertiaryInverse</string>
     <string name="sample_text_link_inverse">android:textColorLinkInverse</string>
+
+    <string name="photos">%1$s Photos</string>
 </resources>

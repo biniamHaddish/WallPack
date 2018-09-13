@@ -10,6 +10,7 @@ import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.util.Log
 import com.berhane.biniam.wallpack.wallpack.api.UnsplashApi
+import com.berhane.biniam.wallpack.wallpack.model.data.PhotoCollection
 import com.berhane.biniam.wallpack.wallpack.model.data.Photos
 import com.berhane.biniam.wallpack.wallpack.utils.PhotoConstants
 import com.google.gson.GsonBuilder
@@ -20,6 +21,10 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class RetrofitClient {
+
+
+    val TAG = "RetrofitClient"
+
     //To make a reference for the retrofit Class to other Classes
     companion object {
         fun getRetrofitClient(): RetrofitClient {
@@ -48,6 +53,7 @@ class RetrofitClient {
                 .build()
                 .create(UnsplashApi::class.java)
     }
+
     /**
      * will request some images from Unsplash.com
      */
@@ -83,6 +89,26 @@ class RetrofitClient {
             override fun onFailure(call: Call<List<Photos>>, t: Throwable) {
                 t.printStackTrace()
                 Log.d("Retrofit", t.message)
+            }
+        })
+        return data
+    }
+
+    /**
+     * Returning the collection of Photos
+     */
+    fun requestPhotoCollections(page: Int, perPage: Int): LiveData<List<PhotoCollection>> {
+        val getPhotoCollections = retrofitClient(okhttpClient()).getAllCollections(page, perPage)
+        val data: MutableLiveData<List<PhotoCollection>> = MutableLiveData()
+        getPhotoCollections.enqueue(object : Callback<List<PhotoCollection>> {
+            override fun onResponse(call: Call<List<PhotoCollection>>, response: retrofit2.Response<List<PhotoCollection>>) {
+                data.value = response.body()
+                Log.d(TAG, "" + response.body().toString())
+            }
+
+            override fun onFailure(call: Call<List<PhotoCollection>>, t: Throwable) {
+                t.printStackTrace()
+                Log.e(TAG, t.message)
             }
         })
         return data

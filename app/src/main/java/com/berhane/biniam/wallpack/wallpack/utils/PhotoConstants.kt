@@ -15,10 +15,10 @@ object PhotoConstants {
     const val SECRET_KEY: String = BuildConfig.SECRET_KEY
 
     val BASE_URL: String = "https://api.unsplash.com/"
-    const val latest: String = "latest"
-    const val oldest: String = "oldest"
-    const val popular: String = "popular"
-    const val perPage:Int = 20
+    const val LATEST: String = "LATEST"
+    const val OLDEST: String = "oldest"
+    const val POPULAR: String = "popular"
+    const val PERPAGE: Int = 25
 
     const val CATEGORY_TOTAL_NEW = 10
     const val CATEGORY_TOTAL_FEATURED = 20
@@ -28,7 +28,6 @@ object PhotoConstants {
     const val CATEGORY_OBJECTS_ID = 60
     const val CATEGORY_PEOPLE_ID = 70
     const val CATEGORY_TECHNOLOGY_ID = 80
-
 
     const val DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss"
     const val DOWNLOAD_PATH = "/Pictures/wallpack/"

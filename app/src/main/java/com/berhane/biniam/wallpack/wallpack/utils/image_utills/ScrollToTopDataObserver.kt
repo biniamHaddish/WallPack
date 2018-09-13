@@ -4,7 +4,7 @@
  * Author:bini :
  */
 
-package com.berhane.biniam.wallpack.wallpack.utils
+package com.berhane.biniam.wallpack.wallpack.utils.image_utills
 
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView

@@ -1,10 +1,16 @@
 /*
+ * DayTime:9/13/18 12:05 PM :
+ * Year:2018 :
+ * Author:bini :
+ */
+
+/*
  * DayTime:9/8/18 11:27 PM :
  * Year:2018 :
  * Author:bini :
  */
 
-package com.berhane.biniam.wallpack.wallpack.utils;
+package com.berhane.biniam.wallpack.wallpack.utils.image_utills;
 
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;

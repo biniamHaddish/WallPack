@@ -1,10 +1,16 @@
 /*
+ * DayTime:9/13/18 12:05 PM :
+ * Year:2018 :
+ * Author:bini :
+ */
+
+/*
  * DayTime:9/7/18 4:37 PM :
  * Year:2018 :
  * Author:bini :
  */
 
-package com.berhane.biniam.wallpack.wallpack.utils;
+package com.berhane.biniam.wallpack.wallpack.utils.image_utills;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

@@ -7,37 +7,30 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/swipeContainerNew"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
-        <com.jcodecraeer.xrecyclerview.XRecyclerView
-            android:id="@+id/photo_recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:gravity="center"
-            android:visibility="gone"
-            android:scrollbars="none"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            />
+    <FrameLayout
+        android:id="@+id/fragmentContainer"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    </android.support.v4.widget.SwipeRefreshLayout>
+    </FrameLayout>
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="0dp"
-        android:layout_marginStart="0dp"
-        android:background="?android:attr/windowBackground"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:menu="@menu/navigation" />
+        app:menu="@menu/navigation"
+        android:background="@color/seaFoamTextColorLinkInverse"
+        app:itemIconTint="@drawable/bottom_navigation_colors"
+        app:itemTextColor="@drawable/bottom_navigation_colors"
+        />
+
 
 </android.support.constraint.ConstraintLayout>

@@ -8,6 +8,7 @@ package com.berhane.biniam.wallpack.wallpack.model.View
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.ViewModel
+import com.berhane.biniam.wallpack.wallpack.model.data.PhotoCollection
 import com.berhane.biniam.wallpack.wallpack.model.data.Photos
 import com.berhane.biniam.wallpack.wallpack.utils.PhotoConstants
 import com.berhane.biniam.wallpack.wallpack.utils.connectivity.RetrofitClient
@@ -16,14 +17,15 @@ import com.berhane.biniam.wallpack.wallpack.utils.connectivity.RetrofitClient
 class WallPackViewModel : ViewModel() {
 
     private var wallPackLiveData: LiveData<List<Photos>>? = null
-    private var retrofitClient : RetrofitClient? = null
+    private var wallpackPhotoCollection :LiveData<List<PhotoCollection>>?=null
+    private var retrofitClient: RetrofitClient? = null
 
     //loading the Photos with LiveData
-    fun  loadData(perpage :Int):LiveData<List<Photos>>?{
-        if (retrofitClient==null) {
-            retrofitClient= RetrofitClient.getRetrofitClient()
+    fun loadData(perpage: Int): LiveData<List<Photos>>? {
+        if (retrofitClient == null) {
+            retrofitClient = RetrofitClient.getRetrofitClient()
         }
-        this.wallPackLiveData = retrofitClient!!.requestImages(perpage, PhotoConstants.perPage, PhotoConstants.latest)
+        this.wallPackLiveData = retrofitClient!!.requestImages(perpage, PhotoConstants.PERPAGE, PhotoConstants.LATEST)
         return wallPackLiveData
     }
 
@@ -31,16 +33,21 @@ class WallPackViewModel : ViewModel() {
         if (null == retrofitClient) {
             retrofitClient = RetrofitClient.getRetrofitClient()
         }
-        if (-1!= categoryId) {
-            this.wallPackLiveData = retrofitClient!!.requestPhotosByCategory(categoryId, pageIndex, PhotoConstants.perPage)
+        if (-1 != categoryId) {
+            this.wallPackLiveData = retrofitClient!!.requestPhotosByCategory(categoryId, pageIndex, PhotoConstants.PERPAGE)
         } else {
-            this.wallPackLiveData = retrofitClient!!.requestImages(pageIndex, PhotoConstants.perPage,
-                    PhotoConstants.latest)
+            this.wallPackLiveData = retrofitClient!!.requestImages(pageIndex, PhotoConstants.PERPAGE,
+                    PhotoConstants.LATEST)
         }
         return wallPackLiveData!!
     }
 
+    fun getPhotoCollection(page: Int, perPage: Int): LiveData<List<PhotoCollection>>? {
+        if (null == retrofitClient) {
+            retrofitClient = RetrofitClient.getRetrofitClient()
+        }
+        this.wallpackPhotoCollection= retrofitClient!!.requestPhotoCollections(page,perPage)
+        return wallpackPhotoCollection
 
-
-
+    }
 }
