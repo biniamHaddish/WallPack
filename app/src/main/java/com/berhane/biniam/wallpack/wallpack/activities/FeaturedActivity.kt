@@ -1,10 +1,10 @@
 /*
- * DayTime:9/5/18 2:40 PM :
+ * DayTime:9/14/18 1:13 PM :
  * Year:2018 :
  * Author:bini :
  */
 
-package com.berhane.biniam.wallpack.wallpack
+package com.berhane.biniam.wallpack.wallpack.activities
 
 import android.app.Activity
 import android.content.Context
@@ -14,15 +14,12 @@ import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.view.WindowManager
+import com.berhane.biniam.wallpack.wallpack.R
 import com.berhane.biniam.wallpack.wallpack.View.frag.CollectionFragment
-import com.berhane.biniam.wallpack.wallpack.View.frag.CuratedFrag
 import com.berhane.biniam.wallpack.wallpack.View.frag.NewPhotosFragment
-import com.berhane.biniam.wallpack.wallpack.activities.FeaturedActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
-
-class MainActivity : AppCompatActivity() {
-
+class FeaturedActivity:AppCompatActivity() {
     private lateinit var context: Context
     private val manager = supportFragmentManager
 
@@ -58,14 +55,13 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.featured_activity)
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
         val localLayoutParams = window.attributes
         localLayoutParams.flags = (WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS or localLayoutParams.flags)
         context = this
-        val newPhotoFragment = NewPhotosFragment.newInstance()
-        loadFragment(newPhotoFragment)
     }
+
 
     /**
      *  load Fragment here using the fragment obj
@@ -76,16 +72,8 @@ class MainActivity : AppCompatActivity() {
         transaction.addToBackStack(null)
         transaction.commit()
     }
-    fun loadActivity(activity:Activity){
+    fun loadActivity(activity: Activity){
         val intent = Intent(context, activity::class.java)
         startActivity(intent)
     }
-
 }
-
-
-
-
-
-
-

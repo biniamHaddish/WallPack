@@ -6,6 +6,8 @@
 
 package com.berhane.biniam.wallpack.wallpack.utils
 
+import android.app.Activity
+import android.widget.Toast
 import com.berhane.biniam.wallpack.wallpack.BuildConfig
 
 
@@ -18,6 +20,7 @@ object PhotoConstants {
     const val LATEST: String = "LATEST"
     const val OLDEST: String = "oldest"
     const val POPULAR: String = "popular"
+    const val TRENDING: String = "trending"
     const val PERPAGE: Int = 25
 
     const val CATEGORY_TOTAL_NEW = 10

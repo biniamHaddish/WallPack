@@ -2,7 +2,7 @@
     <string name="app_name">WallPack</string>
     <string name="title_home">Home</string>
     <string name="photo_collections">Collection</string>
-    <string name="trending">Trending</string>
+    <string name="trending">Featured</string>
     <string name="photo_search">Search</string>
 
 

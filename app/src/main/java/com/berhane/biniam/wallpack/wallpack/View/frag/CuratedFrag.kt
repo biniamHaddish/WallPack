@@ -1,93 +1,61 @@
 /*
- * DayTime:9/13/18 11:43 AM :
+ * DayTime:9/9/18 10:31 PM :
  * Year:2018 :
  * Author:bini :
  */
 
 package com.berhane.biniam.wallpack.wallpack.View.frag
 
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.view.ViewCompat.setBackground
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.StaggeredGridLayoutManager
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import com.berhane.biniam.wallpack.wallpack.R
 import com.berhane.biniam.wallpack.wallpack.model.View.WallPackViewModel
-import com.berhane.biniam.wallpack.wallpack.model.data.PhotoCollection
+import com.berhane.biniam.wallpack.wallpack.model.data.Photos
 import com.berhane.biniam.wallpack.wallpack.utils.PhotoConstants
-import com.berhane.biniam.wallpack.wallpack.utils.WallPack
-import com.berhane.biniam.wallpack.wallpack.utils.adapter.CollectionAdapter
+import com.berhane.biniam.wallpack.wallpack.utils.adapter.WallPackPhotoAdapter
 import com.bumptech.glide.Glide
-import com.google.gson.Gson
 import com.jcodecraeer.xrecyclerview.ProgressStyle
 import com.jcodecraeer.xrecyclerview.XRecyclerView
+import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.Toolbar
 
-class CollectionFragment : Fragment() {
+
+class CuratedFrag : Fragment() {
 
     private var pageNumber: Int = 1
     private lateinit var viewModel: WallPackViewModel
     private lateinit var mRecyclerView: XRecyclerView
-    private var viewAdapter: CollectionAdapter? = null
+    private var viewAdapter: WallPackPhotoAdapter? = null
 
-    val TAG = "CollectionFragment"
 
+    val TAG = "CuratedFrag"
 
     companion object {
-        fun newInstance() = CollectionFragment()
-    }
-
-
-    override fun onAttach(context: Context?) {
-        super.onAttach(context)
-
-        Log.d(TAG,"fragment Attatched")
-    }
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        Log.d(TAG, "onCreate")
-    }
-
-
-    @SuppressLint("ClickableViewAccessibility")
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val rootView = inflater!!.inflate(R.layout.collection_fragment, container, false)
-        viewModel = ViewModelProviders.of(this).get(WallPackViewModel::class.java)
-        mRecyclerView = rootView.findViewById(R.id.CollectionRecyclerView)
-        mRecyclerView.setOnTouchListener(object : View.OnTouchListener {
-            override fun onTouch(v: View?, event: MotionEvent?): Boolean {
-                when (event?.action) {
-                    MotionEvent.ACTION_DOWN -> false
-                }
-
-                return v?.onTouchEvent(event) ?: true
-            }
-        })
-        return rootView
+        fun newInstance() = CuratedFrag()
     }
 
     override fun onResume() {
         super.onResume()
-        loadPhotoCollections(false)
+        loadCuratedPhotos(false)
         mRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
                 when (newState) {
                     RecyclerView.SCROLL_STATE_IDLE -> {
-                        Glide.with(this@CollectionFragment).resumeRequests()
+                        Glide.with(this@CuratedFrag).resumeRequests()
                     }
                     else -> {
-                        Glide.with(this@CollectionFragment).pauseRequests()
+                        Glide.with(this@CuratedFrag).pauseRequests()
                     }
                 }
             }
@@ -95,25 +63,38 @@ class CollectionFragment : Fragment() {
 
     }
 
-    /**
-     * Will let the fragment start after the base activity is finished
-     */
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        val rootView = inflater!!.inflate(R.layout.curated_fragment, container, false)
+
+
+//        val toolbar = view!!.findViewById(R.id.curatedToolbar) as Toolbar
+//
+//        //set toolbar appearance
+//       //toolbar.background=R.color.abc_hint_foreground_material_light\
+//
+//        //for crate home button
+//        val activity = activity as AppCompatActivity?
+//        activity!!.setSupportActionBar(toolbar)
+//        activity.supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+
+        viewModel = ViewModelProviders.of(this).get(WallPackViewModel::class.java)
+        mRecyclerView = rootView.findViewById(R.id.CuratedRecyclerView)
+        return rootView
+    }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         initCollection()
     }
 
-    /**
-     * Will Load more CollectionFragment if the value is true
-     */
-    fun loadPhotoCollections(moreCollection: Boolean) {
-        viewModel.getPhotoCollection(pageNumber, PhotoConstants.PERPAGE)!!.observe(this@CollectionFragment,
-                Observer<List<PhotoCollection>> { t: List<PhotoCollection>? ->
+    fun loadCuratedPhotos(loadMore:Boolean){
+        viewModel.getCuratedPhotos(pageNumber,PhotoConstants.PERPAGE,PhotoConstants.POPULAR)!!.observe(this@CuratedFrag,
+                Observer<List<Photos>> { t: List<Photos>? ->
                     if (viewAdapter == null) {
-                        viewAdapter = CollectionAdapter(t!!, activity as Activity)
+                        viewAdapter = WallPackPhotoAdapter(t!!, activity as Activity)
                         mRecyclerView.adapter = viewAdapter
                     } else {
-                        if (moreCollection) {
+                        if (loadMore) {
                             viewAdapter!!.addImageInfo(t!!)
                             mRecyclerView.loadMoreComplete()
                         } else {
@@ -121,10 +102,9 @@ class CollectionFragment : Fragment() {
                             mRecyclerView.refreshComplete()
                         }
                     }
-
-                }
-        )
+                })
     }
+
 
     /**
      * initializing the value of our CollectionFragment here
@@ -139,30 +119,15 @@ class CollectionFragment : Fragment() {
         mRecyclerView.setLoadingListener(object : XRecyclerView.LoadingListener {
             override fun onLoadMore() {
                 ++pageNumber
-                loadPhotoCollections(true)
+                loadCuratedPhotos(true)
             }
 
             override fun onRefresh() {
                 pageNumber = 1
-                loadPhotoCollections(false)
+                loadCuratedPhotos(false)
             }
         })
-        mRecyclerView.setOnClickListener(onClickListener)
     }
-
-    private val onClickListener = object : View.OnClickListener {
-        override fun onClick(p0: View?) {
-            Log.d(TAG,p0.toString())
-        }
-//
-//        fun onClick(v: View, adapter: CollectionAdapter, item: PhotoCollection, position: Int): Boolean {
-//            val i = Intent(context, CollectionDetailActivity::class.java)
-//            i.putExtra("Collection", Gson().toJson(item))
-//            startActivity(i)
-//            return false
-//        }
-    }
-
     override fun onDetach() {
         Log.d(TAG, "onDetach")
         super.onDetach()

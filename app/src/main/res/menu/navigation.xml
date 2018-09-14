@@ -5,20 +5,18 @@
         android:id="@+id/navigation_home"
         android:icon="@drawable/ic_round_home_24px"
         android:title="@string/title_home" />
-
-    <item
-        android:id="@+id/photo_search"
-        android:icon="@drawable/ic_round_image_search_24px"
-        android:title="@string/photo_search" />
-
     <item
         android:id="@+id/photo_collection"
-        android:icon="@drawable/ic_round_photo_library_24px"
+        android:icon="@drawable/ic_baseline_photo_library_24px"
         android:title="@string/photo_collections" />
 
     <item
-        android:id="@+id/trending_photos"
-        android:icon="@drawable/ic_round_trending_up_24px"
+        android:id="@+id/featured"
+        android:icon="@drawable/ic_fire"
         android:title="@string/trending" />
+    <item
+        android:id="@+id/photo_search"
+        android:icon="@drawable/ic_magnify"
+        android:title="@string/photo_search" />
 
 </menu>

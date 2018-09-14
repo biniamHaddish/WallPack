@@ -17,6 +17,7 @@ import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Callback
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -110,6 +111,26 @@ class RetrofitClient {
                 t.printStackTrace()
                 Log.e(TAG, t.message)
             }
+        })
+        return data
+    }
+
+    /**
+     * Will return a Curated Photos depending on the Sort Order
+     */
+    fun requestCuratedPhotos(page: Int, perpage: Int, sortOrder: String): LiveData<List<Photos>> {
+        val getCuratedPhotos = retrofitClient(okhttpClient()).getCuratedPhotos(page, perpage, sortOrder)
+        val data: MutableLiveData<List<Photos>> = MutableLiveData()
+        getCuratedPhotos.enqueue(object : Callback<List<Photos>> {
+            override fun onFailure(call: Call<List<Photos>>, t: Throwable) {
+                t.printStackTrace()
+                Log.e(TAG, t.message)
+            }
+            override fun onResponse(call: Call<List<Photos>>, response: Response<List<Photos>>) {
+                Log.d(TAG,response.body().toString())
+                data.value = response.body()
+            }
+
         })
         return data
     }
