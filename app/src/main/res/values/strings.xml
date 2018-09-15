@@ -4,6 +4,7 @@
     <string name="photo_collections">Collection</string>
     <string name="trending">Featured</string>
     <string name="photo_search">Search</string>
+    <string name="action_settings">Setting</string>
 
 
     <string name="theme_name_tokyo">Tokyo</string>
@@ -31,6 +32,16 @@
     <string name="sample_text_secondary_inverse">android:textColorSecondaryInverse</string>
     <string name="sample_text_tertiary_inverse">android:textColorTertiaryInverse</string>
     <string name="sample_text_link_inverse">android:textColorLinkInverse</string>
-
     <string name="photos">%1$s Photos</string>
+
+    <!--menu -->
+
+
+    <string name="sort_menu">Sort By</string>
+    <string name="menu_latest">Latest</string>
+    <string name="menu_old">Oldest</string>
+    <string name="menu_popular">Popular</string>
+
+
+
 </resources>

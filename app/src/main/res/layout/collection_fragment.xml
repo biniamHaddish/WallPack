@@ -3,6 +3,9 @@
   ~ Year:2018 :
   ~ Author:bini :
   -->
+<RelativeLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -16,7 +19,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:visibility="visible" />
+        android:visibility="visible"
+        android:layout_centerInParent="true"
+        />
 
     <com.jcodecraeer.xrecyclerview.XRecyclerView
         android:id="@+id/CollectionRecyclerView"
@@ -33,3 +38,4 @@
 
 
 </FrameLayout>
+</RelativeLayout>

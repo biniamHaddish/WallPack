@@ -16,7 +16,7 @@
         android:theme="@style/Theme.Tokyo">
 
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.MainActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,14 +24,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".activities.FeaturedActivity"
-            android:parentActivityName=".activities.FeaturedActivity"
-            android:theme="@style/Theme.Tokyo">
+            android:theme="@style/Theme.TokyoActionBar"
+            >
 
         </activity>
-
     </application>
 
 </manifest>

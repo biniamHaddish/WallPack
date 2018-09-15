@@ -1,37 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- Illini Theme -->
-    <color name="illiniColorPrimary">@color/darkGunmetal</color>
-    <color name="illiniColorPrimaryDark">@color/eerieBlack</color>
-    <color name="illiniColorAccent">@color/carrotOrange</color>
-    <color name="illiniBackground">@color/gunmetal</color>
-    <color name="illiniForeground">@color/putty</color>
-    <color name="illiniDividerColor">@color/eggshell_38</color>
-    <color name="illiniTextColorPrimary">@color/eggshell</color>
-    <color name="illiniTextColorSecondary">@color/eggshell_87</color>
-    <color name="illiniTextColorTertiary">@color/eggshell_54</color>
-    <color name="illiniTextColorLink">@color/winterBlue</color>
-    <color name="illiniTextColorPrimaryInverse">@color/darkGunmetal</color>
-    <color name="illiniTextColorSecondaryInverse">@color/darkGunmetal_54</color>
-    <color name="illiniTextColorTertiaryInverse">@color/darkGunmetal_38</color>
-    <color name="illiniTextColorLinkInverse">@color/lakeBlue</color>
-
-    <!-- Sea Foam Theme -->
-    <color name="seaFoamColorPrimary">@color/onyx</color>
-    <color name="seaFoamColorPrimaryDark">@color/raisinBlack</color>
-    <color name="seaFoamColorAccent">@color/seaFoam</color>
-    <color name="seaFoamBackground">@color/lightGray</color>
-    <color name="seaFoamForeground">@color/onyx</color>
-    <color name="seaFoamDividerColor">@color/lightGray_54</color>
-    <color name="seaFoamTextColorPrimary">@color/onyx</color>
-    <color name="seaFoamTextColorSecondary">@color/onyx_87</color>
-    <color name="seaFoamTextColorTertiary">@color/onyx_54</color>
-    <color name="seaFoamTextColorLink">@color/lakeBlue</color>
-    <color name="seaFoamTextColorPrimaryInverse">@color/lightGray</color>
-    <color name="seaFoamTextColorSecondaryInverse">@color/lightGray_87</color>
-    <color name="seaFoamTextColorTertiaryInverse">@color/lightGray_54</color>
-    <color name="seaFoamTextColorLinkInverse">@color/winterBlue</color>
 
     <!-- Tokyo Theme -->
     <color name="tokyoColorPrimary">@color/white</color>
@@ -44,5 +13,42 @@
     <color name="tokyoTextColorLink">@color/agateBlue</color>
     <color name="tokyoTextColorLinkInverse">@color/winterBlue</color>
 
+
+    <!--black and White Combo Theme classic Theme-->
+    <color name="black">#000000</color>
+    <color name="transparent">#00ffffff</color>
+
+    <color name="colorPrimary_light">#ffffff</color>
+    <color name="colorPrimaryDark_light">#F5F5F5</color>
+    <color name="colorAccent_light">#26292c</color>
+    <color name="colorText_light">#000000</color>
+    <color name="colorTextSecondary_light">#96000000</color>
+    <color name="menuBackground_light">#ccffffff</color>
+    <color name="cardBackgroundColor_light">#ffffff</color>
+    <color name="progressBarColor_light">#000000</color>
+    <color name="rippleColor_light">#40000000</color>
+    <color name="previewBackgroundColor_light">#212121</color>
+
+    <color name="colorPrimary_dark">#212121</color>
+    <color name="colorPrimaryDark_dark">#1a1a1a</color>
+    <color name="colorAccent_dark">#1a1a1a</color>
+    <color name="colorText_dark">#ffffff</color>
+    <color name="colorTextSecondary_dark">#96ffffff</color>
+    <color name="menuBackground_dark">#cc000000</color>
+    <color name="cardBackgroundColor_dark">#303030</color>
+    <color name="progressBarColor_dark">#ffffff</color>
+    <color name="rippleColor_dark">#40ffffff</color>
+    <color name="previewBackgroundColor_dark">#212121</color>
+
+    <color name="colorPrimary_black">#000000</color>
+    <color name="colorPrimaryDark_black">#1a1a1a</color>
+    <color name="colorAccent_black">#1a1a1a</color>
+    <color name="colorText_black">#ffffff</color>
+    <color name="colorTextSecondary_black">#96ffffff</color>
+    <color name="menuBackground_black">#cc000000</color>
+    <color name="cardBackgroundColor_black">#1a1a1a</color>
+    <color name="progressBarColor_black">#ffffff</color>
+    <color name="rippleColor_black">#40ffffff</color>
+    <color name="previewBackgroundColor_black">#000000</color>
 
 </resources>

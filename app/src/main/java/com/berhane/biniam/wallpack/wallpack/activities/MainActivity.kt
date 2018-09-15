@@ -1,10 +1,16 @@
 /*
+ * DayTime:9/15/18 11:24 PM :
+ * Year:2018 :
+ * Author:bini :
+ */
+
+/*
  * DayTime:9/5/18 2:40 PM :
  * Year:2018 :
  * Author:bini :
  */
 
-package com.berhane.biniam.wallpack.wallpack
+package com.berhane.biniam.wallpack.wallpack.activities
 
 import android.app.Activity
 import android.content.Context
@@ -14,10 +20,9 @@ import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.view.WindowManager
+import com.berhane.biniam.wallpack.wallpack.R
 import com.berhane.biniam.wallpack.wallpack.View.frag.CollectionFragment
-import com.berhane.biniam.wallpack.wallpack.View.frag.CuratedFrag
 import com.berhane.biniam.wallpack.wallpack.View.frag.NewPhotosFragment
-import com.berhane.biniam.wallpack.wallpack.activities.FeaturedActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -47,7 +52,7 @@ class MainActivity : AppCompatActivity() {
 //                val curatedFrag = CuratedFrag.newInstance()
 //                loadFragment(curatedFrag)
 
-                val activity=FeaturedActivity()
+                val activity= FeaturedActivity()
                 loadActivity(activity)
                 return@OnNavigationItemSelectedListener true
             }
@@ -60,6 +65,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+
         val localLayoutParams = window.attributes
         localLayoutParams.flags = (WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS or localLayoutParams.flags)
         context = this

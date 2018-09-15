@@ -1,5 +1,5 @@
 /*
- * DayTime:9/14/18 1:13 PM :
+ * DayTime:9/15/18 12:22 PM :
  * Year:2018 :
  * Author:bini :
  */
@@ -13,13 +13,17 @@ import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
-import android.view.WindowManager
+import android.support.v7.widget.Toolbar
+import android.view.Menu
+import android.view.MenuItem
+import android.widget.Toast
 import com.berhane.biniam.wallpack.wallpack.R
 import com.berhane.biniam.wallpack.wallpack.View.frag.CollectionFragment
+import com.berhane.biniam.wallpack.wallpack.View.frag.FeaturedPageAdapter
 import com.berhane.biniam.wallpack.wallpack.View.frag.NewPhotosFragment
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.featured_activity.*
 
-class FeaturedActivity:AppCompatActivity() {
+class FeaturedActivity : AppCompatActivity() {
     private lateinit var context: Context
     private val manager = supportFragmentManager
 
@@ -44,7 +48,7 @@ class FeaturedActivity:AppCompatActivity() {
 //                val curatedFrag = CuratedFrag.newInstance()
 //                loadFragment(curatedFrag)
 
-                val activity=FeaturedActivity()
+                val activity= FeaturedActivity()
                 loadActivity(activity)
                 return@OnNavigationItemSelectedListener true
             }
@@ -52,14 +56,36 @@ class FeaturedActivity:AppCompatActivity() {
         false
     }
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.featured_activity)
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
-        val localLayoutParams = window.attributes
-        localLayoutParams.flags = (WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS or localLayoutParams.flags)
-        context = this
+        featured_navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+
+        setSupportActionBar(toolbar)
+
+        val fragmentAdapter = FeaturedPageAdapter(supportFragmentManager)
+        viewpager_main.adapter = fragmentAdapter
+        tabs_main.setupWithViewPager(viewpager_main)
+
+    }
+
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        menuInflater.inflate(R.menu.featured_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        val id = item.itemId
+        return if (id == R.id.curatedToolbar) {
+            Toast.makeText(this,"biniam",Toast.LENGTH_LONG).show()
+            true
+        } else super.onOptionsItemSelected(item)
     }
 
 
