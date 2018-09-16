@@ -52,6 +52,7 @@ class NewPhotosFragment : Fragment() {
 
         viewModel = ViewModelProviders.of(this).get(WallPackViewModel::class.java)
         mRecyclerView = rootView.findViewById(R.id.photo_recycler_view)
+
         return rootView
 
     }

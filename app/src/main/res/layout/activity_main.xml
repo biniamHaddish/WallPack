@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,11 +9,31 @@
     android:layout_height="match_parent"
     tools:context=".activities.MainActivity">
 
+    <android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/drawerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".activities.MainActivity">
 
-    <FrameLayout
-        android:id="@+id/fragmentContainer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"></FrameLayout>
+        <FrameLayout
+            android:id="@+id/fragmentContainer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        </FrameLayout>
+        <android.support.design.widget.NavigationView
+            android:id="@+id/drawerNavigationView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            app:headerLayout="@layout/nav_header"
+            app:menu="@menu/drawer_menu">
+
+        </android.support.design.widget.NavigationView>
+
+    </android.support.v4.widget.DrawerLayout>
 
 
     <android.support.design.widget.BottomNavigationView

@@ -1,0 +1,10 @@
+<!--
+  ~ DayTime:9/16/18 2:38 PM :
+  ~ Year:2018 :
+  ~ Author:bini :
+  -->
+
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="?attr/colorPrimary" />
+</shape>

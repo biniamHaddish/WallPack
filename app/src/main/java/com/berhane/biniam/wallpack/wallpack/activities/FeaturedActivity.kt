@@ -60,9 +60,9 @@ class FeaturedActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.featured_activity)
         featured_navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
-
-        setSupportActionBar(toolbar)
+//        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+//
+//        setSupportActionBar(toolbar)
 
         val fragmentAdapter = FeaturedPageAdapter(supportFragmentManager)
         viewpager_main.adapter = fragmentAdapter

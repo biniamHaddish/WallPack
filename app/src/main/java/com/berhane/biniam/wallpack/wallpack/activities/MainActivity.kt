@@ -17,20 +17,24 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
+import android.support.design.widget.NavigationView
 import android.support.v4.app.Fragment
+import android.support.v4.view.GravityCompat
 import android.support.v7.app.AppCompatActivity
 import android.view.WindowManager
 import com.berhane.biniam.wallpack.wallpack.R
 import com.berhane.biniam.wallpack.wallpack.View.frag.CollectionFragment
 import com.berhane.biniam.wallpack.wallpack.View.frag.NewPhotosFragment
 import kotlinx.android.synthetic.main.activity_main.*
+import com.berhane.biniam.wallpack.wallpack.R.id.navigationView
+import android.support.v4.widget.DrawerLayout
+import android.support.v7.app.ActionBarDrawerToggle
 
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var context: Context
     private val manager = supportFragmentManager
-
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
@@ -52,7 +56,7 @@ class MainActivity : AppCompatActivity() {
 //                val curatedFrag = CuratedFrag.newInstance()
 //                loadFragment(curatedFrag)
 
-                val activity= FeaturedActivity()
+                val activity = FeaturedActivity()
                 loadActivity(activity)
                 return@OnNavigationItemSelectedListener true
             }
@@ -61,10 +65,38 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+
+
+    private val mOnDrawerNavigationItemSelectedListener = NavigationView.OnNavigationItemSelectedListener { item ->
+        when (item.itemId) {
+
+            R.id.photo_collection -> {
+                val collectionFragment = CollectionFragment.newInstance()
+                loadFragment(collectionFragment)
+                return@OnNavigationItemSelectedListener true
+            }
+            R.id.featured -> {
+                val activity = FeaturedActivity()
+                loadActivity(activity)
+                return@OnNavigationItemSelectedListener true
+            }
+        }
+        drawerLayout?.closeDrawer(GravityCompat.START)
+        true
+    }
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+
+       // val headerView = drawerNavigationView.inflateHeaderView(R.layout.nav_header)
+
+        //Navigation Listener
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+        drawerNavigationView.setNavigationItemSelectedListener(mOnDrawerNavigationItemSelectedListener)
+
 
         val localLayoutParams = window.attributes
         localLayoutParams.flags = (WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS or localLayoutParams.flags)
@@ -82,11 +114,20 @@ class MainActivity : AppCompatActivity() {
         transaction.addToBackStack(null)
         transaction.commit()
     }
-    fun loadActivity(activity:Activity){
+
+    fun loadActivity(activity: Activity) {
         val intent = Intent(context, activity::class.java)
         startActivity(intent)
     }
 
+
+    override fun onBackPressed() {
+        if (drawerLayout.isDrawerOpen(R.id.drawerLayout)) {
+            drawerLayout.closeDrawers()
+        } else {
+            super.onBackPressed()
+        }
+    }
 }
 
 

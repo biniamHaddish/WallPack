@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ DayTime:9/16/18 2:35 PM :
+  ~ Year:2018 :
+  ~ Author:bini :
+  -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/nav_header"
+    android:layout_width="match_parent"
+    android:layout_height="160dp"
+    android:background="@color/tokyoColorPrimary"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?attr/selectableItemBackgroundBorderless"
+    android:gravity="bottom"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:theme="@style/ThemeOverlay.Tokyo">
+
+    <ImageView
+        android:id="@+id/nav_header_imageView"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/ic_account_circle" />
+
+    <TextView
+        android:id="@+id/nav_avatar_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="16dp"
+        android:text="#User"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+
+</LinearLayout>

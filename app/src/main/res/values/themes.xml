@@ -83,7 +83,7 @@
     </style>
 
     <style name="Theme.TokyoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
-        <!--<item name="android:windowTranslucentStatus" tools:targetApi="kitkat">true</item>-->
+        <item name="android:windowActionBar" tools:targetApi="kitkat">true</item>
         <!-- General theme colors -->
         <item name="colorPrimary">@color/tokyoColorPrimary</item>
         <item name="colorPrimaryDark">@color/tokyoColorPrimaryDark</item>
