@@ -9,7 +9,9 @@ package com.berhane.biniam.wallpack.wallpack.utils.adapter
 
 import android.animation.ObjectAnimator
 import android.content.Context
+import android.content.Intent
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,17 +19,20 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
 import com.berhane.biniam.wallpack.wallpack.R
+import com.berhane.biniam.wallpack.wallpack.activities.PhotoDetails
 import com.berhane.biniam.wallpack.wallpack.model.data.Photos
 import com.berhane.biniam.wallpack.wallpack.utils.image_utills.ColorShifter
 import com.bumptech.glide.GenericTransitionOptions
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.transition.ViewPropertyTransition
+import com.google.gson.Gson
 import java.util.*
 
 
-class WallPackPhotoAdapter(wallPackList: List<Photos>, context: Context) :
-        RecyclerView.Adapter<WallPackPhotoAdapter.WallPackHolder>() {
+class WallPackPhotoAdapter(wallPackList: List<Photos>, context: Context) : RecyclerView.Adapter<WallPackPhotoAdapter.WallPackHolder>() {
 
+
+    val TAG = "WallPackPhotoAdapter"
 
     var wallpackList: List<Photos> = wallPackList
     var context: Context = context
@@ -71,6 +76,13 @@ class WallPackPhotoAdapter(wallPackList: List<Photos>, context: Context) :
                 .into(holder.image_preview)
         holder.image_preview.minimumHeight = imageHeight.toInt()
 
+        holder.image_preview.setOnClickListener {
+            val gson = Gson().toJson(wallPackPhotos)
+            val i = Intent(context, PhotoDetails::class.java)
+            i.putExtra("Photo", Gson().toJson(wallPackPhotos))
+            context.startActivity(i)
+            Log.d(TAG, "ImageClicked$gson")
+        }
 
     }
 

@@ -17,8 +17,7 @@
 
         <activity
             android:name=".activities.MainActivity"
-            android:label="@string/app_name"
-            >
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -30,6 +29,9 @@
             android:theme="@style/Theme.Tokyo">
 
         </activity>
+        <activity android:name=".activities.PhotoDetails"
+            android:parentActivityName=".activities.MainActivity"
+            />
     </application>
 
 </manifest>

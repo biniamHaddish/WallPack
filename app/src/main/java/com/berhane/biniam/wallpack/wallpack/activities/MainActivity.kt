@@ -15,26 +15,30 @@ package com.berhane.biniam.wallpack.wallpack.activities
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
-import android.support.design.widget.NavigationView
 import android.support.v4.app.Fragment
-import android.support.v4.view.GravityCompat
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.Toolbar
+import android.view.View
 import android.view.WindowManager
+import android.view.animation.AccelerateInterpolator
 import com.berhane.biniam.wallpack.wallpack.R
 import com.berhane.biniam.wallpack.wallpack.View.frag.CollectionFragment
 import com.berhane.biniam.wallpack.wallpack.View.frag.NewPhotosFragment
 import kotlinx.android.synthetic.main.activity_main.*
-import com.berhane.biniam.wallpack.wallpack.R.id.navigationView
-import android.support.v4.widget.DrawerLayout
-import android.support.v7.app.ActionBarDrawerToggle
+import com.berhane.biniam.wallpack.wallpack.R.id.toolbar
+import android.support.design.widget.AppBarLayout
+
+
 
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var context: Context
     private val manager = supportFragmentManager
+    val TAG: String = "MainActivity"
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
@@ -65,37 +69,41 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-
-
-    private val mOnDrawerNavigationItemSelectedListener = NavigationView.OnNavigationItemSelectedListener { item ->
-        when (item.itemId) {
-
-            R.id.photo_collection -> {
-                val collectionFragment = CollectionFragment.newInstance()
-                loadFragment(collectionFragment)
-                return@OnNavigationItemSelectedListener true
-            }
-            R.id.featured -> {
-                val activity = FeaturedActivity()
-                loadActivity(activity)
-                return@OnNavigationItemSelectedListener true
-            }
-        }
-        drawerLayout?.closeDrawer(GravityCompat.START)
-        true
-    }
+//    private val mOnDrawerNavigationItemSelectedListener = NavigationView.OnNavigationItemSelectedListener { item ->
+//        when (item.itemId) {
+//
+//            R.id.photo_collection -> {
+//                val collectionFragment = CollectionFragment.newInstance()
+//                loadFragment(collectionFragment)
+//                return@OnNavigationItemSelectedListener true
+//            }
+//            R.id.featured -> {
+//                val activity = FeaturedActivity()
+//                loadActivity(activity)
+//                return@OnNavigationItemSelectedListener true
+//            }
+//        }
+//        //drawerLayout?.closeDrawer(GravityCompat.START)
+//        true
+//    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+        setSupportActionBar(toolbar)
 
-       // val headerView = drawerNavigationView.inflateHeaderView(R.layout.nav_header)
-
+//        val accountImage= findViewById<ImageView>(R.id.AccountImage)
+//
+//        accountImage.setOnClickListener {
+//            Toast.makeText(this,"this is an entry point for the App",Toast.LENGTH_LONG).show()
+//        }
+        // val headerView = drawerNavigationView.inflateHeaderView(R.layout.nav_header)
         //Navigation Listener
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
-        drawerNavigationView.setNavigationItemSelectedListener(mOnDrawerNavigationItemSelectedListener)
+        //drawerNavigationView.setNavigationItemSelectedListener(mOnDrawerNavigationItemSelectedListener)
 
 
         val localLayoutParams = window.attributes
@@ -121,13 +129,6 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    override fun onBackPressed() {
-        if (drawerLayout.isDrawerOpen(R.id.drawerLayout)) {
-            drawerLayout.closeDrawers()
-        } else {
-            super.onBackPressed()
-        }
-    }
 }
 
 

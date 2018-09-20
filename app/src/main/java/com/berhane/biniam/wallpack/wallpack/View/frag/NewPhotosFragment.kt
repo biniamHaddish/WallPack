@@ -37,7 +37,7 @@ class NewPhotosFragment : Fragment() {
 
 
     companion object {
-        fun newInstance()=NewPhotosFragment()
+        fun newInstance() = NewPhotosFragment()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -60,6 +60,7 @@ class NewPhotosFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         initWallpackPhotoView()
+
     }
 
     override fun onResume() {
@@ -99,6 +100,7 @@ class NewPhotosFragment : Fragment() {
                 loadPhotos(false)
             }
         })
+
     }
 
     /**
@@ -120,6 +122,8 @@ class NewPhotosFragment : Fragment() {
                         }
                     }
                 })
+
+
     }
 
 

@@ -26,22 +26,6 @@
                 <item android:id="@+id/menu_item_featured_oldest"
                     android:title="@string/menu_old"
                     android:icon="?attr/oldIcon"/>
-
-                <item android:id="@+id/menu_item_featured_popular"
-                    android:title="@string/menu_popular"
-                    android:icon="?attr/hotIcon"/>
-
-                <item android:id="@+id/menu_item_new_latest"
-                    android:title="@string/menu_latest"
-                    android:icon="?attr/newIcon"/>
-
-                <item android:id="@+id/menu_item_new_oldest"
-                    android:title="@string/menu_old"
-                    android:icon="?attr/oldIcon"/>
-
-                <item android:id="@+id/menu_item_new_popular"
-                    android:title="@string/menu_popular"
-                    android:icon="?attr/hotIcon"/>
             </group>
         </menu>
     </item>

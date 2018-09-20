@@ -117,6 +117,16 @@
         <item name="android:textAppearance">@style/TextAppearance.AppCompat.Small</item>
     </style>
 
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/tokyoColorPrimary</item>
+        <item name="colorPrimaryDark">@color/tokyoColorPrimaryDark</item>
+        <item name="colorAccent">@color/tokyoColorAccent</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
+
     <style name="WallPackToolbarTheme">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">?attr/actionBarSize</item>
@@ -125,5 +135,6 @@
         <item name="titleTextColor">?attr/primaryTextColor</item>
         <item name="popupTheme">?attr/toolbarPopupTheme</item>
     </style>
+
 
 </resources>
