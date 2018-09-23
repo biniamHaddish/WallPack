@@ -13,4 +13,5 @@
 package com.berhane.biniam.wallpack.wallpack.model.data
 data class PhotoCategory(var id: Int,
                          var title: String,
-                         var photo_count: Int, var links: CategoryLinks)
+                         var photo_count: Int,
+                         var links: CategoryLinks)

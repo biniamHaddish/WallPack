@@ -6,6 +6,8 @@
     <string name="photo_search">Search</string>
     <string name="action_settings">Setting</string>
     <string name="account_image">Account Image</string>
+    <string name="unsplash_photo">Photo from Unsplash.com</string>
+    <string name="share_via">Share via</string>
 
 
     <string name="theme_name_tokyo">Tokyo</string>

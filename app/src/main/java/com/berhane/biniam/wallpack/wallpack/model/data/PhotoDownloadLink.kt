@@ -6,5 +6,9 @@
 
 package com.berhane.biniam.wallpack.wallpack.model.data
 
-data class PhotoDownloadLinks(var self: String, var html: String, var download: String, var
-download_location: String)
+data class PhotoDownloadLinks(
+        var self: String,
+        var html: String,
+        var download: String,
+        var downlods:Int,
+        var download_location: String)

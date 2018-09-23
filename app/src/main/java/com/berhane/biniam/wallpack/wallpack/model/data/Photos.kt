@@ -11,12 +11,14 @@
  */
 
 package com.berhane.biniam.wallpack.wallpack.model.data
+
 data class Photos(var id: String,
                   var created_at: String,
                   var updated_at: String,
                   var width: Int,
                   var height: Int,
                   var color: String,
+                  var photoDetails: PhotoDetails,
                   var likes: Int,
                   var liked_by_user: Boolean,
                   var description: String,
@@ -25,4 +27,5 @@ data class Photos(var id: String,
                   var urls: PhotoUrls,
                   var categories: List<PhotoCategory>,
                   var links: PhotoDownloadLinks
+
 )

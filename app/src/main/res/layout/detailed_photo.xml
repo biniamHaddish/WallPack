@@ -7,24 +7,23 @@
     android:layout_height="match_parent"
     android:clipToPadding="false"
     android:fitsSystemWindows="true"
-    tools:context="com.berhane.biniam.wallpack.wallpack.activities.PhotoDetails"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    >
+    tools:context="com.berhane.biniam.wallpack.wallpack.activities.PhotoDetails">
 
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/app_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/ThemeOverlay.Tokyo">
+    <!--<android.support.design.widget.AppBarLayout-->
+    <!--android:id="@+id/app_bar"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:theme="@style/ThemeOverlay.Tokyo">-->
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar_details"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@color/tokyoColorPrimary"
-            app:layout_scrollFlags="scroll|enterAlways" />
+    <!--<android.support.v7.widget.Toolbar-->
+    <!--android:id="@+id/toolbar_details"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="?attr/actionBarSize"-->
+    <!--android:background="@color/tokyoColorPrimary"-->
+    <!--app:layout_scrollFlags="scroll|enterAlways" />-->
 
-    </android.support.design.widget.AppBarLayout>
+    <!--</android.support.design.widget.AppBarLayout>-->
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -46,27 +45,18 @@
                 android:src="@drawable/ic_placeholder"
                 android:transitionName="photoScale" />
 
-            <!--<ProgressBar-->
-            <!--android:id="@+id/detail_progress"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_gravity="center"-->
-            <!--android:scaleX="0.75"-->
-            <!--android:scaleY="0.75"-->
-            <!--android:visibility="visible" />-->
 
             <LinearLayout
                 android:id="@+id/detail_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                >
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:background="@color/gray_54"
+                    android:background="@drawable/transparent_gradient"
                     android:orientation="horizontal"
                     android:paddingBottom="10dp"
                     android:paddingLeft="20dp"
@@ -78,7 +68,9 @@
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:clickable="true"
-                        android:focusable="true" />
+                        android:focusable="true"
+                        android:onClick="getPhotographerDetails"
+                        />
 
                     <TextView
                         android:id="@+id/photographerName"
@@ -90,7 +82,8 @@
                         android:clickable="true"
                         android:focusable="true"
                         android:text="@string/app_name"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/raisinBlack"
+                        />
 
                     <ImageButton
                         android:id="@+id/like_details_btn"
@@ -101,7 +94,24 @@
                         android:adjustViewBounds="true"
                         android:background="@color/transparent"
                         android:scaleType="fitCenter"
-                        android:src="@drawable/ic_heart" />
+                        android:src="@drawable/ic_heart"
+                        />
+
+                    <ImageButton
+                        android:id="@+id/share_photo_btn"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="20dp"
+                        android:adjustViewBounds="true"
+                        android:background="@color/transparent"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/ic_share"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        />
+
 
                 </LinearLayout>
 
@@ -143,7 +153,7 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="10dp"
                     android:drawablePadding="20dp"
-                    android:drawableStart="@drawable/ic_heart"
+                    android:drawableStart="@drawable/ic_heart_full"
                     android:gravity="center_vertical"
                     android:textColor="@color/black" />
 

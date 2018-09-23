@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ DayTime:9/23/18 1:55 PM :
+  ~ Year:2018 :
+  ~ Author:bini :
+  -->
+
+<shape xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <gradient
+        android:angle="45"
+        android:endColor="@color/white"
+        android:startColor="@color/gray_54" />
+
+</shape>

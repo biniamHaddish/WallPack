@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
-
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 28
@@ -22,7 +22,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
+//    dataBinding {
+//        enabled = true
+//    }
 
     defaultConfig {
         resConfigs "en"
@@ -49,12 +51,14 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+   // kapt "com.android.databinding:compiler:$gradle_version"
     // external libs'''
     implementation "com.squareup.okhttp3:okhttp:$okhttp_version"
     implementation "com.squareup.okio:okio:$okio_Version"
     implementation "io.reactivex.rxjava2:rxkotlin:$rxkotlin_version"
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation "com.github.bumptech.glide:glide:$glide_Version"
+    annotationProcessor "com.github.bumptech.glide:compiler:$glide_Version"
     implementation "com.google.code.gson:gson:$gson_Version"
     implementation "io.reactivex.rxjava2:rxkotlin:$rxkotlin_version"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit2_converter_gson"

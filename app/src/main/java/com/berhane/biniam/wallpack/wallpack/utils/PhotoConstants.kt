@@ -17,11 +17,13 @@ object PhotoConstants {
     const val SECRET_KEY: String = BuildConfig.SECRET_KEY
 
     val BASE_URL: String = "https://api.unsplash.com/"
+    val UNSPLASH_UTM_PARAMETERS: String = "?utm_source=resplash&utm_medium=referral&utm_campaign=api-credit"
     const val LATEST: String = "LATEST"
     const val OLDEST: String = "oldest"
     const val POPULAR: String = "popular"
     const val TRENDING: String = "trending"
     const val PERPAGE: Int = 25
+
 
     const val CATEGORY_TOTAL_NEW = 10
     const val CATEGORY_TOTAL_FEATURED = 20

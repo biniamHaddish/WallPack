@@ -13,6 +13,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:largeHeap="true"
         android:theme="@style/Theme.Tokyo">
 
         <activity
@@ -29,8 +30,25 @@
             android:theme="@style/Theme.Tokyo">
 
         </activity>
-        <activity android:name=".activities.PhotoDetails"
+        <activity
+            android:name=".activities.PhotoDetails"
             android:parentActivityName=".activities.MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Tokyo"
+            />
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.biniam.berhane.wallpack.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+        <activity
+            android:name=".activities.PhotographerActivity"
+            android:theme="@style/Theme.Tokyo"
+            android:screenOrientation="portrait"
             />
     </application>
 

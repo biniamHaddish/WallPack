@@ -6,6 +6,9 @@
 
 package com.berhane.biniam.wallpack.wallpack.model.data
 
-data class PhotoUrls(var raw: String, var full: String, var regular: String, var small: String, var
-thumb: String)
+data class PhotoUrls(var raw: String,
+                     var full: String,
+                     var regular: String,
+                     var small: String,
+                     var thumb: String)
 

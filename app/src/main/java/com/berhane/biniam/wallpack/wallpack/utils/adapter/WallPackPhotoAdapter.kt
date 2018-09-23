@@ -31,9 +31,7 @@ import java.util.*
 
 class WallPackPhotoAdapter(wallPackList: List<Photos>, context: Context) : RecyclerView.Adapter<WallPackPhotoAdapter.WallPackHolder>() {
 
-
     val TAG = "WallPackPhotoAdapter"
-
     var wallpackList: List<Photos> = wallPackList
     var context: Context = context
 
@@ -60,7 +58,7 @@ class WallPackPhotoAdapter(wallPackList: List<Photos>, context: Context) : Recyc
 
         holder.cardView.setBackgroundColor(ColorShifter.computeCardBackgroundColor(context, wallPackPhotos.color))
         // holder.publishDate.text = wallPackPhotos.created_at
-        holder.authorName.text = wallPackPhotos.user.name
+        //holder.authorName.text = wallPackPhotos.user.name
         //Author image
         Glide.with(context)
                 .load(wallPackPhotos.user.profile_image.medium)
@@ -89,7 +87,7 @@ class WallPackPhotoAdapter(wallPackList: List<Photos>, context: Context) : Recyc
     class WallPackHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var cardView: FrameLayout = itemView.findViewById(R.id.cardview)
         var image_preview: ImageView = itemView.findViewById(R.id.image_preview)
-        var authorName: TextView = itemView.findViewById(R.id.author)
+       // var authorName: TextView = itemView.findViewById(R.id.author)
         var author_image: ImageView = itemView.findViewById(R.id.author_image)
     }
 
