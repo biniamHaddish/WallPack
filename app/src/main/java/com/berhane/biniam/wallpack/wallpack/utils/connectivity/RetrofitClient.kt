@@ -115,6 +115,58 @@ class RetrofitClient {
         return data
     }
 
+    fun requestPhotosCollections(collection:PhotoCollection,page:Int,perPage: Int):LiveData<List<Photos>> {
+        val getPhotoCollections = retrofitClient(okhttpClient()).getCollectionPhotos(collection.id,page, perPage)
+        val data: MutableLiveData<List<Photos>> = MutableLiveData()
+        getPhotoCollections.enqueue(object : Callback<List<Photos>> {
+            override fun onResponse(call: Call<List<Photos>>, response: retrofit2.Response<List<Photos>>) {
+                data.value = response.body()
+                Log.d(TAG, "" + response.body().toString())
+            }
+
+            override fun onFailure(call: Call<List<Photos>>, t: Throwable) {
+                t.printStackTrace()
+                Log.e(TAG, t.message)
+            }
+        })
+        return data
+    }
+
+    fun requestFeaturedPhotoCollections(page: Int, perPage: Int): LiveData<List<PhotoCollection>> {
+        val getPhotoCollections = retrofitClient(okhttpClient()).getFeaturedCollections(page, perPage)
+        val data: MutableLiveData<List<PhotoCollection>> = MutableLiveData()
+        getPhotoCollections.enqueue(object : Callback<List<PhotoCollection>> {
+            override fun onResponse(call: Call<List<PhotoCollection>>, response: retrofit2.Response<List<PhotoCollection>>) {
+                data.value = response.body()
+                Log.d(TAG, "" + response.body().toString())
+            }
+
+            override fun onFailure(call: Call<List<PhotoCollection>>, t: Throwable) {
+                t.printStackTrace()
+                Log.e(TAG, t.message)
+            }
+        })
+        return data
+    }
+
+
+    fun requestCuratedPhotoCollections(page: Int, perPage: Int): LiveData<List<PhotoCollection>> {
+        val getPhotoCollections = retrofitClient(okhttpClient()).getCuratedCollections(page, perPage)
+        val data: MutableLiveData<List<PhotoCollection>> = MutableLiveData()
+        getPhotoCollections.enqueue(object : Callback<List<PhotoCollection>> {
+            override fun onResponse(call: Call<List<PhotoCollection>>, response: retrofit2.Response<List<PhotoCollection>>) {
+                data.value = response.body()
+                Log.d(TAG, "" + response.body().toString())
+            }
+
+            override fun onFailure(call: Call<List<PhotoCollection>>, t: Throwable) {
+                t.printStackTrace()
+                Log.e(TAG, t.message)
+            }
+        })
+        return data
+    }
+
     /**
      * Will return a Curated Photos depending on the Sort Order
      */
@@ -126,13 +178,15 @@ class RetrofitClient {
                 t.printStackTrace()
                 Log.e(TAG, t.message)
             }
+
             override fun onResponse(call: Call<List<Photos>>, response: Response<List<Photos>>) {
-                Log.d(TAG,response.body().toString())
+                Log.d(TAG, response.body().toString())
                 data.value = response.body()
             }
 
         })
         return data
     }
+
 }
 

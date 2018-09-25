@@ -11,26 +11,25 @@
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/wallPckTheme">
+        android:layout_height="wrap_content">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
+            android:background="@color/white"
             app:layout_scrollFlags="scroll|enterAlways">
 
             <ImageView
                 android:id="@+id/AccountImage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_account_circle"
                 android:adjustViewBounds="true"
-                />
+                android:src="@drawable/ic_account_circle" />
 
         </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>
+
     <!--fragment container-->
     <FrameLayout
         android:id="@+id/fragmentContainer"

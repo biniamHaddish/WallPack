@@ -17,7 +17,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.ImageView
-import android.widget.TextView
 import com.berhane.biniam.wallpack.wallpack.R
 import com.berhane.biniam.wallpack.wallpack.activities.PhotoDetails
 import com.berhane.biniam.wallpack.wallpack.model.data.Photos
@@ -75,11 +74,11 @@ class WallPackPhotoAdapter(wallPackList: List<Photos>, context: Context) : Recyc
         holder.image_preview.minimumHeight = imageHeight.toInt()
 
         holder.image_preview.setOnClickListener {
-            val gson = Gson().toJson(wallPackPhotos)
+            val gSon = Gson().toJson(wallPackPhotos)
             val i = Intent(context, PhotoDetails::class.java)
             i.putExtra("Photo", Gson().toJson(wallPackPhotos))
             context.startActivity(i)
-            Log.d(TAG, "ImageClicked$gson")
+            Log.d(TAG, "ImageClicked$gSon")
         }
 
     }

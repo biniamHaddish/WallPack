@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.berhane.biniam.wallpack.wallpack">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -14,7 +15,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:largeHeap="true"
-        android:theme="@style/Theme.Tokyo">
+        android:theme="@style/Theme.Tokyo"
+        tools:ignore="GoogleAppIndexingWarning">
 
         <activity
             android:name=".activities.MainActivity"
@@ -26,8 +28,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.FeaturedActivity"
-            android:theme="@style/Theme.Tokyo">
+            android:name=".activities.FeaturedActivity">
 
         </activity>
         <activity
@@ -36,6 +37,8 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Tokyo"
             />
+
+        <activity android:name=".activities.CollectionActivity"/>
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.biniam.berhane.wallpack.fileprovider"
@@ -49,6 +52,11 @@
             android:name=".activities.PhotographerActivity"
             android:theme="@style/Theme.Tokyo"
             android:screenOrientation="portrait"
+            />
+        <activity
+            android:name=".activities.CollectionDetailsActivity"
+            android:theme="@style/Theme.Tokyo"
+            android:parentActivityName=".activities.CollectionActivity"
             />
     </application>
 

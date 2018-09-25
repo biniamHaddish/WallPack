@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ DayTime:9/25/18 1:42 PM :
+  ~ Year:2018 :
+  ~ Author:bini :
+  -->
+
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipToPadding="false"
+    tools:context="com.berhane.biniam.wallpack.wallpack.activities.CollectionDetailsActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/Theme.Tokyo">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_scrollFlags="scroll|snap">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar_collection_detail"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@android:color/background_light"
+                android:theme="?attr/actionBarStyle"
+                app:layout_scrollFlags="scroll|enterAlways"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+            <TextView
+                android:id="@+id/collectionDescription_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/toolbar_collection_detail"
+                android:layout_marginLeft="24dp"
+                android:layout_marginRight="24dp"
+                android:gravity="center"
+                android:textColor="@color/black" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="13dp">
+
+            <com.berhane.biniam.wallpack.wallpack.utils.image_utills.CircularAuthorImage
+                android:id="@+id/collectionPhotographerImg"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:transitionName="profileTransition" />
+
+            <TextView
+                android:id="@+id/photographerCollection"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:textSize="15sp" />
+
+        </LinearLayout>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <!--<ProgressBar-->
+    <!--android:id="@+id/fragment_collection_detail_progress"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_gravity="center"-->
+    <!--android:scaleX="0.75"-->
+    <!--android:scaleY="0.75" />-->
+
+    <!--fragment container-->
+    <FrameLayout
+        android:id="@+id/fragmentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+
+    <!--<com.jcodecraeer.xrecyclerview.XRecyclerView-->
+    <!--android:id="@+id/collection_detail_recyclerView"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:gravity="center"-->
+    <!--android:scrollbars="none"-->
+    <!--android:visibility="gone"-->
+    <!--app:layout_behavior="@string/appbar_scrolling_view_behavior" />-->
+
+
+</android.support.design.widget.CoordinatorLayout>

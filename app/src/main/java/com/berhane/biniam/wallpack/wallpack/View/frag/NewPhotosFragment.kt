@@ -19,7 +19,10 @@ import android.view.View
 import android.view.ViewGroup
 import com.berhane.biniam.wallpack.wallpack.R
 import com.berhane.biniam.wallpack.wallpack.model.View.WallPackViewModel
+import com.berhane.biniam.wallpack.wallpack.model.data.PhotoCollection
 import com.berhane.biniam.wallpack.wallpack.model.data.Photos
+import com.berhane.biniam.wallpack.wallpack.utils.FragmentArgumentDelegate
+import com.berhane.biniam.wallpack.wallpack.utils.PhotoConstants
 import com.berhane.biniam.wallpack.wallpack.utils.adapter.WallPackPhotoAdapter
 import com.bumptech.glide.Glide
 import com.jcodecraeer.xrecyclerview.ProgressStyle
@@ -33,6 +36,8 @@ class NewPhotosFragment : Fragment() {
     private var viewAdapter: WallPackPhotoAdapter? = null
     private var categoryId = -1
 
+    private var collectionType by FragmentArgumentDelegate<String>()
+    private var photocollection by FragmentArgumentDelegate<PhotoCollection>()
     val TAG = "NewPhotosFragment"
 
 
@@ -49,7 +54,6 @@ class NewPhotosFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         Log.d(TAG, "onCreateView")
         val rootView = inflater!!.inflate(R.layout.new_photo_frag_layout, container, false)
-
         viewModel = ViewModelProviders.of(this).get(WallPackViewModel::class.java)
         mRecyclerView = rootView.findViewById(R.id.photo_recycler_view)
 
@@ -107,6 +111,7 @@ class NewPhotosFragment : Fragment() {
      *
      */
     private fun loadPhotos(onLoadNext: Boolean) {
+
         viewModel.getPhotosList(pageNumber, categoryId)!!.observe(this@NewPhotosFragment,
                 Observer<List<Photos>> { t: List<Photos>? ->
                     if (viewAdapter == null) {

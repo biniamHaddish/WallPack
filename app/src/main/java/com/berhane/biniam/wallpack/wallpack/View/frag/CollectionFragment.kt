@@ -11,7 +11,6 @@ import android.app.Activity
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.RecyclerView
@@ -25,11 +24,11 @@ import android.widget.Toast
 import com.berhane.biniam.wallpack.wallpack.R
 import com.berhane.biniam.wallpack.wallpack.model.View.WallPackViewModel
 import com.berhane.biniam.wallpack.wallpack.model.data.PhotoCollection
+import com.berhane.biniam.wallpack.wallpack.model.data.Photos
+import com.berhane.biniam.wallpack.wallpack.utils.FragmentArgumentDelegate
 import com.berhane.biniam.wallpack.wallpack.utils.PhotoConstants
-import com.berhane.biniam.wallpack.wallpack.utils.WallPack
 import com.berhane.biniam.wallpack.wallpack.utils.adapter.CollectionAdapter
 import com.bumptech.glide.Glide
-import com.google.gson.Gson
 import com.jcodecraeer.xrecyclerview.ProgressStyle
 import com.jcodecraeer.xrecyclerview.XRecyclerView
 
@@ -42,17 +41,21 @@ class CollectionFragment : Fragment() {
 
     val TAG = "CollectionFragment"
 
+    private var collectionType by FragmentArgumentDelegate<String>()
 
     companion object {
-        fun newInstance() = CollectionFragment()
+        fun newInstance(collectionType: String) = CollectionFragment().apply {
+            this.collectionType = collectionType
+        }
     }
 
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
 
-        Log.d(TAG,"fragment Attatched")
+        Log.d(TAG, "fragment Attatched")
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d(TAG, "onCreate")
@@ -69,7 +72,6 @@ class CollectionFragment : Fragment() {
                 when (event?.action) {
                     MotionEvent.ACTION_DOWN -> false
                 }
-
                 return v?.onTouchEvent(event) ?: true
             }
         })
@@ -107,23 +109,66 @@ class CollectionFragment : Fragment() {
      * Will Load more CollectionFragment if the value is true
      */
     fun loadPhotoCollections(moreCollection: Boolean) {
-        viewModel.getPhotoCollection(pageNumber, PhotoConstants.PERPAGE)!!.observe(this@CollectionFragment,
-                Observer<List<PhotoCollection>> { t: List<PhotoCollection>? ->
-                    if (viewAdapter == null) {
-                        viewAdapter = CollectionAdapter(t!!, activity as Activity)
-                        mRecyclerView.adapter = viewAdapter
-                    } else {
-                        if (moreCollection) {
-                            viewAdapter!!.addImageInfo(t!!)
-                            mRecyclerView.loadMoreComplete()
-                        } else {
-                            viewAdapter!!.setImageInfo(t!!)
-                            mRecyclerView.refreshComplete()
-                        }
-                    }
+        if (collectionType == PhotoConstants.COLLECTION_TYPE_ALL) {
 
-                }
-        )
+            viewModel.getPhotoCollection(pageNumber, PhotoConstants.PERPAGE)!!.observe(this@CollectionFragment,
+                    Observer<List<PhotoCollection>> { t: List<PhotoCollection>? ->
+                        if (viewAdapter == null) {
+                            viewAdapter = CollectionAdapter(t!!, activity as Activity)
+                            mRecyclerView.adapter = viewAdapter
+                        } else {
+                            if (moreCollection) {
+                                viewAdapter!!.addImageInfo(t!!)
+                                mRecyclerView.loadMoreComplete()
+                            } else {
+                                viewAdapter!!.setImageInfo(t!!)
+                                mRecyclerView.refreshComplete()
+                            }
+                        }
+
+                    }
+            )
+        } else if (collectionType == (PhotoConstants.COLLECTION_TYPE_FEATURED)) {
+
+            viewModel.getFeaturedCollection(pageNumber, PhotoConstants.PERPAGE)!!.observe(this@CollectionFragment,
+                    Observer<List<PhotoCollection>> { t: List<PhotoCollection>? ->
+                        if (viewAdapter == null) {
+                            viewAdapter = CollectionAdapter(t!!, activity as Activity)
+                            mRecyclerView.adapter = viewAdapter
+                        } else {
+                            if (moreCollection) {
+                                viewAdapter!!.addImageInfo(t!!)
+                                mRecyclerView.loadMoreComplete()
+                            } else {
+                                viewAdapter!!.setImageInfo(t!!)
+                                mRecyclerView.refreshComplete()
+                            }
+                        }
+
+                    }
+            )
+
+        } else if (collectionType == (PhotoConstants.COLLECTION_TYPE_CURATED)) {
+
+            viewModel.getCuratedCollection(pageNumber, PhotoConstants.PERPAGE)!!.observe(this@CollectionFragment,
+                    Observer<List<PhotoCollection>> { t: List<PhotoCollection>? ->
+                        if (viewAdapter == null) {
+                            viewAdapter = CollectionAdapter(t!!, activity as Activity)
+                            mRecyclerView.adapter = viewAdapter
+                        } else {
+                            if (moreCollection) {
+                                viewAdapter!!.addImageInfo(t!!)
+                                mRecyclerView.loadMoreComplete()
+                            } else {
+                                viewAdapter!!.setImageInfo(t!!)
+                                mRecyclerView.refreshComplete()
+                            }
+                        }
+
+                    }
+            )
+        }
+
     }
 
     /**
@@ -152,7 +197,7 @@ class CollectionFragment : Fragment() {
 
     private val onClickListener = object : View.OnClickListener {
         override fun onClick(p0: View?) {
-            Log.d(TAG,p0.toString())
+            Log.d(TAG, p0.toString())
         }
 //
 //        fun onClick(v: View, adapter: CollectionAdapter, item: PhotoCollection, position: Int): Boolean {
@@ -173,8 +218,6 @@ class CollectionFragment : Fragment() {
     override fun onDestroy() {
         Log.d(TAG, "onDestroy")
         super.onDestroy()
-        if (mRecyclerView != null) {
             mRecyclerView.destroy()
-        }
     }
 }

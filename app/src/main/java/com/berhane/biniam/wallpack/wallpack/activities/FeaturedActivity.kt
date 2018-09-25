@@ -11,9 +11,10 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
+import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
+import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
@@ -21,6 +22,7 @@ import com.berhane.biniam.wallpack.wallpack.R
 import com.berhane.biniam.wallpack.wallpack.View.frag.CollectionFragment
 import com.berhane.biniam.wallpack.wallpack.View.frag.FeaturedPageAdapter
 import com.berhane.biniam.wallpack.wallpack.View.frag.NewPhotosFragment
+import com.berhane.biniam.wallpack.wallpack.utils.PhotoConstants
 import kotlinx.android.synthetic.main.featured_activity.*
 
 class FeaturedActivity : AppCompatActivity() {
@@ -36,7 +38,7 @@ class FeaturedActivity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.photo_collection -> {
-                val collectionFragment = CollectionFragment.newInstance()
+                val collectionFragment = CollectionFragment.newInstance(PhotoConstants.COLLECTION_TYPE_ALL)
                 loadFragment(collectionFragment)
                 return@OnNavigationItemSelectedListener true
             }
@@ -45,10 +47,10 @@ class FeaturedActivity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.featured -> {
-//                val curatedFrag = CuratedFrag.newInstance()
+//                val curatedFrag = FeaturedFragment.newInstance()
 //                loadFragment(curatedFrag)
 
-                val activity= FeaturedActivity()
+                val activity = FeaturedActivity()
                 loadActivity(activity)
                 return@OnNavigationItemSelectedListener true
             }
@@ -61,12 +63,31 @@ class FeaturedActivity : AppCompatActivity() {
         setContentView(R.layout.featured_activity)
         featured_navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 //        val toolbar = findViewById<Toolbar>(R.id.toolbar)
-//
 //        setSupportActionBar(toolbar)
+        val viewPager = findViewById<ViewPager>(R.id.featured_viewpager)
+        val tabsCollection = findViewById<TabLayout>(R.id.featured_tabs)
+
 
         val fragmentAdapter = FeaturedPageAdapter(supportFragmentManager)
-        viewpager_main.adapter = fragmentAdapter
-        tabs_main.setupWithViewPager(viewpager_main)
+        viewPager.adapter = fragmentAdapter
+        tabsCollection.setupWithViewPager(viewPager)
+
+        viewPager?.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+
+            override fun onPageScrollStateChanged(state: Int) {
+                //Toast.makeText(context, "State \t$state", Toast.LENGTH_LONG).show()
+            }
+
+            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+                //  Toast.makeText(context, "State \t$position offset\t$positionOffset positionPixel \t $positionOffsetPixels", Toast.LENGTH_LONG).show()
+
+            }
+
+            override fun onPageSelected(position: Int) {
+                viewPager.currentItem = position
+            }
+
+        })
 
     }
 
@@ -83,7 +104,7 @@ class FeaturedActivity : AppCompatActivity() {
         // as you specify a parent activity in AndroidManifest.xml.
         val id = item.itemId
         return if (id == R.id.curatedToolbar) {
-            Toast.makeText(this,"biniam",Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "biniam", Toast.LENGTH_LONG).show()
             true
         } else super.onOptionsItemSelected(item)
     }
@@ -92,13 +113,14 @@ class FeaturedActivity : AppCompatActivity() {
     /**
      *  load Fragment here using the fragment obj
      */
-    fun loadFragment(fragment: Fragment) {
+    private fun loadFragment(fragment: Fragment) {
         val transaction = manager.beginTransaction()
         transaction.replace(R.id.fragmentContainer, fragment)
         transaction.addToBackStack(null)
         transaction.commit()
     }
-    fun loadActivity(activity: Activity){
+
+    private fun loadActivity(activity: Activity) {
         val intent = Intent(context, activity::class.java)
         startActivity(intent)
     }

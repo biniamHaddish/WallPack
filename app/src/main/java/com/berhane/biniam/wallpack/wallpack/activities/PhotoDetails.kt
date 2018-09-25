@@ -16,6 +16,7 @@ import android.support.v4.graphics.drawable.DrawableCompat
 import android.support.v4.widget.CircularProgressDrawable
 import android.support.v7.app.AppCompatActivity
 import android.view.View
+import android.view.WindowManager
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
@@ -40,6 +41,9 @@ class PhotoDetails : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.detailed_photo)
+        // Making the status bar translucent
+        val localLayoutParams = window.attributes
+        localLayoutParams.flags = (WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS or localLayoutParams.flags)
         context = this
         // Hide the status bar.
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN

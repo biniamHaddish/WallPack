@@ -37,6 +37,10 @@ interface UnsplashApi {
 //    @GET("photos/{id}")
 //    fun getAPhoto(@Path("id") id: String): Call<PhotoDetails>
 
+    @GET("collections/{id}/photos")
+     fun getCollectionPhotos(@Path("id") id: Int,
+                                     @Query("page") page: Int,
+                                     @Query("per_page") per_page: Int): Call<List<Photos>>
 
     @GET("collections")
     fun getAllCollections(@Query("page") page: Int,
@@ -45,6 +49,11 @@ interface UnsplashApi {
     @GET("collections/curated")
     fun getCuratedCollections(@Query("page") page: Int,
                               @Query("per_page") per_page: Int): Call<List<PhotoCollection>>
+
+    @GET("collections/curated/{id}/photos")
+     fun getCuratedCollectionPhotos(@Path("id") id: Int,
+                                            @Query("page") page: Int,
+                                            @Query("per_page") per_page: Int): Call<List<Photos>>
 
     @GET("collections/featured")
     fun getFeaturedCollections(@Query("page") page: Int,

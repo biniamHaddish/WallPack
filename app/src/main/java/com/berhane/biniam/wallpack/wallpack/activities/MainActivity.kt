@@ -15,23 +15,14 @@ package com.berhane.biniam.wallpack.wallpack.activities
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
-import android.view.View
-import android.view.WindowManager
-import android.view.animation.AccelerateInterpolator
 import com.berhane.biniam.wallpack.wallpack.R
-import com.berhane.biniam.wallpack.wallpack.View.frag.CollectionFragment
 import com.berhane.biniam.wallpack.wallpack.View.frag.NewPhotosFragment
 import kotlinx.android.synthetic.main.activity_main.*
-import com.berhane.biniam.wallpack.wallpack.R.id.toolbar
-import android.support.design.widget.AppBarLayout
-
-
 
 
 class MainActivity : AppCompatActivity() {
@@ -48,8 +39,10 @@ class MainActivity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.photo_collection -> {
-                val collectionFragment = CollectionFragment.newInstance()
-                loadFragment(collectionFragment)
+//                val collectionFragment = CollectionFragment.newInstance()
+//                loadFragment(collectionFragment)
+                val activity = CollectionActivity()
+                loadActivity(activity)
                 return@OnNavigationItemSelectedListener true
             }
             R.id.photo_search -> {
@@ -106,8 +99,8 @@ class MainActivity : AppCompatActivity() {
         //drawerNavigationView.setNavigationItemSelectedListener(mOnDrawerNavigationItemSelectedListener)
 
 
-        val localLayoutParams = window.attributes
-        localLayoutParams.flags = (WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS or localLayoutParams.flags)
+//        val localLayoutParams = window.attributes
+//        localLayoutParams.flags = (WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS or localLayoutParams.flags)
         context = this
         val newPhotoFragment = NewPhotosFragment.newInstance()
         loadFragment(newPhotoFragment)

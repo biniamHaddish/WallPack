@@ -10,9 +10,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.myapplication.MainActivity">
 
-
-
-
     <item android:id="@+id/sort_by"
         android:title="@string/sort_menu"
         android:icon="?attr/sortIcon"

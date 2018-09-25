@@ -49,6 +49,32 @@ class WallPackViewModel : ViewModel() {
 
     }
 
+    fun getPhotoCollectionById(collections: PhotoCollection, page: Int, perPage: Int): LiveData<List<Photos>>? {
+        if (null == retrofitClient) {
+            retrofitClient = RetrofitClient.getRetrofitClient()
+        }
+        this.wallPackLiveData = retrofitClient!!.requestPhotosCollections(collections, page, perPage)
+        return wallPackLiveData!!
+    }
+
+    fun getFeaturedCollection(page: Int, perPage: Int): LiveData<List<PhotoCollection>>? {
+        if (null == retrofitClient) {
+            retrofitClient = RetrofitClient.getRetrofitClient()
+        }
+        this.wallpackPhotoCollection = retrofitClient!!.requestFeaturedPhotoCollections(page, perPage)
+        return wallpackPhotoCollection!!
+
+    }
+
+    fun getCuratedCollection(page: Int, perPage: Int): LiveData<List<PhotoCollection>>? {
+        if (null == retrofitClient) {
+            retrofitClient = RetrofitClient.getRetrofitClient()
+        }
+        this.wallpackPhotoCollection = retrofitClient!!.requestCuratedPhotoCollections(page, perPage)
+        return wallpackPhotoCollection!!
+
+    }
+
     /**
      * LiveData Curated Photos
      */

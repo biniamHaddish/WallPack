@@ -8,8 +8,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/transparent"
+    android:layout_height="wrap_content"
     tools:context=".activities.FeaturedActivity"
     android:fitsSystemWindows="true"
     >
@@ -18,34 +17,34 @@
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/ThemeOverlay.Tokyo"
-        >
+        android:fitsSystemWindows="true">
 
-        <!--<android.support.v7.widget.Toolbar-->
-            <!--android:id="@+id/toolbar"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="?attr/actionBarSize"-->
-            <!--android:background="@android:color/background_light"-->
-            <!--android:theme="?attr/actionBarStyle"-->
-            <!--app:layout_scrollFlags="scroll|enterAlways"-->
-            <!--app:popupTheme="@style/ThemeOverlay.AppCompat.Light"-->
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@android:color/background_light"
+            android:theme="?attr/actionBarStyle"
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
 
-             <!--/>-->
+            />
 
         <android.support.design.widget.TabLayout
-            android:id="@+id/tabs_main"
+            android:id="@+id/featured_tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_scrollFlags="scroll|enterAlways"
-            app:tabMode="fixed" />
+            app:tabMode="fixed"
+            />
 
     </android.support.design.widget.AppBarLayout>
 
     <android.support.v4.view.ViewPager
-        android:id="@+id/viewpager_main"
+        android:id="@+id/featured_viewpager"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:ignore="NotSibling" />
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        />
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/featured_navigation"
@@ -54,9 +53,6 @@
         android:background="@color/tokyoColorPrimary"
         app:itemIconTint="@drawable/bottom_navigation_colors"
         app:itemTextColor="@drawable/bottom_navigation_colors"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
         app:menu="@menu/navigation" />
 
 </android.support.design.widget.CoordinatorLayout>

@@ -18,10 +18,14 @@ object PhotoConstants {
 
     val BASE_URL: String = "https://api.unsplash.com/"
     val UNSPLASH_UTM_PARAMETERS: String = "?utm_source=resplash&utm_medium=referral&utm_campaign=api-credit"
-    const val LATEST: String = "LATEST"
+    const val LATEST: String = "latest"
     const val OLDEST: String = "oldest"
     const val POPULAR: String = "popular"
     const val TRENDING: String = "trending"
+    const val COLLECTION_TYPE_ALL: String = "all"
+    const val COLLECTION_TYPE_CURATED: String = "Curated"
+    const val COLLECTION_TYPE_FEATURED: String = "Featured"
+    const val COLLECTION_BY_ID: String = "CollectionId"
     const val PERPAGE: Int = 25
 
 

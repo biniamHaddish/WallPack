@@ -18,7 +18,6 @@ import com.bumptech.glide.GlideBuilder
 @GlideModule
 class MyAppGlideModule: AppGlideModule() {
 
-
     override fun applyOptions(context: Context, builder: GlideBuilder) {
         // Glide default Bitmap Format is set to RGB_565 since it
         // consumed just 50% memory footprint compared to ARGB_8888.
