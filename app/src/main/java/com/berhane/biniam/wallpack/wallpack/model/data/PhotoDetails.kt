@@ -5,7 +5,11 @@
  */
 
 package com.berhane.biniam.wallpack.wallpack.model.data
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
 
+
+@Parcelize
 data class PhotoDetails(
         var id: String,
         var created_at: String,
@@ -18,5 +22,6 @@ data class PhotoDetails(
         var exif: Exif,
         var location: Location,
         var user: User,
-        var photos: Photos
-)
+        var photos: Photos,
+        var links: PhotoDownloadLinks
+) : Parcelable

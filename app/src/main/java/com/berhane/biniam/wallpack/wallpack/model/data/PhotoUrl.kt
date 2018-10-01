@@ -5,10 +5,14 @@
  */
 
 package com.berhane.biniam.wallpack.wallpack.model.data
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
 
+
+@Parcelize
 data class PhotoUrls(var raw: String,
                      var full: String,
                      var regular: String,
                      var small: String,
-                     var thumb: String)
+                     var thumb: String) : Parcelable
 

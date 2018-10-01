@@ -38,6 +38,11 @@ android {
         it.buildConfigField 'String', 'SECRET_KEY', keystoreProperties['Secret_key']
     }
 
+    androidExtensions {
+        experimental = true
+    }
+
+
 }
 
 dependencies {

@@ -62,45 +62,45 @@
         <!--<item name="tabLayoutStyle">@style/TabStyle.Dark.Serif</item>-->
     <!--</style>-->
 
-    <style name="Theme.Tokyo" parent="Theme.AppCompat.DayNight.NoActionBar">
-        <item name="android:windowTranslucentStatus" tools:targetApi="kitkat">true</item>
-        <!-- General theme colors -->
-        <item name="colorPrimary">@color/tokyoColorPrimary</item>
-        <item name="colorPrimaryDark">@color/tokyoColorPrimaryDark</item>
-        <item name="colorAccent">@color/tokyoColorAccent</item>
-        <item name="colorControlNormal">@color/tokyoColorNormal</item>
-        <!-- Text Appearance styles -->
-        <item name="android:colorBackground">@color/tokyoBackground</item>
-        <item name="android:colorForeground">@color/tokyoForeground</item>
-        <item name="android:textColorLink">@color/tokyoTextColorLink</item>
-        <item name="android:textColorLinkInverse">@color/tokyoTextColorLinkInverse</item>
-        <!-- Custom attributes defined in attrs.xml -->
+    <!--<style name="Theme.Tokyo" parent="Theme.AppCompat.DayNight.NoActionBar">-->
+        <!--<item name="android:windowTranslucentStatus" tools:targetApi="kitkat">true</item>-->
+        <!--&lt;!&ndash; General theme colors &ndash;&gt;-->
+        <!--<item name="colorPrimary">@color/tokyoColorPrimary</item>-->
+        <!--<item name="colorPrimaryDark">@color/tokyoColorPrimaryDark</item>-->
+        <!--<item name="colorAccent">@color/tokyoColorAccent</item>-->
+        <!--<item name="colorControlNormal">@color/tokyoColorNormal</item>-->
+        <!--&lt;!&ndash; Text Appearance styles &ndash;&gt;-->
+        <!--<item name="android:colorBackground">@color/tokyoBackground</item>-->
+        <!--<item name="android:colorForeground">@color/tokyoForeground</item>-->
+        <!--<item name="android:textColorLink">@color/tokyoTextColorLink</item>-->
+        <!--<item name="android:textColorLinkInverse">@color/tokyoTextColorLinkInverse</item>-->
+        <!--&lt;!&ndash; Custom attributes defined in attrs.xml &ndash;&gt;-->
 
-        <item name="dividerColor">@color/tokyoDividerColor</item>
-        <item name="themeName">@string/theme_name_tokyo</item>
-        <item name="themeDescription">@string/theme_desc_tokyo</item>
-        <item name="tabLayoutStyle">@style/TabStyle.Light</item>
-    </style>
+        <!--<item name="dividerColor">@color/tokyoDividerColor</item>-->
+        <!--<item name="themeName">@string/theme_name_tokyo</item>-->
+        <!--<item name="themeDescription">@string/theme_desc_tokyo</item>-->
+        <!--<item name="tabLayoutStyle">@style/TabStyle.Light</item>-->
+    <!--</style>-->
 
-    <style name="Theme.TokyoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:windowActionBar" tools:targetApi="kitkat">false</item>
-        <!-- General theme colors -->
-        <item name="colorPrimary">@color/tokyoColorPrimary</item>
-        <item name="colorPrimaryDark">@color/tokyoColorPrimaryDark</item>
-        <item name="colorAccent">@color/tokyoColorAccent</item>
-        <item name="colorControlNormal">@color/tokyoColorNormal</item>
-        <!-- Text Appearance styles -->
-        <item name="android:colorBackground">@color/tokyoBackground</item>
-        <item name="android:colorForeground">@color/tokyoForeground</item>
-        <item name="android:textColorLink">@color/tokyoTextColorLink</item>
-        <item name="android:textColorLinkInverse">@color/tokyoTextColorLinkInverse</item>
-        <!-- Custom attributes defined in attrs.xml -->
+    <!--<style name="Theme.TokyoActionBar" parent="Theme.AppCompat.Light.NoActionBar">-->
+        <!--<item name="android:windowActionBar" tools:targetApi="kitkat">false</item>-->
+        <!--&lt;!&ndash; General theme colors &ndash;&gt;-->
+        <!--<item name="colorPrimary">@color/tokyoColorPrimary</item>-->
+        <!--<item name="colorPrimaryDark">@color/tokyoColorPrimaryDark</item>-->
+        <!--<item name="colorAccent">@color/tokyoColorAccent</item>-->
+        <!--<item name="colorControlNormal">@color/tokyoColorNormal</item>-->
+        <!--&lt;!&ndash; Text Appearance styles &ndash;&gt;-->
+        <!--<item name="android:colorBackground">@color/tokyoBackground</item>-->
+        <!--<item name="android:colorForeground">@color/tokyoForeground</item>-->
+        <!--<item name="android:textColorLink">@color/tokyoTextColorLink</item>-->
+        <!--<item name="android:textColorLinkInverse">@color/tokyoTextColorLinkInverse</item>-->
+        <!--&lt;!&ndash; Custom attributes defined in attrs.xml &ndash;&gt;-->
 
-        <item name="dividerColor">@color/tokyoDividerColor</item>
-        <item name="themeName">@string/theme_name_tokyo</item>
-        <item name="themeDescription">@string/theme_desc_tokyo</item>
-        <item name="tabLayoutStyle">@style/TabStyle.Light</item>
-    </style>
+        <!--<item name="dividerColor">@color/tokyoDividerColor</item>-->
+        <!--<item name="themeName">@string/theme_name_tokyo</item>-->
+        <!--<item name="themeDescription">@string/theme_desc_tokyo</item>-->
+        <!--<item name="tabLayoutStyle">@style/TabStyle.Light</item>-->
+    <!--</style>-->
 
 
 

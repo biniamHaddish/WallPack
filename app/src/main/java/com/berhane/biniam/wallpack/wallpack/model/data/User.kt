@@ -11,7 +11,11 @@
  */
 
 package com.berhane.biniam.wallpack.wallpack.model.data
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
 
+
+@Parcelize
 data class User(var id: String,
                 var updated_at: String,
                 var username: String,
@@ -26,5 +30,5 @@ data class User(var id: String,
                 var total_photos: Int,
                 var total_collections: Int,
                 var profile_image: UserProfileImageUrl,
-                var links: UserLinks)
+                var links: UserLinks) : Parcelable
 

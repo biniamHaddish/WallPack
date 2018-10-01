@@ -28,52 +28,46 @@ import com.google.gson.Gson
 import java.util.*
 
 
-class WallPackPhotoAdapter(wallPackList: List<Photos>, context: Context) : RecyclerView.Adapter<WallPackPhotoAdapter.WallPackHolder>() {
+class WallPackPhotoAdapter(private var wallPackList: List<Photos>, context: Context) :
+        RecyclerView.Adapter<WallPackPhotoAdapter.WallPackHolder>() {
 
-    val TAG = "WallPackPhotoAdapter"
-    var wallpackList: List<Photos> = wallPackList
+    private val TAG = "WallPackPhotoAdapter"
     var context: Context = context
-
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WallPackHolder {
         val itemView = LayoutInflater.from(context).inflate(R.layout.photos_layout, null)
         return WallPackHolder(itemView)
     }
 
     override fun getItemCount(): Int {
-        return wallpackList.size
+        return wallPackList.size
     }
-
 
     override fun onBindViewHolder(holder: WallPackHolder, position: Int) {
 
-        val wallPackPhotos = wallpackList[position]
-
+        val wallPackPhotos = wallPackList[position]
         val fadeAnimation = ViewPropertyTransition.Animator { view ->
             val fadeAnimation = ObjectAnimator.ofFloat(view, "alpha", 0f, 1f)
-            fadeAnimation.duration = 1000// 500 is good for the eye
+            fadeAnimation.duration = 500// 500 is good for the eye
             fadeAnimation.start()
         }
 
         holder.cardView.setBackgroundColor(ColorShifter.computeCardBackgroundColor(context, wallPackPhotos.color))
-        // holder.publishDate.text = wallPackPhotos.created_at
-        //holder.authorName.text = wallPackPhotos.user.name
         //Author image
         Glide.with(context)
                 .load(wallPackPhotos.user.profile_image.medium)
-                .into(holder.author_image)
+                .into(holder.authorImage)
         //DisplayMetrics
-        val displayMetrics = context.getResources().getDisplayMetrics()
+        val displayMetrics = context.resources.displayMetrics
         val imageHeight: Float = displayMetrics.widthPixels / (wallPackPhotos.width.toFloat() / wallPackPhotos.height.toFloat())
 
 
         Glide.with(context)
                 .load(wallPackPhotos.urls.regular)
                 .transition(GenericTransitionOptions.with(fadeAnimation))
-                .into(holder.image_preview)
-        holder.image_preview.minimumHeight = imageHeight.toInt()
+                .into(holder.imagePreview)
+        holder.imagePreview.minimumHeight = imageHeight.toInt()
 
-        holder.image_preview.setOnClickListener {
+        holder.imagePreview.setOnClickListener {
             val gSon = Gson().toJson(wallPackPhotos)
             val i = Intent(context, PhotoDetails::class.java)
             i.putExtra("Photo", Gson().toJson(wallPackPhotos))
@@ -85,20 +79,18 @@ class WallPackPhotoAdapter(wallPackList: List<Photos>, context: Context) : Recyc
 
     class WallPackHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var cardView: FrameLayout = itemView.findViewById(R.id.cardview)
-        var image_preview: ImageView = itemView.findViewById(R.id.image_preview)
-       // var authorName: TextView = itemView.findViewById(R.id.author)
-        var author_image: ImageView = itemView.findViewById(R.id.author_image)
+        var imagePreview: ImageView = itemView.findViewById(R.id.image_preview)
+        var authorImage: ImageView = itemView.findViewById(R.id.author_image)
     }
 
-
     fun setImageInfo(photosList: List<Photos>) {
-        this.wallpackList = photosList
+        this.wallPackList = photosList
         notifyDataSetChanged()
     }
 
     fun addImageInfo(photosList: List<Photos>) {
-        if (this.wallpackList is ArrayList) {
-            (this.wallpackList as ArrayList<Photos>).addAll(photosList)
+        if (this.wallPackList is ArrayList) {
+            (this.wallPackList as ArrayList<Photos>).addAll(photosList)
         }
         notifyDataSetChanged()
     }

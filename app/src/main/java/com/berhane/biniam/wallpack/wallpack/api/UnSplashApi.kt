@@ -5,9 +5,10 @@ import com.berhane.biniam.wallpack.wallpack.model.data.Photos
 import retrofit2.Call
 import okhttp3.ResponseBody
 import retrofit2.http.*
+import retrofit2.http.GET
 
 
-interface UnsplashApi {
+interface UnSplashApi {
 
     @GET("photos")
     fun getPhotos(@Query("page") page: Int,
@@ -38,9 +39,9 @@ interface UnsplashApi {
 //    fun getAPhoto(@Path("id") id: String): Call<PhotoDetails>
 
     @GET("collections/{id}/photos")
-     fun getCollectionPhotos(@Path("id") id: Int,
-                                     @Query("page") page: Int,
-                                     @Query("per_page") per_page: Int): Call<List<Photos>>
+    fun getCollectionPhotos(@Path("id") id: Int,
+                            @Query("page") page: Int,
+                            @Query("per_page") per_page: Int): Call<List<Photos>>
 
     @GET("collections")
     fun getAllCollections(@Query("page") page: Int,
@@ -51,9 +52,9 @@ interface UnsplashApi {
                               @Query("per_page") per_page: Int): Call<List<PhotoCollection>>
 
     @GET("collections/curated/{id}/photos")
-     fun getCuratedCollectionPhotos(@Path("id") id: Int,
-                                            @Query("page") page: Int,
-                                            @Query("per_page") per_page: Int): Call<List<Photos>>
+    fun getCuratedCollectionPhotosById(@Path("id") id: Int,
+                                       @Query("page") page: Int,
+                                       @Query("per_page") per_page: Int): Call<List<Photos>>
 
     @GET("collections/featured")
     fun getFeaturedCollections(@Query("page") page: Int,

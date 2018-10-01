@@ -26,8 +26,6 @@
             android:background="@android:color/background_light"
             android:theme="?attr/actionBarStyle"
             app:layout_scrollFlags="scroll|enterAlways"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-
             />
 
         <android.support.design.widget.TabLayout

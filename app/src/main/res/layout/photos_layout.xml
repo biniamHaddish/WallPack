@@ -22,7 +22,8 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_alignBottom="@+id/image_preview"
-            android:layout_margin="10dp" />
+            android:layout_margin="10dp"
+            />
 
     </RelativeLayout>
 </FrameLayout>

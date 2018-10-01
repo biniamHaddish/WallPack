@@ -12,12 +12,13 @@ import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
 import android.support.v4.widget.CircularProgressDrawable
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import com.berhane.biniam.wallpack.wallpack.R
 import com.berhane.biniam.wallpack.wallpack.View.frag.CollectionDetailsFragment
 import com.berhane.biniam.wallpack.wallpack.View.frag.CollectionFragment
-import com.berhane.biniam.wallpack.wallpack.View.frag.NewPhotosFragment
 import com.berhane.biniam.wallpack.wallpack.model.data.PhotoCollection
 import com.berhane.biniam.wallpack.wallpack.utils.PhotoConstants
 import com.bumptech.glide.Glide
@@ -28,7 +29,7 @@ import com.google.gson.Gson
 class CollectionDetailsActivity : AppCompatActivity() {
 
     private val Context: Context? = null
-    private val TAG: String = "CollectionDetailsActivity"
+    private val TAG: String = "CollectionDActivity"
     private val manager = supportFragmentManager
 
 
@@ -51,7 +52,7 @@ class CollectionDetailsActivity : AppCompatActivity() {
 
         collectionDescription.text = collectionPhotos.description
         val requestOption = RequestOptions().placeholder(circularProgressDrawable).centerCrop()
-        photographerCollection.text = collectionPhotos.total_photos.toString()
+        photographerCollection.text = "By\t"+collectionPhotos.user.name
 
         Glide.with(this@CollectionDetailsActivity)
                 .load(collectionPhotos.user.profile_image.medium)
@@ -70,7 +71,7 @@ class CollectionDetailsActivity : AppCompatActivity() {
 
     private fun loadFragment(fragment: Fragment) {
         val transaction = manager.beginTransaction()
-        transaction.replace(R.id.fragmentContainer, fragment)
+        transaction.replace(R.id.collectionFragmentContainer, fragment)
         transaction.addToBackStack(null)
         transaction.commit()
     }

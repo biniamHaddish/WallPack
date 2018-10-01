@@ -3,25 +3,31 @@
   ~ Year:2018 :
   ~ Author:bini :
   -->
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/detailedCollectionFragment"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ProgressBar
-        android:id="@+id/detailedCollectionProgress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:visibility="visible" />
-
-    <com.jcodecraeer.xrecyclerview.XRecyclerView
-        android:id="@+id/detailedCollectionRecyclerView"
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/detailedCollectionFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:scrollbars="none"
-        android:visibility="gone"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-</FrameLayout>
+        android:layout_height="match_parent">
+
+        <ProgressBar
+            android:id="@+id/detailedCollectionProgress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="visible" />
+
+        <com.jcodecraeer.xrecyclerview.XRecyclerView
+            android:id="@+id/detailedCollectionRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:scrollbars="none"
+            android:visibility="gone"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+    </FrameLayout>
+</RelativeLayout>

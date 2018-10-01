@@ -5,7 +5,11 @@
  */
 
 package com.berhane.biniam.wallpack.wallpack.model.data
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
 
+
+@Parcelize
 data class Exif(
 
         var make: String,
@@ -14,4 +18,4 @@ data class Exif(
         var aperture: String,
         var focal_length: String,
         var iso: Int
-)
+) : Parcelable

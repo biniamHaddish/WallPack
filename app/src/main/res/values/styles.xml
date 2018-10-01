@@ -1,140 +1,236 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- Base application theme. -->
-    <style name="wallPckTheme" parent="Theme.AppCompat.NoActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/tokyoColorPrimary</item>
-        <item name="colorPrimaryDark">@color/tokyoColorPrimaryDark</item>
-        <item name="colorAccent">@color/tokyoColorAccent</item>
-        <item name="android:colorBackground">@color/tokyoBackground</item>
-        <item name="android:colorForeground">@color/tokyoForeground</item>
 
+    <!-- WallPack Activities & fragments themes -->
 
+    <style name="WallPackTheme_light" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary_light</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark_light</item>
+        <item name="colorAccent">@color/colorAccentRed</item>
+        <item name="root_color">@color/colorRoot_light</item>
+        <item name="line_color">@color/colorLine_light</item>
+        <item name="title_color">@color/colorTextTitle_light</item>
+        <item name="subtitle_color">@color/colorTextSubtitle_light</item>
+        <item name="content_color">@color/colorTextContent_light</item>
+        <item name="android:windowBackground">@color/colorPrimary_light</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:popupMenuStyle">@style/material_popup_menu</item>
+    </style>
 
+    <style name="WallPackTheme_dark" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary_dark</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark_dark</item>
+        <item name="colorAccent">@color/colorAccent_dark</item>
+        <item name="root_color">@color/colorRoot_dark</item>
+        <item name="line_color">@color/colorLine_dark</item>
+        <item name="title_color">@color/colorTextTitle_dark</item>
+        <item name="subtitle_color">@color/colorTextSubtitle_dark</item>
+        <item name="content_color">@color/colorTextContent_dark</item>
+        <item name="android:windowBackground">@color/colorPrimary_dark</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:popupMenuStyle">@style/material_popup_menu</item>
+    </style>
 
+    <style name="WallPackTheme_light.Translucent" parent="WallPackTheme_light">
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+    <style name="WallPackTheme_dark.Translucent" parent="WallPackTheme_dark">
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+    <style name="WallPackTheme_light.TranslucentNavigation" parent="WallPackTheme_light">
+        <item name="android:windowTranslucentNavigation">true</item>
+    </style>
+
+    <style name="WallPackTheme_dark.TranslucentNavigation" parent="WallPackTheme_dark">
+        <item name="android:windowTranslucentNavigation">true</item>
+    </style>
+
+    <style name="WallPackTheme_light.Translucent.TranslucentNavigation" parent="WallPackTheme_light.Translucent">
+        <item name="android:windowTranslucentNavigation">true</item>
+    </style>
+
+    <style name="WallPackTheme_dark.Translucent.TranslucentNavigation" parent="WallPackTheme_dark.Translucent">
+        <item name="android:windowTranslucentNavigation">true</item>
+    </style>
+
+    <!-- main activity. -->
+
+    <style name="WallPackTheme_light.TranslucentNavigation.Main" parent="WallPackTheme_light.TranslucentNavigation" />
+
+    <style name="WallPackTheme_dark.TranslucentNavigation.Main" parent="WallPackTheme_dark.TranslucentNavigation" />
+
+    <!-- photo activity 2. -->
+
+    <style name="WallPackTheme_light.TranslucentNavigation.Photo2" parent="WallPackTheme_light.TranslucentNavigation" />
+
+    <style name="WallPackTheme_dark.TranslucentNavigation.Photo2" parent="WallPackTheme_dark.TranslucentNavigation" />
+
+    <!-- preview activity. -->
+
+    <style name="WallPackTheme_light.Translucent.TranslucentNavigation.Preview" parent="WallPackTheme_light.Translucent.TranslucentNavigation" />
+
+    <style name="WallPackTheme_dark.Translucent.TranslucentNavigation.Preview" parent="WallPackTheme_dark.Translucent.TranslucentNavigation" />
+
+    <!-- user activity. -->
+
+    <style name="WallPackTheme_light.TranslucentNavigation.User" parent="WallPackTheme_light.TranslucentNavigation" />
+
+    <style name="WallPackTheme_dark.TranslucentNavigation.User" parent="WallPackTheme_dark.TranslucentNavigation" />
+
+    <!-- me activity. -->
+
+    <style name="WallPackTheme_light.TranslucentNavigation.Me" parent="WallPackTheme_light.TranslucentNavigation" />
+
+    <style name="WallPackTheme_dark.TranslucentNavigation.Me" parent="WallPackTheme_dark.TranslucentNavigation" />
+
+    <!-- collection activity. -->
+
+    <style name="WallPackTheme_light.TranslucentNavigation.Collection" parent="WallPackTheme_light.TranslucentNavigation" />
+
+    <style name="WallPackTheme_dark.TranslucentNavigation.Collection" parent="WallPackTheme_dark.TranslucentNavigation" />
+
+    <!-- settings activity. -->
+
+    <style name="WallPackTheme_light.Translucent.Settings" parent="WallPackTheme_light.Translucent">
+        <item name="android:alertDialogTheme">@style/WallPackDialogTheme_light</item>
+    </style>
+
+    <style name="WallPackTheme_dark.Translucent.Settings" parent="WallPackTheme_dark.Translucent">
+        <item name="android:alertDialogTheme">@style/WallPackDialogTheme_dark</item>
+    </style>
+
+    <!-- common activity theme. -->
+
+    <style name="WallPackTheme_light.Common" parent="WallPackTheme_light" />
+
+    <style name="WallPackTheme_dark.Common" parent="WallPackTheme_dark" />
+
+    <style name="WallPackTheme_light.Translucent.Common" parent="WallPackTheme_light.Translucent" />
+
+    <style name="WallPackTheme_dark.Translucent.Common" parent="WallPackTheme_dark.Translucent" />
+
+    <!-- set wallpaper activity. -->
+
+    <style name="WallPackTheme_dark.SetWallpaper" parent="WallPackTheme_dark">
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+    </style>
+
+    <!-- toolbar. -->
+
+    <style name="WallPackToolbarTheme" parent="@style/ThemeOverlay.AppCompat.ActionBar">
+        <item name="android:textColorPrimary">?attr/content_color</item>
+        <item name="android:textColorSecondary">?attr/content_color</item>
+    </style>
+
+    <!-- tab layout. -->
+
+    <style name="WallPackTabLayoutTheme" parent="Widget.Design.TabLayout">
+        <item name="tabIndicatorHeight">3dp</item>
+        <item name="tabIndicatorColor">?attr/title_color</item>
+        <item name="tabSelectedTextColor">?android:textColorPrimary</item>
+        <item name="tabTextColor">?attr/subtitle_color</item>
+    </style>
+
+    <!-- menu. -->
+
+    <style name="WallPackPopupMenuTheme" parent="@style/ThemeOverlay.AppCompat">
+        <item name="android:colorBackground">?attr/root_color</item>
+        <item name="android:textColor">?attr/content_color</item>
     </style>
 
 
-    <!--<declare-styleable name="FreedomImageView">-->
-        <!--<attr name="fiv_not_free" format="boolean" />-->
-        <!--<attr name="fiv_cover_mode" format="boolean" />-->
-        <!--<attr name="fiv_shadow_position">-->
-            <!--<enum name="top" value="1" />-->
-            <!--<enum name="bottom" value="-1" />-->
-            <!--<enum name="both" value="2" />-->
-            <!--<enum name="none" value="0" />-->
-        <!--</attr>-->
-    <!--</declare-styleable>-->
-    <!---->
-    <!---->
+    <!-- Text -->
 
-
-
-
-    <style name="TabStyle.Light" parent="Widget.Design.TabLayout">
-        <item name="tabTextAppearance">@style/TabTextAppearance.Dark</item>
-        <item name="tabSelectedTextColor">@color/darkGunmetal</item>
-    </style>
-
-
-
-    <style name="TabStyle.Dark" parent="Widget.Design.TabLayout">
-        <item name="tabTextAppearance">@style/TabTextAppearance.Light</item>
-        <item name="tabSelectedTextColor">@android:color/white</item>
-    </style>
-
-    <style name="TabStyle.Dark.Serif">
-        <item name="tabTextAppearance">@style/TabTextAppearance.Light.Serif</item>
-    </style>
-
-    <style name="TabTextAppearance.Dark" parent="TextAppearance.Design.Tab">
-        <item name="android:textColor">@color/darkGunmetal_87</item>
-    </style>
-
-    <style name="TabTextAppearance.Light" parent="TextAppearance.Design.Tab">
-        <item name="android:textColor">@color/white_87</item>
-    </style>
-
-    <style name="TabTextAppearance.Light.Serif">
-        <item name="android:textColor">@color/white_87</item>
-        <item name="android:fontFamily">serif</item>
-        <item name="textAllCaps">false</item>
-    </style>
-
-    <style name="TextViewStyle.Serif" parent="android:Widget.TextView">
-        <item name="android:fontFamily">serif</item>
-    </style>
-
-    <style name="TextViewStyle.Condensed" parent="android:Widget.TextView">
-        <item name="android:fontFamily">sans-serif-condensed</item>
-    </style>
-
-    <style name="PaletteItem">
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">match_parent</item>
-        <item name="android:layout_weight">1</item>
-        <item name="android:gravity">center_horizontal</item>
-        <item name="android:padding">2dp</item>
-        <item name="android:paddingTop">4dp</item>
-        <item name="android:paddingBottom">4dp</item>
-        <item name="android:minHeight">48dp</item>
-        <item name="android:textSize">10dp</item>
-        <item name="android:textColor">@color/gray_87</item>
-        <item name="android:breakStrategy" tools:targetApi="m">balanced</item>
-    </style>
-
-    <style name="TextSample">
+    <style name="large_title_text">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginLeft">16dp</item>
-        <item name="android:layout_marginRight">16dp</item>
+        <item name="android:textSize">@dimen/large_title_text_size</item>
+        <item name="android:textColor">?attr/title_color</item>
     </style>
 
-    <style name="TextSample.Inverse">
-        <item name="android:layout_marginLeft">8dp</item>
-        <item name="android:layout_marginRight">8dp</item>
-    </style>
-
-    <style name="ViewSample">
+    <style name="title_text">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_gravity">center_vertical</item>
-        <item name="android:paddingTop">4dp</item>
-        <item name="android:paddingBottom">4dp</item>
+        <item name="android:textSize">@dimen/title_text_size</item>
+        <item name="android:textColor">?attr/title_color</item>
     </style>
 
-    <style name="ViewSample.Name">
+    <style name="subtitle_text">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginRight">16dp</item>
-        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Body1</item>
-        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/subtitle_text_size</item>
+        <item name="android:textColor">?attr/subtitle_color</item>
     </style>
 
-    <style name="ViewSample.Description">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Small</item>
-    </style>
-
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/tokyoColorPrimary</item>
-        <item name="colorPrimaryDark">@color/tokyoColorPrimaryDark</item>
-        <item name="colorAccent">@color/tokyoColorAccent</item>
-        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
-        <item name="android:statusBarColor">@android:color/transparent</item>
-    </style>
-
-    <style name="WallPackToolbarTheme">
+    <style name="content_text">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">?attr/actionBarSize</item>
-        <item name="android:background">?attr/colorPrimary</item>
-        <item name="android:theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
-        <item name="titleTextColor">?attr/primaryTextColor</item>
-        <item name="popupTheme">?attr/toolbarPopupTheme</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/content_text_size</item>
+        <item name="android:textColor">?attr/content_color</item>
     </style>
+
+    <!-- button -->
+
+    <style name="material_button" parent="@style/Widget.AppCompat.Button.Borderless">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/subtitle_text_size</item>
+        <item name="android:textColor">?attr/colorAccent</item>
+    </style>
+
+    <style name="material_image_button">
+        <item name="android:layout_width">40dp</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:padding">@dimen/little_margin</item>
+        <item name="android:layout_margin">@dimen/little_margin</item>
+        <item name="android:background">?attr/selectableItemBackgroundBorderless</item>
+    </style>
+
+    <!-- image -->
+
+    <style name="material_icon">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">@dimen/normal_margin</item>
+    </style>
+
+    <!-- popup. -->
+
+    <style name="material_popup_menu" parent="@android:style/Widget.Holo.PopupMenu">
+        <item name="android:popupBackground">?attr/root_color</item>
+    </style>
+
+    <!-- dialog. -->
+    <style name="WallPackDialogTheme_light" parent="@android:style/Theme.Holo.Light.Dialog">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColorPrimary">@color/colorTextSubtitle_light</item>
+        <item name="android:textColorAlertDialogListItem">@color/colorTextTitle_light</item>
+        <item name="android:textColorSecondary">@color/colorTextTitle_light</item>
+        <item name="colorAccent">@color/colorTextTitle_light</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+    <style name="WallPackDialogTheme_dark" parent="@android:style/Theme.Holo.Dialog">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColorPrimary">@color/colorTextSubtitle_dark</item>
+        <item name="android:textColorAlertDialogListItem">@color/colorTextTitle_dark</item>
+        <item name="android:textColorSecondary">@color/colorTextTitle_dark</item>
+        <item name="colorAccent">@color/colorTextTitle_dark</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+    <!-- animation. -->
 
 
 </resources>

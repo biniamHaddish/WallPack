@@ -12,13 +12,18 @@
 
 package com.berhane.biniam.wallpack.wallpack.model.data
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+
+@Parcelize
 data class Photos(var id: String,
                   var created_at: String,
                   var updated_at: String,
                   var width: Int,
                   var height: Int,
                   var color: String,
-                  var photoDetails: PhotoDetails,
+                  var downloads: Int,
                   var likes: Int,
                   var liked_by_user: Boolean,
                   var description: String,
@@ -28,4 +33,4 @@ data class Photos(var id: String,
                   var categories: List<PhotoCategory>,
                   var links: PhotoDownloadLinks
 
-)
+) : Parcelable

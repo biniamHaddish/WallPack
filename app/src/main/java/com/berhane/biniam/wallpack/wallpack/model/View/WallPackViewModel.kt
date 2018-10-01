@@ -17,17 +17,11 @@ import com.berhane.biniam.wallpack.wallpack.utils.connectivity.RetrofitClient
 class WallPackViewModel : ViewModel() {
 
     private var wallPackLiveData: LiveData<List<Photos>>? = null
-    private var wallpackPhotoCollection: LiveData<List<PhotoCollection>>? = null
+    private var wallPackPhotoCollection: LiveData<List<PhotoCollection>>? = null
     private var retrofitClient: RetrofitClient? = null
-
-    fun loadData(perpage: Int): LiveData<List<Photos>>? {
-        if (retrofitClient == null) {
-            retrofitClient = RetrofitClient.getRetrofitClient()
-        }
-        this.wallPackLiveData = retrofitClient!!.requestImages(perpage, PhotoConstants.PERPAGE, PhotoConstants.LATEST)
-        return wallPackLiveData
-    }
-
+    /**
+     * List of new Photos from UnSplash.com
+     */
     fun getPhotosList(pageIndex: Int, categoryId: Int): LiveData<List<Photos>>? {
         if (null == retrofitClient) {
             retrofitClient = RetrofitClient.getRetrofitClient()
@@ -40,41 +34,52 @@ class WallPackViewModel : ViewModel() {
         return wallPackLiveData!!
     }
 
+    /**
+     * get All the collection
+     */
     fun getPhotoCollection(page: Int, perPage: Int): LiveData<List<PhotoCollection>>? {
         if (null == retrofitClient) {
             retrofitClient = RetrofitClient.getRetrofitClient()
         }
-        this.wallpackPhotoCollection = retrofitClient!!.requestPhotoCollections(page, perPage)
-        return wallpackPhotoCollection!!
+        this.wallPackPhotoCollection = retrofitClient!!.requestPhotoCollections(page, perPage)
+        return wallPackPhotoCollection!!
 
     }
 
+    /**
+     * collection of Photos organized by Collection Id
+     */
     fun getPhotoCollectionById(collections: PhotoCollection, page: Int, perPage: Int): LiveData<List<Photos>>? {
         if (null == retrofitClient) {
             retrofitClient = RetrofitClient.getRetrofitClient()
         }
-        this.wallPackLiveData = retrofitClient!!.requestPhotosCollections(collections, page, perPage)
+        this.wallPackLiveData = retrofitClient!!.requestPhotosCollectionsById(collections, page, perPage)
         return wallPackLiveData!!
     }
 
+    /**
+     * Featured collection of Photos
+     */
     fun getFeaturedCollection(page: Int, perPage: Int): LiveData<List<PhotoCollection>>? {
         if (null == retrofitClient) {
             retrofitClient = RetrofitClient.getRetrofitClient()
         }
-        this.wallpackPhotoCollection = retrofitClient!!.requestFeaturedPhotoCollections(page, perPage)
-        return wallpackPhotoCollection!!
+        this.wallPackPhotoCollection = retrofitClient!!.requestFeaturedPhotoCollections(page, perPage)
+        return wallPackPhotoCollection!!
 
     }
 
+    /**
+     * curated collection
+     */
     fun getCuratedCollection(page: Int, perPage: Int): LiveData<List<PhotoCollection>>? {
         if (null == retrofitClient) {
             retrofitClient = RetrofitClient.getRetrofitClient()
         }
-        this.wallpackPhotoCollection = retrofitClient!!.requestCuratedPhotoCollections(page, perPage)
-        return wallpackPhotoCollection!!
+        this.wallPackPhotoCollection = retrofitClient!!.requestCuratedPhotoCollections(page, perPage)
+        return wallPackPhotoCollection!!
 
     }
-
     /**
      * LiveData Curated Photos
      */

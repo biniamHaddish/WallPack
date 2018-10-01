@@ -22,7 +22,6 @@ import com.berhane.biniam.wallpack.wallpack.model.View.WallPackViewModel
 import com.berhane.biniam.wallpack.wallpack.model.data.PhotoCollection
 import com.berhane.biniam.wallpack.wallpack.model.data.Photos
 import com.berhane.biniam.wallpack.wallpack.utils.FragmentArgumentDelegate
-import com.berhane.biniam.wallpack.wallpack.utils.PhotoConstants
 import com.berhane.biniam.wallpack.wallpack.utils.adapter.WallPackPhotoAdapter
 import com.bumptech.glide.Glide
 import com.jcodecraeer.xrecyclerview.ProgressStyle
@@ -36,8 +35,9 @@ class NewPhotosFragment : Fragment() {
     private var viewAdapter: WallPackPhotoAdapter? = null
     private var categoryId = -1
 
-    private var collectionType by FragmentArgumentDelegate<String>()
-    private var photocollection by FragmentArgumentDelegate<PhotoCollection>()
+//    private var collectionType by FragmentArgumentDelegate<String>()
+//    private var photocollection by FragmentArgumentDelegate<PhotoCollection>()
+
     val TAG = "NewPhotosFragment"
 
 

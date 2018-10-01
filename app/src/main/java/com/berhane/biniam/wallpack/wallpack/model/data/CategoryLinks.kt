@@ -6,6 +6,10 @@
 
 package com.berhane.biniam.wallpack.wallpack.model.data
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
 
+
+@Parcelize
 data class CategoryLinks(var self: String,
-                         var photos: String)
+                         var photos: String) : Parcelable

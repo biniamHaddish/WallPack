@@ -16,7 +16,7 @@
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/Theme.Tokyo">
+        >
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -27,6 +27,8 @@
                 android:id="@+id/toolbar_collection_detail"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentBottom="true"
                 android:background="@android:color/background_light"
                 android:theme="?attr/actionBarStyle"
                 app:layout_scrollFlags="scroll|enterAlways"
@@ -46,7 +48,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="122dp"
             android:gravity="center"
             android:orientation="horizontal"
             android:padding="13dp">
@@ -72,30 +74,11 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <!--<ProgressBar-->
-    <!--android:id="@+id/fragment_collection_detail_progress"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_gravity="center"-->
-    <!--android:scaleX="0.75"-->
-    <!--android:scaleY="0.75" />-->
-
     <!--fragment container-->
     <FrameLayout
-        android:id="@+id/fragmentContainer"
+        android:id="@+id/collectionFragmentContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-
-
-    <!--<com.jcodecraeer.xrecyclerview.XRecyclerView-->
-    <!--android:id="@+id/collection_detail_recyclerView"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:gravity="center"-->
-    <!--android:scrollbars="none"-->
-    <!--android:visibility="gone"-->
-    <!--app:layout_behavior="@string/appbar_scrolling_view_behavior" />-->
-
 
 </android.support.design.widget.CoordinatorLayout>

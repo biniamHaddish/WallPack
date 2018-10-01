@@ -9,7 +9,7 @@ package com.berhane.biniam.wallpack.wallpack.utils.connectivity
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.util.Log
-import com.berhane.biniam.wallpack.wallpack.api.UnsplashApi
+import com.berhane.biniam.wallpack.wallpack.api.UnSplashApi
 import com.berhane.biniam.wallpack.wallpack.model.data.PhotoCollection
 import com.berhane.biniam.wallpack.wallpack.model.data.Photos
 import com.berhane.biniam.wallpack.wallpack.utils.PhotoConstants
@@ -45,14 +45,14 @@ class RetrofitClient {
     /**
      *
      */
-    private fun retrofitClient(client: OkHttpClient): UnsplashApi {
+    private fun retrofitClient(client: OkHttpClient): UnSplashApi {
         return Retrofit.Builder()
                 .baseUrl(PhotoConstants.BASE_URL)
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create(GsonBuilder().setDateFormat
                 (PhotoConstants.DATE_FORMAT).create()))
                 .build()
-                .create(UnsplashApi::class.java)
+                .create(UnSplashApi::class.java)
     }
 
     /**
@@ -115,18 +115,19 @@ class RetrofitClient {
         return data
     }
 
-    fun requestPhotosCollections(collection:PhotoCollection,page:Int,perPage: Int):LiveData<List<Photos>> {
-        val getPhotoCollections = retrofitClient(okhttpClient()).getCollectionPhotos(collection.id,page, perPage)
+    fun requestPhotosCollectionsById(collection:PhotoCollection,page:Int,perPage: Int):LiveData<List<Photos>> {
+        val getPhotoCollectionsDetails = retrofitClient(okhttpClient()).getCollectionPhotos(collection.id,page, perPage)
         val data: MutableLiveData<List<Photos>> = MutableLiveData()
-        getPhotoCollections.enqueue(object : Callback<List<Photos>> {
+        getPhotoCollectionsDetails.enqueue(object : Callback<List<Photos>> {
             override fun onResponse(call: Call<List<Photos>>, response: retrofit2.Response<List<Photos>>) {
+                Log.d(TAG, "collection_by_ID" + response.body().toString())
                 data.value = response.body()
-                Log.d(TAG, "" + response.body().toString())
-            }
 
+            }
             override fun onFailure(call: Call<List<Photos>>, t: Throwable) {
+
                 t.printStackTrace()
-                Log.e(TAG, t.message)
+                Log.e(TAG, "fetching Error"+t.message)
             }
         })
         return data

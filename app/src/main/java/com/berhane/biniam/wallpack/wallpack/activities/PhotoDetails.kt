@@ -68,11 +68,11 @@ class PhotoDetails : AppCompatActivity() {
         detailed_user_location.text = photos.user.location
         published_date.text = photos.created_at.split("T")[0]
         likes_details.text = NumberFormat.getInstance(Locale.US).format(photos.likes) + " Likes"
-        details_download.text = NumberFormat.getInstance(Locale.US).format(photos.links.downlods)
+        details_download.text = NumberFormat.getInstance(Locale.US).format(photos.downloads)
         color_details.text = photos.color
 
         //Circular drawable until the detailed image loads
-        var drawable = resources.getDrawable(R.drawable.ic_palette,resources.newTheme())
+        var drawable = resources.getDrawable(R.drawable.ic_palette, resources.newTheme())
         drawable = DrawableCompat.wrap(drawable)
         DrawableCompat.setTint(drawable, Color.parseColor(photos.color))
         DrawableCompat.setTintMode(drawable, PorterDuff.Mode.XOR)
@@ -122,6 +122,7 @@ class PhotoDetails : AppCompatActivity() {
     fun updateLikeState(fav: Boolean) {
         like_details_btn.setImageResource(if (fav) R.drawable.ic_heart_red else R.drawable.ic_heart)
     }
+
     // will take us to the Photographer details collection of photos and description for the collection
     fun getPhotographerDetails(view: View) {
         val photos = Gson().fromJson<Photos>(intent.getStringExtra("Photo"), Photos::class.java)

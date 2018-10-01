@@ -34,6 +34,7 @@ class FragmentArgumentDelegate<T : Any> : kotlin.properties.ReadWriteProperty<Fr
         val key = property.name
 
         when (value) {
+            is PhotoCollection->args!!
             is String -> args!!.putString(key, value)
             is Int -> args!!.putInt(key, value)
             is Short -> args!!.putShort(key, value)

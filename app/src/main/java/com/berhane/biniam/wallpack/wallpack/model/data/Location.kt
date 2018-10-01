@@ -5,11 +5,15 @@
  */
 
 package com.berhane.biniam.wallpack.wallpack.model.data
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
 
+
+@Parcelize
 data class Location(
         var city: String,
         var country: String
 
-)
+) : Parcelable
 
 
