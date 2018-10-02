@@ -146,8 +146,6 @@
         <item name="android:colorBackground">?attr/root_color</item>
         <item name="android:textColor">?attr/content_color</item>
     </style>
-
-
     <!-- Text -->
 
     <style name="large_title_text">

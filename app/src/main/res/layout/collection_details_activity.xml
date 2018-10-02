@@ -4,7 +4,8 @@
   ~ Author:bini :
   -->
 
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -12,73 +13,170 @@
     android:clipToPadding="false"
     tools:context="com.berhane.biniam.wallpack.wallpack.activities.CollectionDetailsActivity">
 
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/app_bar"
+    <View
+        android:id="@+id/activity_collection_background"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
+        android:layout_height="match_parent" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_scrollFlags="scroll|snap">
-
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar_collection_detail"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentBottom="true"
-                android:background="@android:color/background_light"
-                android:theme="?attr/actionBarStyle"
-                app:layout_scrollFlags="scroll|enterAlways"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
-
-            <TextView
-                android:id="@+id/collectionDescription_tv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/toolbar_collection_detail"
-                android:layout_marginLeft="24dp"
-                android:layout_marginRight="24dp"
-                android:gravity="center"
-                android:textColor="@color/black" />
-
-        </RelativeLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="122dp"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:padding="13dp">
-
-            <com.berhane.biniam.wallpack.wallpack.utils.image_utills.CircularAuthorImage
-                android:id="@+id/collectionPhotographerImg"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:transitionName="profileTransition" />
-
-            <TextView
-                android:id="@+id/photographerCollection"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:textSize="15sp" />
-
-        </LinearLayout>
-
-    </android.support.design.widget.AppBarLayout>
-
-    <!--fragment container-->
-    <FrameLayout
-        android:id="@+id/collectionFragmentContainer"
+    <View
+        android:id="@+id/activity_collection_shadow"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        android:alpha="0"
+        android:background="@android:color/black" />
+
+    <com.berhane.biniam.wallpack.wallpack.utils.SwipeBackCoordinatorLayout
+        android:id="@+id/activity_collection_swipeBackView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?attr/root_color"
+        android:transitionName="@string/transition_collection_background"
+        tools:ignore="UnusedAttribute">
+
+        <com.berhane.biniam.wallpack.wallpack.utils.NestedScrollAppBarLayout
+            android:id="@+id/activity_collection_appBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            app:theme="@style/WallPackToolbarTheme">
+
+            <com.berhane.biniam.wallpack.wallpack.utils.CoverContainerLayout
+                android:id="@+id/activity_collection_collectionBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_scrollFlags="scroll">
+
+                <ImageView
+                    android:id="@+id/collection_topCover"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scaleType="centerCrop"
+                    tools:ignore="ContentDescription"
+                    android:alpha="0.98"
+                    android:adjustViewBounds="true"
+                    />
+
+                <com.berhane.biniam.wallpack.wallpack.utils.CoverMaskLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    app:cml_from_alpha="1"
+                    app:cml_gradient_angle="90"
+                    app:cml_mask_color="?attr/colorPrimary"
+                    app:cml_to_alpha="0.25">
+
+                    <com.berhane.biniam.wallpack.wallpack.utils.StatusBarView
+                        android:id="@+id/activity_collection_appBarStatusBar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:sbv_fill_in_mode="true" />
+
+                    <android.support.v7.widget.Toolbar
+                        android:id="@+id/toolbar_collection_detail"
+                        android:layout_width="match_parent"
+                        android:layout_height="?attr/actionBarSize"
+                        android:background="@android:color/transparent"
+                        app:popupTheme="@style/WallPackPopupMenuTheme" />
+
+
+                    <TextView
+                        android:id="@+id/activity_collection_title"
+                        style="@style/title_text"
+                        android:layout_marginStart="@dimen/large_icon_size"
+                        android:layout_marginEnd="@dimen/large_icon_size"
+                        android:textIsSelectable="false"
+                        android:textSize="@dimen/design_title_text_size"
+                        android:textStyle="bold"
+                        tools:text="The Sample Collection Title" />
+
+                    <TextView
+                        android:id="@+id/collectionDescription_tv"
+                        style="@style/content_text"
+                        android:layout_width="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_marginStart="@dimen/mini_icon_size"
+                        android:layout_marginEnd="@dimen/mini_icon_size"
+                        android:lineSpacingMultiplier="1.3"
+                        android:textIsSelectable="false"
+                        tools:text="Do not go gentle into that good night, Old age should burn and rave at close of day; Rage, rage against the dying of the light." />
+                </com.berhane.biniam.wallpack.wallpack.utils.CoverMaskLayout>
+            </com.berhane.biniam.wallpack.wallpack.utils.CoverContainerLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/activity_collection_creatorBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_scrollFlags="scroll|enterAlways"
+                tools:ignore="UselessParent">
+
+                <com.berhane.biniam.wallpack.wallpack.utils.StatusBarView
+                    android:id="@+id/activity_collection_creatorBarStatusBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:sbv_fill_in_mode="true" />
+
+                <RelativeLayout
+                    android:id="@+id/activity_collection_touchBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/normal_margin"
+                    android:layout_marginEnd="@dimen/normal_margin"
+                    android:layout_below="@id/activity_collection_creatorBarStatusBar"
+                    android:layout_centerHorizontal="true"
+                    android:background="?attr/selectableItemBackground">
+
+                <com.berhane.biniam.wallpack.wallpack.utils.image_utills.CircularAuthorImage
+                    android:id="@+id/collectionPhotographerImg"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    app:sbv_fill_in_mode="true"
+                    android:layout_margin="@dimen/normal_margin"
+                    android:scaleType="centerCrop"
+                    android:src="?attr/line_color"
+                    android:transitionName="@string/transition_collection_avatar"
+                    tools:ignore="ContentDescription,RtlHardcoded"
+                    />
+
+                    <TextView
+                        android:id="@+id/photographerCollection"
+                        style="@style/subtitle_text"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="@dimen/normal_margin"
+                        android:layout_toEndOf="@id/collectionPhotographerImg"
+                        android:maxLines="1"
+                        tools:ignore="RtlHardcoded"
+                        tools:text="By Biniam _ haddish" />
+
+                <!--<TextView-->
+                    <!--android:id="@+id/photographerCollection"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginStart="20dp"-->
+                    <!--android:clickable="true"-->
+                    <!--android:focusable="true"-->
+                    <!--android:textSize="15sp" />-->
+
+            </RelativeLayout>
+
+            </RelativeLayout>
+        </com.berhane.biniam.wallpack.wallpack.utils.NestedScrollAppBarLayout>
+        <!--fragment container-->
+        <FrameLayout
+            android:id="@+id/collectionFragmentContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+
+    </com.berhane.biniam.wallpack.wallpack.utils.SwipeBackCoordinatorLayout>
+
+    <com.berhane.biniam.wallpack.wallpack.utils.StatusBarView
+        android:id="@+id/activity_collection_statusBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:sbv_translucent_mode="true" />
 
 </android.support.design.widget.CoordinatorLayout>

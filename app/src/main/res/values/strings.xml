@@ -36,7 +36,8 @@
     <string name="sample_text_tertiary_inverse">android:textColorTertiaryInverse</string>
     <string name="sample_text_link_inverse">android:textColorLinkInverse</string>
     <string name="photos">%1$s Photos</string>
-
+    <string name="transition_collection_background">collection_background</string>
+    <string name="transition_collection_avatar">collection_avatar</string>
     <!--menu -->
 
 
@@ -44,7 +45,7 @@
     <string name="menu_latest">Latest</string>
     <string name="menu_old">Oldest</string>
     <string name="menu_popular">Popular</string>
-
+    <string name="todo">TODO</string>
 
 
 </resources>

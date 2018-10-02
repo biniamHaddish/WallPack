@@ -25,6 +25,9 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import com.google.gson.Gson
+import android.graphics.drawable.Drawable
+
+
 
 class CollectionDetailsActivity : AppCompatActivity() {
 
@@ -40,8 +43,10 @@ class CollectionDetailsActivity : AppCompatActivity() {
         val collectionPhotos = Gson().fromJson<PhotoCollection>(intent.getStringExtra("collection"), PhotoCollection::class.java)
         // view setting here
         val collectionDescription = findViewById<TextView>(R.id.collectionDescription_tv)
+        val activity_collection_title = findViewById<TextView>(R.id.activity_collection_title)
         val photographerImg = findViewById<ImageView>(R.id.collectionPhotographerImg)
         val photographerCollection = findViewById<TextView>(R.id.photographerCollection)
+        val collection_topCover = findViewById<ImageView>(R.id.collection_topCover)
 
         // load the image here
         val circularProgressDrawable = CircularProgressDrawable(this)
@@ -49,16 +54,24 @@ class CollectionDetailsActivity : AppCompatActivity() {
         circularProgressDrawable.centerRadius = 30f
         circularProgressDrawable.setColorSchemeColors(ContextCompat.getColor(this, R.color.tokyoColorAccent))
         circularProgressDrawable.start()
-
+        activity_collection_title.text = collectionPhotos.title
         collectionDescription.text = collectionPhotos.description
         val requestOption = RequestOptions().placeholder(circularProgressDrawable).centerCrop()
-        photographerCollection.text = "By\t"+collectionPhotos.user.name
+        photographerCollection.text = "By\t" + collectionPhotos.user.name
+
+
+
+        Glide.with(this@CollectionDetailsActivity)
+                .load(collectionPhotos.cover_photo.urls.regular)
+                .transition(DrawableTransitionOptions.withCrossFade())
+                .into(collection_topCover)
 
         Glide.with(this@CollectionDetailsActivity)
                 .load(collectionPhotos.user.profile_image.medium)
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .apply(requestOption)
                 .into(photographerImg)
+
 
         if (collectionPhotos.curated) {
             val curatedPhotoCollection = CollectionFragment.newInstance(PhotoConstants.COLLECTION_TYPE_CURATED)

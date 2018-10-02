@@ -5,38 +5,16 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
+    android:clipToPadding="false"
     tools:context=".activities.MainActivity">
-
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/app_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@color/white"
-            app:layout_scrollFlags="scroll|enterAlways">
-
-            <ImageView
-                android:id="@+id/AccountImage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:adjustViewBounds="true"
-                android:src="@drawable/ic_account_circle" />
-
-        </android.support.v7.widget.Toolbar>
-    </android.support.design.widget.AppBarLayout>
 
     <!--fragment container-->
     <FrameLayout
         android:id="@+id/fragmentContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-
+        android:background="?attr/root_color"
+        />
 
     <!-- bottom navigation bar -->
     <android.support.design.widget.BottomNavigationView
@@ -47,8 +25,10 @@
         android:background="@color/tokyoColorPrimary"
         app:itemIconTint="@drawable/bottom_navigation_colors"
         app:itemTextColor="@drawable/bottom_navigation_colors"
-        app:layout_behavior="com.berhane.biniam.wallpack.wallpack.utils.BottomNavigationBehavior"
-        app:menu="@menu/navigation" />
-
+        app:insetForeground="@android:color/transparent"
+        app:elevation="4dp"
+        app:menu="@menu/navigation"
+        />
+<!-- app:layout_behavior="com.berhane.biniam.wallpack.wallpack.utils.BottomNavigationBehavior"-->
 </android.support.design.widget.CoordinatorLayout>
 

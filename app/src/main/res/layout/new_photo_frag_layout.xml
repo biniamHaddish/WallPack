@@ -3,17 +3,65 @@
   ~ Year:2018 :
   ~ Author:bini :
   -->
-
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/newPhotoFragment"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="?attr/colorPrimary">
 
-    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/newPhotoFragment"
+    <com.berhane.biniam.wallpack.wallpack.utils.SwipeBackCoordinatorLayout
+        android:id="@+id/activity_collection_swipeBackView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="?attr/colorPrimary">
+        android:background="?attr/root_color"
+        android:transitionName="@string/transition_collection_background"
+        tools:ignore="UnusedAttribute">
+
+        <com.berhane.biniam.wallpack.wallpack.utils.NestedScrollAppBarLayout
+            android:id="@+id/activity_collection_appBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            app:theme="@style/WallPackToolbarTheme">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_scrollFlags="scroll|enterAlways">
+
+                <com.berhane.biniam.wallpack.wallpack.utils.StatusBarView
+                    android:id="@+id/activity_collection_appBarStatusBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:sbv_fill_in_mode="true" />
+
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/main_toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="?attr/colorPrimary"
+                    app:popupTheme="@style/WallPackPopupMenuTheme"
+                    tools:ignore="UnusedAttribute">
+
+
+                    <ImageView
+                        android:id="@+id/AccountImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/activity_horizontal_margin"
+                        android:adjustViewBounds="true"
+                        android:contentDescription="@string/todo"
+                        android:src="@drawable/ic_account_circle"
+                        tools:ignore="contentDescription" />
+
+
+                </android.support.v7.widget.Toolbar>
+            </LinearLayout>
+
+        </com.berhane.biniam.wallpack.wallpack.utils.NestedScrollAppBarLayout>
 
         <ProgressBar
             android:id="@+id/loadingProgress"
@@ -29,9 +77,17 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:scrollbars="none"
-            android:visibility="gone"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+            android:visibility="visible" />
 
-    </FrameLayout>
+        <!--app:layout_behavior="@string/appbar_scrolling_view_behavior"-->
+    </com.berhane.biniam.wallpack.wallpack.utils.SwipeBackCoordinatorLayout>
 
-</RelativeLayout>
+    <com.berhane.biniam.wallpack.wallpack.utils.StatusBarView
+        android:id="@+id/activity_collection_statusBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:sbv_translucent_mode="true" />
+
+
+</FrameLayout>
+

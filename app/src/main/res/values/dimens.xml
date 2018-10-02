@@ -15,7 +15,14 @@
     <dimen name="title_text_size">16sp</dimen>
     <dimen name="subtitle_text_size">14sp</dimen>
     <dimen name="content_text_size">16sp</dimen>
-
+    <!-- icon -->
+    <dimen name="feedback_icon_size">156dp</dimen>
+    <dimen name="design_icon_size">72dp</dimen>
+    <dimen name="large_icon_size">56dp</dimen>
+    <dimen name="normal_icon_size">48dp</dimen>
+    <dimen name="little_icon_size">36dp</dimen>
+    <dimen name="mini_icon_size">24dp</dimen>
+    <dimen name="nano_icon_size">18dp</dimen>
     <!-- margin. -->
     <dimen name="normal_margin">16dp</dimen>
     <dimen name="little_margin">8dp</dimen>

@@ -15,7 +15,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:largeHeap="true"
-        android:theme="@style/WallPackTheme_light"
+        android:theme="@style/WallPackTheme_light.TranslucentNavigation.Main"
         tools:ignore="GoogleAppIndexingWarning">
 
         <activity
