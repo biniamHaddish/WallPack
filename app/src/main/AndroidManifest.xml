@@ -9,17 +9,20 @@
 
     <application
         android:name=".utils.WallPack"
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:largeHeap="true"
+        android:allowTaskReparenting="true"
         android:theme="@style/WallPackTheme_light.TranslucentNavigation.Main"
         tools:ignore="GoogleAppIndexingWarning">
 
         <activity
             android:name=".activities.MainActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="user"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

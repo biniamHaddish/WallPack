@@ -118,6 +118,7 @@ class MainActivity : AppCompatActivity() {
 
     fun loadActivity(activity: Activity) {
         val intent = Intent(context, activity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
         startActivity(intent)
     }
 

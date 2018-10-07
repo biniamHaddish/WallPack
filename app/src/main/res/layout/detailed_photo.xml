@@ -7,23 +7,9 @@
     android:layout_height="match_parent"
     android:clipToPadding="false"
     android:fitsSystemWindows="true"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.berhane.biniam.wallpack.wallpack.activities.PhotoDetails">
+    <!--app:layout_behavior="@string/appbar_scrolling_view_behavior"-->
 
-    <!--<android.support.design.widget.AppBarLayout-->
-    <!--android:id="@+id/app_bar"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:theme="@style/ThemeOverlay.Tokyo">-->
-
-    <!--<android.support.v7.widget.Toolbar-->
-    <!--android:id="@+id/toolbar_details"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="?attr/actionBarSize"-->
-    <!--android:background="@color/tokyoColorPrimary"-->
-    <!--app:layout_scrollFlags="scroll|enterAlways" />-->
-
-    <!--</android.support.design.widget.AppBarLayout>-->
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -41,6 +27,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
+                android:contentDescription="@string/todo"
                 android:scaleType="fitXY"
                 android:src="@drawable/ic_placeholder"
                 android:transitionName="photoScale" />
@@ -58,23 +45,22 @@
                     android:layout_gravity="center_vertical"
                     android:background="@drawable/transparent_gradient"
                     android:orientation="horizontal"
-                    android:paddingBottom="10dp"
                     android:paddingLeft="20dp"
+                    android:paddingTop="10dp"
                     android:paddingRight="20dp"
-                    android:paddingTop="10dp">
+                    android:paddingBottom="10dp">
 
                     <com.berhane.biniam.wallpack.wallpack.utils.image_utills.CircularAuthorImage
                         android:id="@+id/photographerIMGView"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:clickable="true"
                         android:focusable="true"
-                        android:onClick="getPhotographerDetails"
-                        />
+                        android:onClick="getPhotographerDetails" />
 
                     <TextView
                         android:id="@+id/photographerName"
-                        android:layout_width="fill_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="20dp"
@@ -82,8 +68,7 @@
                         android:clickable="true"
                         android:focusable="true"
                         android:text="@string/app_name"
-                        android:textColor="@color/raisinBlack"
-                        />
+                        android:textColor="@color/raisinBlack" />
 
                     <ImageButton
                         android:id="@+id/like_details_btn"
@@ -93,9 +78,9 @@
                         android:layout_marginStart="20dp"
                         android:adjustViewBounds="true"
                         android:background="@color/transparent"
+                        android:contentDescription="@string/todo"
                         android:scaleType="fitCenter"
-                        android:src="@drawable/ic_heart"
-                        />
+                        android:src="@drawable/ic_heart" />
 
                     <ImageButton
                         android:id="@+id/share_photo_btn"
@@ -105,27 +90,28 @@
                         android:layout_marginStart="20dp"
                         android:adjustViewBounds="true"
                         android:background="@color/transparent"
-                        android:scaleType="fitCenter"
-                        android:src="@drawable/ic_share"
                         android:clickable="true"
+                        android:contentDescription="@string/todo"
                         android:focusable="true"
                         android:foreground="?android:attr/selectableItemBackground"
-                        />
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/ic_share" />
 
 
                 </LinearLayout>
+
 
                 <TextView
                     android:id="@+id/detailed_user_location"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginEnd="20dp"
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="10dp"
-                    android:drawablePadding="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="10dp"
                     android:drawableStart="@drawable/ic_map_marker"
+                    android:drawablePadding="20dp"
                     android:gravity="center_vertical"
                     android:textColor="@color/black" />
 
@@ -134,12 +120,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginEnd="20dp"
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="10dp"
-                    android:drawablePadding="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="10dp"
                     android:drawableStart="@drawable/ic_calendar_clock"
+                    android:drawablePadding="20dp"
                     android:gravity="center_vertical"
                     android:textColor="@color/black" />
 
@@ -148,12 +134,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginEnd="20dp"
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="10dp"
-                    android:drawablePadding="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="10dp"
                     android:drawableStart="@drawable/ic_heart_full"
+                    android:drawablePadding="20dp"
                     android:gravity="center_vertical"
                     android:textColor="@color/black" />
 
@@ -162,12 +148,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginEnd="20dp"
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="10dp"
-                    android:drawablePadding="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="10dp"
                     android:drawableStart="@drawable/ic_cloud_download"
+                    android:drawablePadding="20dp"
                     android:gravity="center_vertical"
                     android:textColor="@color/black" />
 
@@ -176,15 +162,37 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginEnd="20dp"
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="10dp"
-                    android:drawablePadding="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="10dp"
                     android:drawableStart="@drawable/ic_palette"
+                    android:drawablePadding="20dp"
                     android:gravity="center_vertical"
                     android:textColor="@color/black" />
+
+
             </LinearLayout>
+            <!--<LinearLayout-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:orientation="horizontal"-->
+            <!--android:layout_marginLeft="300dp"-->
+            <!--&gt;-->
+
+            <!--<android.support.design.widget.FloatingActionButton-->
+            <!--android:id="@+id/info_fab"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_margin="16dp"-->
+            <!--app:backgroundTint="@color/white"-->
+            <!--app:rippleColor="@color/gray_38"-->
+            <!--app:srcCompat="@drawable/ic_info" />-->
+            <!--</LinearLayout>-->
         </LinearLayout>
+
+
     </android.support.v4.widget.NestedScrollView>
+
+
 </android.support.design.widget.CoordinatorLayout>

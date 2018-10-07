@@ -89,5 +89,9 @@ class CollectionDetailsActivity : AppCompatActivity() {
         transaction.commit()
     }
 
+    override fun onBackPressed() {
+        finish()
+        super.onBackPressed()
 
+    }
 }

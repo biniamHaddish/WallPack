@@ -17,6 +17,7 @@ import kotlinx.android.synthetic.main.collection_activity.*
 import kotlinx.android.synthetic.main.featured_activity.*
 import android.support.v4.view.ViewPager
 import android.widget.Toast
+import com.github.ajalt.timberkt.Timber
 
 
 class CollectionActivity : AppCompatActivity() {
@@ -33,15 +34,15 @@ class CollectionActivity : AppCompatActivity() {
 
         val viewPager = findViewById<ViewPager>(R.id.collection_viewPager)
         val tabsCollection = findViewById<TabLayout>(R.id.collection_tabs)
-
         val fragmentAdapter = CollectionPageAdapter(supportFragmentManager)
+
         viewPager.adapter = fragmentAdapter
         tabsCollection.setupWithViewPager(viewPager)
 
         viewPager?.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
 
             override fun onPageScrollStateChanged(state: Int) {
-                //Toast.makeText(context, "State \t$state", Toast.LENGTH_LONG).show()
+              // Timber.d("%d",state)
             }
 
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {

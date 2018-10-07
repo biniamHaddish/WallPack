@@ -61,14 +61,11 @@ class FeaturedActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.featured_activity)
-        featured_navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
-//        val toolbar = findViewById<Toolbar>(R.id.toolbar)
-//        setSupportActionBar(toolbar)
+
         val viewPager = findViewById<ViewPager>(R.id.featured_viewpager)
         val tabsCollection = findViewById<TabLayout>(R.id.featured_tabs)
-
-
         val fragmentAdapter = FeaturedPageAdapter(supportFragmentManager)
+
         viewPager.adapter = fragmentAdapter
         tabsCollection.setupWithViewPager(viewPager)
 
@@ -91,37 +88,19 @@ class FeaturedActivity : AppCompatActivity() {
 
     }
 
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.featured_menu, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        val id = item.itemId
-        return if (id == R.id.curatedToolbar) {
-            Toast.makeText(this, "biniam", Toast.LENGTH_LONG).show()
-            true
-        } else super.onOptionsItemSelected(item)
-    }
-
-
     /**
      *  load Fragment here using the fragment obj
      */
     private fun loadFragment(fragment: Fragment) {
         val transaction = manager.beginTransaction()
-        transaction.replace(R.id.fragmentContainer, fragment)
+        transaction.replace(R.id.featuredFragmentContainer, fragment)
         transaction.addToBackStack(null)
         transaction.commit()
     }
 
     private fun loadActivity(activity: Activity) {
         val intent = Intent(context, activity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
         startActivity(intent)
     }
 }

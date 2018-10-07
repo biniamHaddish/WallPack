@@ -188,6 +188,5 @@ class RetrofitClient {
         })
         return data
     }
-
 }
 

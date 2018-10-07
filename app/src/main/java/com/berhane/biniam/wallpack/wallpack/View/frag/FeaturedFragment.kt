@@ -26,6 +26,7 @@ import com.berhane.biniam.wallpack.wallpack.utils.adapter.WallPackPhotoAdapter
 import com.bumptech.glide.Glide
 import com.jcodecraeer.xrecyclerview.ProgressStyle
 import com.jcodecraeer.xrecyclerview.XRecyclerView
+import timber.log.Timber
 
 
 class FeaturedFragment : Fragment() {
@@ -68,6 +69,7 @@ class FeaturedFragment : Fragment() {
         val rootView = inflater!!.inflate(R.layout.curated_fragment, container, false)
         viewModel = ViewModelProviders.of(this).get(WallPackViewModel::class.java)
         mRecyclerView = rootView.findViewById(R.id.CuratedRecyclerView)
+
         return rootView
     }
 

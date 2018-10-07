@@ -19,6 +19,7 @@ class WallPackViewModel : ViewModel() {
     private var wallPackLiveData: LiveData<List<Photos>>? = null
     private var wallPackPhotoCollection: LiveData<List<PhotoCollection>>? = null
     private var retrofitClient: RetrofitClient? = null
+
     /**
      * List of new Photos from UnSplash.com
      */
@@ -37,7 +38,7 @@ class WallPackViewModel : ViewModel() {
     /**
      * get All the collection
      */
-    fun getPhotoCollection(page: Int, perPage: Int): LiveData<List<PhotoCollection>>? {
+    fun getPhotoCollection(page: Int, perPage: Int): LiveData<List<PhotoCollection>>?{
         if (null == retrofitClient) {
             retrofitClient = RetrofitClient.getRetrofitClient()
         }

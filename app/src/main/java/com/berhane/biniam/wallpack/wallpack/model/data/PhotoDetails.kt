@@ -25,3 +25,7 @@ data class PhotoDetails(
         var photos: Photos,
         var links: PhotoDownloadLinks
 ) : Parcelable
+
+
+
+

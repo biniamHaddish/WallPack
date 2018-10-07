@@ -13,134 +13,168 @@
     android:layout_height="match_parent"
     tools:context="com.berhane.biniam.wallpack.wallpack.activities.PhotographerActivity">
 
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/app_bar"
+    <View
+        android:id="@+id/photographer_bg"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
+        android:layout_height="match_parent" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_scrollFlags="scroll|snap">
-
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar_photographer_details"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="@color/tokyoColorPrimary"
-                app:layout_scrollFlags="scroll|enterAlways" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingBottom="10dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:paddingBottom="10dp"
-                    android:paddingLeft="20dp"
-                    android:paddingRight="20dp">
-
-                    <com.berhane.biniam.wallpack.wallpack.utils.image_utills.CircularAuthorImage
-                        android:id="@+id/user_profile_picture"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:transitionName="profileTransition" />
-
-                    <LinearLayout
-                        android:id="@+id/user_details_container"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:visibility="visible">
-
-                        <ProgressBar
-                            android:id="@+id/user_links_progress"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:scaleX="0.75"
-                            android:scaleY="0.75" />
-
-                        <LinearLayout
-                            android:id="@+id/photographer_link_LinearContainer"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginStart="20dp"
-                            android:gravity="center"
-                            android:orientation="vertical"
-                            android:visibility="gone">
-
-                            <TextView
-                                android:id="@+id/photographerLocation"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_vertical"
-                                android:layout_marginBottom="5dp"
-                                android:drawablePadding="10dp"
-                                android:drawableStart="?attr/locationIcon"
-                                android:gravity="center_vertical"
-                                android:visibility="visible" />
-
-                            <!--<TextView-->
-                                <!--android:id="@+id/photographerUrl"-->
-                                <!--android:layout_width="match_parent"-->
-                                <!--android:layout_height="wrap_content"-->
-                                <!--android:layout_gravity="center_vertical"-->
-                                <!--android:autoLink="web"-->
-                                <!--android:clickable="true"-->
-                                <!--android:drawablePadding="10dp"-->
-                                <!--android:drawableStart="?attr/browserIcon"-->
-                                <!--android:focusable="true"-->
-                                <!--android:gravity="center_vertical"-->
-                                <!--android:textColorLink="?attr/primaryTextColor"-->
-                                <!--android:visibility="gone" />-->
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-                <TextView
-                    android:id="@+id/photographerBio"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:paddingLeft="30dp"
-                    android:paddingRight="30dp"
-                    android:textAlignment="center"
-                    android:visibility="gone" />
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <android.support.design.widget.TabLayout
-            android:id="@+id/user_tabs"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:tabGravity="fill"
-            app:tabIndicatorColor="@color/colorTextSecondary_dark"
-            app:tabMode="fixed"
-            app:tabSelectedTextColor="@color/colorTextSecondary_black"
-            app:tabTextColor="@color/colorTextSecondary_dark" />
-
-    </android.support.design.widget.AppBarLayout>
-
-    <android.support.v4.view.ViewPager
-        android:id="@+id/user_viewpager"
+    <View
+        android:id="@+id/photographer_shadow"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        android:alpha="0"
+        android:background="@android:color/black" />
 
+    <com.berhane.biniam.wallpack.wallpack.utils.SwipeBackCoordinatorLayout
+        android:id="@+id/photographer_swipeBackView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?attr/root_color"
+        android:transitionName="@string/transition_collection_background"
+        tools:ignore="UnusedAttribute">
+
+        <com.berhane.biniam.wallpack.wallpack.utils.NestedScrollAppBarLayout
+            android:id="@+id/photographer_appBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            app:theme="@style/WallPackToolbarTheme">
+
+            <com.berhane.biniam.wallpack.wallpack.utils.CoverContainerLayout
+                android:id="@+id/photographerBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_scrollFlags="scroll">
+
+                <com.berhane.biniam.wallpack.wallpack.utils.CoverMaskLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    app:cml_from_alpha="1"
+                    app:cml_gradient_angle="90"
+                    app:cml_mask_color="?attr/colorPrimary"
+                    app:cml_to_alpha="0.25">
+
+                    <com.berhane.biniam.wallpack.wallpack.utils.StatusBarView
+                        android:id="@+id/photographer_appBarStatusBar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:sbv_fill_in_mode="true" />
+
+                    <!--<android.support.v7.widget.Toolbar-->
+                    <!--android:id="@+id/photographer_toolbar"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="?attr/actionBarSize"-->
+                    <!--android:background="@android:color/transparent"-->
+                    <!--app:popupTheme="@style/WallPackPopupMenuTheme" />-->
+
+                    <RelativeLayout
+                        android:id="@+id/photographerContainer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:ignore="UnusedAttribute">
+
+                        <com.berhane.biniam.wallpack.wallpack.utils.image_utills.CircularAuthorImage
+                            android:id="@+id/photographer_img"
+                            android:layout_width="@dimen/design_icon_size"
+                            android:layout_height="@dimen/design_icon_size"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_marginStart="14dp"
+                            android:layout_marginTop="50dp"
+                            android:src="@drawable/ic_account_circle" />
+
+                        <RelativeLayout
+                            android:id="@+id/item_user_titleContainer"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toEndOf="@id/photographer_img"
+                            tools:ignore="RtlHardcoded">
+
+                            <TextView
+                                android:id="@+id/photographer_name"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="20dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginEnd="20dp"
+                                android:layout_marginBottom="10dp"
+                                android:drawablePadding="20dp"
+                                android:gravity="center_vertical"
+                                android:text="By Biniam-Haddish"
+                                android:textColor="@color/black"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/photographer_location"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/photographer_name"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginStart="20dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginEnd="20dp"
+                                android:layout_marginBottom="10dp"
+                                android:drawableStart="@drawable/ic_map_marker"
+                                android:drawablePadding="20dp"
+                                android:gravity="center_vertical"
+                                android:textColor="@color/black" />
+
+                            <TextView
+                                android:id="@+id/photographer_link"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/photographer_location"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginStart="20dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginEnd="20dp"
+                                android:layout_marginBottom="10dp"
+                                android:drawableStart="@drawable/ic_user_link_24px"
+                                android:drawablePadding="20dp"
+                                android:gravity="center_vertical"
+                                android:textColor="@color/black" />
+
+                            <TextView
+                                android:id="@+id/photographer_bio"
+                                style="@style/content_text"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/photographer_link"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginStart="20dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginEnd="20dp"
+                                android:layout_marginBottom="10dp"
+                                android:drawablePadding="20dp"
+                                android:gravity="center_vertical"
+                                android:textColor="@color/black"
+                                tools:text="I Will explain the me here " />
+                        </RelativeLayout>
+
+                    </RelativeLayout>
+                </com.berhane.biniam.wallpack.wallpack.utils.CoverMaskLayout>
+            </com.berhane.biniam.wallpack.wallpack.utils.CoverContainerLayout>
+
+            <android.support.design.widget.TabLayout
+                android:id="@+id/photographer_tabs"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </com.berhane.biniam.wallpack.wallpack.utils.NestedScrollAppBarLayout>
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/photographer_viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            />
+        <!--fragment container-->
+        <FrameLayout
+            android:id="@+id/photographer_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+    </com.berhane.biniam.wallpack.wallpack.utils.SwipeBackCoordinatorLayout>
 </android.support.design.widget.CoordinatorLayout>

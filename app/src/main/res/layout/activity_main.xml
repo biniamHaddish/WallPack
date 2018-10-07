@@ -13,8 +13,7 @@
         android:id="@+id/fragmentContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="?attr/root_color"
-        />
+        android:background="?attr/root_color" />
 
     <!-- bottom navigation bar -->
     <android.support.design.widget.BottomNavigationView
@@ -23,12 +22,12 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:background="@color/tokyoColorPrimary"
+        app:elevation="@dimen/middle_elevation"
+        app:insetForeground="@android:color/transparent"
         app:itemIconTint="@drawable/bottom_navigation_colors"
         app:itemTextColor="@drawable/bottom_navigation_colors"
-        app:insetForeground="@android:color/transparent"
-        app:elevation="4dp"
-        app:menu="@menu/navigation"
-        />
-<!-- app:layout_behavior="com.berhane.biniam.wallpack.wallpack.utils.BottomNavigationBehavior"-->
+        app:layout_behavior="com.berhane.biniam.wallpack.wallpack.utils.BottomNavigationBehavior"
+        app:menu="@menu/navigation" />
+
 </android.support.design.widget.CoordinatorLayout>
 

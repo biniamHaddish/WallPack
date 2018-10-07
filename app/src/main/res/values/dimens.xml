@@ -1,14 +1,11 @@
 <resources>
+
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="photo_info_base_view_height">400dp</dimen>
     <dimen name="image_margin_left">20dp</dimen>
     <dimen name="header_height">170dp</dimen>
-
-
-
-
     <!-- text -->
     <dimen name="design_title_text_size">24sp</dimen>
     <dimen name="large_title_text_size">20sp</dimen>
@@ -28,7 +25,6 @@
     <dimen name="little_margin">8dp</dimen>
     <dimen name="mini_margin">4dp</dimen>
     <dimen name="nano_margin">2dp</dimen>
-
     <!-- elevation. -->
     <dimen name="tiny_elevation">1dp</dimen>
     <dimen name="low_elevation">2dp</dimen>

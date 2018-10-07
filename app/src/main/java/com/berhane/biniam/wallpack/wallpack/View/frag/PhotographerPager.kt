@@ -1,5 +1,5 @@
 /*
- * DayTime:9/24/18 3:39 PM :
+ * DayTime:10/7/18 10:55 PM :
  * Year:2018 :
  * Author:bini :
  */
@@ -11,15 +11,15 @@ import android.support.v4.app.FragmentManager
 import com.berhane.biniam.wallpack.wallpack.utils.PhotoConstants
 import com.berhane.biniam.wallpack.wallpack.utils.SmartFragmentStatePagerAdapter
 
-class CollectionPageAdapter(fm: FragmentManager) : SmartFragmentStatePagerAdapter(fm) {
+class PhotographerPager(fm: FragmentManager) : SmartFragmentStatePagerAdapter(fm) {
 
     override fun getItem(position: Int): Fragment {
         when (position) {
-            0 -> return CollectionFragment.newInstance(PhotoConstants.COLLECTION_TYPE_ALL)
-            1 -> return CollectionFragment.newInstance(PhotoConstants.COLLECTION_TYPE_CURATED)
-            2 -> return CollectionFragment.newInstance(PhotoConstants.COLLECTION_TYPE_FEATURED)
+            0 -> return FeaturedFragment.newInstance(PhotoConstants.PHOTOS)
+            1 -> return FeaturedFragment.newInstance(PhotoConstants.LIKES)
+            2 -> return FeaturedFragment.newInstance(PhotoConstants.COLLECTION)
         }
-        return CollectionFragment.newInstance(PhotoConstants.COLLECTION_TYPE_ALL)
+        return FeaturedFragment.newInstance(PhotoConstants.LATEST)
     }
 
     override fun getCount(): Int {
@@ -28,11 +28,10 @@ class CollectionPageAdapter(fm: FragmentManager) : SmartFragmentStatePagerAdapte
 
     override fun getPageTitle(position: Int): CharSequence? {
         when (position) {
-            0 -> return "All "
-            1 -> return "Curated "
-            2 -> return "Featured"
+            0 -> return "PHOTOS "
+            1 -> return "LIKES "
+            2 -> return "COLLECTION"
         }
         return null
     }
-
 }

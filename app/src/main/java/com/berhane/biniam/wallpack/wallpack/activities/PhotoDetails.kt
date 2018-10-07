@@ -11,6 +11,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.PorterDuff
 import android.os.Bundle
+import android.support.design.widget.FloatingActionButton
 import android.support.v4.content.ContextCompat
 import android.support.v4.graphics.drawable.DrawableCompat
 import android.support.v4.widget.CircularProgressDrawable
@@ -29,6 +30,7 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.detailed_photo.*
+import kotlinx.android.synthetic.main.notification_template_custom_big.*
 import java.text.NumberFormat
 import java.util.*
 
@@ -37,6 +39,7 @@ class PhotoDetails : AppCompatActivity() {
 
     var context: Context? = null
     val TAG = "PhotoDetails"
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,17 +55,9 @@ class PhotoDetails : AppCompatActivity() {
         val imageView = findViewById<ImageView>(R.id.image_detailed)
         // val progressbar=findViewById<ProgressBar>(R.id.detail_progress)
         val photographerImg = findViewById<ImageView>(R.id.photographerIMGView)
-        val photographerName = findViewById<TextView>(R.id.photographerName)
-        val like_details_btn = findViewById<ImageButton>(R.id.like_details_btn)
-        val detailed_user_location = findViewById<TextView>(R.id.detailed_user_location)
-        val published_date = findViewById<TextView>(R.id.published_date)
-        val likes_details = findViewById<TextView>(R.id.likes_details)
-        val details_download = findViewById<TextView>(R.id.details_download)
-        val share_photo_btn = findViewById<ImageButton>(R.id.share_photo_btn)
-        val color_details = findViewById<TextView>(R.id.color_details)
 
-
-        val photos = Gson().fromJson<Photos>(intent.getStringExtra("Photo"), Photos::class.java)
+        //
+       val  photos = Gson().fromJson<Photos>(intent.getStringExtra("Photo"), Photos::class.java)
 
         photographerName.text = "By " + photos.user.name
         detailed_user_location.text = photos.user.location
@@ -95,7 +90,7 @@ class PhotoDetails : AppCompatActivity() {
                 .into(imageView)
 
         Glide.with(this@PhotoDetails)
-                .load(photos.user.profile_image.medium)
+                .load(photos.user.profile_image.large)
                 .apply(RequestOptions().priority(Priority.HIGH)
                         .placeholder(R.drawable.ic_account_circle))
                 .into(photographerImg)
@@ -125,10 +120,10 @@ class PhotoDetails : AppCompatActivity() {
 
     // will take us to the Photographer details collection of photos and description for the collection
     fun getPhotographerDetails(view: View) {
-        val photos = Gson().fromJson<Photos>(intent.getStringExtra("Photo"), Photos::class.java)
+        val  photos = Gson().fromJson<Photos>(intent.getStringExtra("Photo"), Photos::class.java)
+        val gSon = Gson().toJson(photos)
         val intent = Intent(this, PhotographerActivity::class.java)
-        intent.putExtra("username", photos.user.username)
-        intent.putExtra("name", photos.user.name)
+        intent.putExtra("photographer",gSon)
         startActivity(intent)
     }
 

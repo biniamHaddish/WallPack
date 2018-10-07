@@ -46,18 +46,13 @@
                     app:popupTheme="@style/WallPackPopupMenuTheme"
                     tools:ignore="UnusedAttribute">
 
-
-                    <ImageView
+                    <com.berhane.biniam.wallpack.wallpack.utils.image_utills.CircularAuthorImage
                         android:id="@+id/AccountImage"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/activity_horizontal_margin"
-                        android:adjustViewBounds="true"
-                        android:contentDescription="@string/todo"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:layout_marginStart="310dp"
                         android:src="@drawable/ic_account_circle"
-                        tools:ignore="contentDescription" />
-
-
+                        />
                 </android.support.v7.widget.Toolbar>
             </LinearLayout>
 
@@ -77,16 +72,17 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:scrollbars="none"
-            android:visibility="visible" />
+            android:visibility="visible"
+             />
 
         <!--app:layout_behavior="@string/appbar_scrolling_view_behavior"-->
     </com.berhane.biniam.wallpack.wallpack.utils.SwipeBackCoordinatorLayout>
 
-    <com.berhane.biniam.wallpack.wallpack.utils.StatusBarView
-        android:id="@+id/activity_collection_statusBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:sbv_translucent_mode="true" />
+    <!--<com.berhane.biniam.wallpack.wallpack.utils.StatusBarView-->
+        <!--android:id="@+id/activity_collection_statusBar"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--app:sbv_translucent_mode="true" />-->
 
 
 </FrameLayout>

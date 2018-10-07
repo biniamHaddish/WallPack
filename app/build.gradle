@@ -55,7 +55,7 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-   // kapt "com.android.databinding:compiler:$gradle_version"
+    // kapt "com.android.databinding:compiler:$gradle_version"
     // external libs'''
     implementation "com.squareup.okhttp3:okhttp:$okhttp_version"
     implementation "com.squareup.okio:okio:$okio_Version"
@@ -76,4 +76,6 @@ dependencies {
     implementation "android.arch.lifecycle:viewmodel:$lifecycle_version" // use -ktx for Kotlin
     // alternatively - just LiveData
     implementation "android.arch.lifecycle:livedata:$lifecycle_version"
+
+    implementation 'com.github.ajalt:timberkt:1.5.1'
 }
