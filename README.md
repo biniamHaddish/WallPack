@@ -8,5 +8,11 @@ Clean unofficial Android client for https://unsplash.com.
 
 
 
-![Drag Racing](/Users/bini/Documents/dev/WallPack/WallPack/wallPack screen shots/collection.png)
+# Screenshots
+
+<img src="https://github.com/biniamHaddish/WallPack/blob/master/wallPack%20screen%20shots/collection.png" width="250">
+<img src="https://github.com/biniamHaddish/WallPack/blob/master/wallPack%20screen%20shots/collection_details2.png" width="250">
+<img src="https://github.com/biniamHaddish/WallPack/blob/master/wallPack%20screen%20shots/featured_activity.png" width="250">
+<img src="https://github.com/biniamHaddish/WallPack/blob/master/wallPack%20screen%20shots/main_activity.png" width="250">
+<img src="https://github.com/biniamHaddish/WallPack/blob/master/wallPack%20screen%20shots/newPhotoDetails.png" width="250">
 
