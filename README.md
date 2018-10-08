@@ -14,11 +14,11 @@ Clean unofficial Android client for https://unsplash.com.
 <img src="https://github.com/biniamHaddish/WallPack/blob/master/wallPack%20screen%20shots/mainActivity.png" width="250"> <img src="https://github.com/biniamHaddish/WallPack/blob/master/wallPack%20screen%20shots/featured_activity.png" width="250">
 <img src="https://github.com/biniamHaddish/WallPack/blob/master/wallPack%20screen%20shots/newPhotoDetails.png" width="250">
 
-#License
+# License
 
 MIT License
 
-Copyright (c) [2018] [Biniam Haddish]
+Copyright (c) 2018 Biniam Haddish
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
