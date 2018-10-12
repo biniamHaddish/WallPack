@@ -77,5 +77,5 @@ dependencies {
     // alternatively - just LiveData
     implementation "android.arch.lifecycle:livedata:$lifecycle_version"
 
-    implementation 'com.github.ajalt:timberkt:1.5.1'
+
 }

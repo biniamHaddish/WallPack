@@ -9,15 +9,10 @@ package com.berhane.biniam.wallpack.wallpack.activities
 import android.content.Context
 import android.os.Bundle
 import android.support.design.widget.TabLayout
+import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
 import com.berhane.biniam.wallpack.wallpack.R
 import com.berhane.biniam.wallpack.wallpack.View.frag.CollectionPageAdapter
-import com.berhane.biniam.wallpack.wallpack.View.frag.FeaturedPageAdapter
-import kotlinx.android.synthetic.main.collection_activity.*
-import kotlinx.android.synthetic.main.featured_activity.*
-import android.support.v4.view.ViewPager
-import android.widget.Toast
-import com.github.ajalt.timberkt.Timber
 
 
 class CollectionActivity : AppCompatActivity() {
@@ -25,7 +20,6 @@ class CollectionActivity : AppCompatActivity() {
 
     private lateinit var context: Context
     private val manager = supportFragmentManager
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,6 +49,9 @@ class CollectionActivity : AppCompatActivity() {
             }
 
         })
+
+
+
 
     }
 }

@@ -174,7 +174,9 @@
         <FrameLayout
             android:id="@+id/photographer_fragment"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+            android:layout_height="wrap_content"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            />
     </com.berhane.biniam.wallpack.wallpack.utils.SwipeBackCoordinatorLayout>
+
 </android.support.design.widget.CoordinatorLayout>

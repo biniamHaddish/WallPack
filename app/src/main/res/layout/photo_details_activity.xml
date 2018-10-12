@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ DayTime:10/8/18 7:33 PM :
+  ~ Year:2018 :
+  ~ Author:bini :
+  -->
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/detailed_photo_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/detailedImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:transitionName="viewDetail" />
+
+        <ImageView
+            android:id="@+id/download_ico"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/detailedImage"
+            android:src="@drawable/ic_download"
+            android:backgroundTint="@color/white"
+            />
+
+    </RelativeLayout>
+
+
+</FrameLayout>

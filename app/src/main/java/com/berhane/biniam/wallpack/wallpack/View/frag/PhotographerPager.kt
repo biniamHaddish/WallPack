@@ -8,18 +8,23 @@ package com.berhane.biniam.wallpack.wallpack.View.frag
 
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
+import com.berhane.biniam.wallpack.wallpack.model.data.Photos
+import com.berhane.biniam.wallpack.wallpack.model.data.User
 import com.berhane.biniam.wallpack.wallpack.utils.PhotoConstants
 import com.berhane.biniam.wallpack.wallpack.utils.SmartFragmentStatePagerAdapter
 
-class PhotographerPager(fm: FragmentManager) : SmartFragmentStatePagerAdapter(fm) {
+class PhotographerPager(fm: FragmentManager, Photographer: Photos) : SmartFragmentStatePagerAdapter(fm) {
+
+    private val  photos = Photographer
 
     override fun getItem(position: Int): Fragment {
+
         when (position) {
-            0 -> return FeaturedFragment.newInstance(PhotoConstants.PHOTOS)
-            1 -> return FeaturedFragment.newInstance(PhotoConstants.LIKES)
-            2 -> return FeaturedFragment.newInstance(PhotoConstants.COLLECTION)
+            0 -> return PhotographerDetailsFragment.newInstance(this.photos)
+            1 -> return PhotographerDetailsFragment.newInstance(this.photos)
+            2 -> return PhotographerDetailsFragment.newInstance(this.photos)
         }
-        return FeaturedFragment.newInstance(PhotoConstants.LATEST)
+        return PhotographerDetailsFragment.newInstance(this.photos)
     }
 
     override fun getCount(): Int {

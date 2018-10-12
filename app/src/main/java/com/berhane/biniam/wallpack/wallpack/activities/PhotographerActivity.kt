@@ -13,13 +13,15 @@ import android.support.v4.app.Fragment
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
 import android.widget.ImageView
-import android.widget.TextView
 import com.berhane.biniam.wallpack.wallpack.R
-import com.berhane.biniam.wallpack.wallpack.R.id.photographerName
-import com.berhane.biniam.wallpack.wallpack.View.frag.FeaturedPageAdapter
+import com.berhane.biniam.wallpack.wallpack.View.frag.FeaturedFragment
+import com.berhane.biniam.wallpack.wallpack.View.frag.PhotographerDetailsFragment
+import com.berhane.biniam.wallpack.wallpack.View.frag.PhotographerPager
 import com.berhane.biniam.wallpack.wallpack.model.data.Photos
-import com.google.gson.Gson
+import com.berhane.biniam.wallpack.wallpack.utils.PhotoConstants
 import com.bumptech.glide.Glide
+import com.google.gson.Gson
+import kotlinx.android.synthetic.main.new_photo_frag_layout.*
 import kotlinx.android.synthetic.main.photographer_activity.*
 
 
@@ -33,12 +35,7 @@ class PhotographerActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.photographer_activity)
         context = this
-        val viewPager = findViewById<ViewPager>(R.id.photographer_viewpager)
-        val tabsCollection = findViewById<TabLayout>(R.id.photographer_tabs)
-        val fragmentAdapter = FeaturedPageAdapter(supportFragmentManager)
 
-        viewPager.adapter = fragmentAdapter
-        tabsCollection.setupWithViewPager(viewPager)
 
         val photographerImg = findViewById<ImageView>(R.id.photographer_img)
         // Setting the values for the above vars
@@ -57,6 +54,31 @@ class PhotographerActivity : AppCompatActivity() {
         photographer_bio.text = photographerInfo.user.bio
 
 
+        //pager
+        val viewPager = findViewById<ViewPager>(R.id.photographer_viewpager)
+        val tabsCollection = findViewById<TabLayout>(R.id.photographer_tabs)
+        val fragmentAdapter = PhotographerPager(supportFragmentManager, photographerInfo)
+        viewPager.adapter = fragmentAdapter
+        tabsCollection.setupWithViewPager(viewPager)
+
+        viewPager?.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+
+            override fun onPageScrollStateChanged(state: Int) {
+
+            }
+
+            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+
+            }
+
+            override fun onPageSelected(position: Int) {
+                viewPager.currentItem = position
+            }
+
+        })
+        //loading the Photographer Collection,Photos and Likes
+        val newPhotoFragment = PhotographerDetailsFragment.newInstance(photographerInfo)
+        loadFragment(newPhotoFragment)
     }
 
     /**
@@ -64,7 +86,7 @@ class PhotographerActivity : AppCompatActivity() {
      */
     private fun loadFragment(fragment: Fragment) {
         val transaction = manager.beginTransaction()
-        transaction.replace(R.id.featuredFragmentContainer, fragment)
+        transaction.replace(R.id.photographer_fragment, fragment)
         transaction.addToBackStack(null)
         transaction.commit()
     }

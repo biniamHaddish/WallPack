@@ -12,10 +12,8 @@ import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
 import android.support.v4.widget.CircularProgressDrawable
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import com.berhane.biniam.wallpack.wallpack.R
 import com.berhane.biniam.wallpack.wallpack.View.frag.CollectionDetailsFragment
 import com.berhane.biniam.wallpack.wallpack.View.frag.CollectionFragment
@@ -25,8 +23,6 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import com.google.gson.Gson
-import android.graphics.drawable.Drawable
-
 
 
 class CollectionDetailsActivity : AppCompatActivity() {
@@ -43,7 +39,7 @@ class CollectionDetailsActivity : AppCompatActivity() {
         val collectionPhotos = Gson().fromJson<PhotoCollection>(intent.getStringExtra("collection"), PhotoCollection::class.java)
         // view setting here
         val collectionDescription = findViewById<TextView>(R.id.collectionDescription_tv)
-        val activity_collection_title = findViewById<TextView>(R.id.activity_collection_title)
+        val activityCollectionTitle = findViewById<TextView>(R.id.activity_collection_title)
         val photographerImg = findViewById<ImageView>(R.id.collectionPhotographerImg)
         val photographerCollection = findViewById<TextView>(R.id.photographerCollection)
         val collection_topCover = findViewById<ImageView>(R.id.collection_topCover)
@@ -54,7 +50,7 @@ class CollectionDetailsActivity : AppCompatActivity() {
         circularProgressDrawable.centerRadius = 30f
         circularProgressDrawable.setColorSchemeColors(ContextCompat.getColor(this, R.color.tokyoColorAccent))
         circularProgressDrawable.start()
-        activity_collection_title.text = collectionPhotos.title
+        activityCollectionTitle.text = collectionPhotos.title
         collectionDescription.text = collectionPhotos.description
         val requestOption = RequestOptions().placeholder(circularProgressDrawable).centerCrop()
         photographerCollection.text = "By\t" + collectionPhotos.user.name

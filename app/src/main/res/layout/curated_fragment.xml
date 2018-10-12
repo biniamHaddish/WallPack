@@ -3,8 +3,6 @@
   ~ Year:2018 :
   ~ Author:bini :
   -->
-
-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/curated_fragment"
     android:layout_width="match_parent"
@@ -25,7 +23,5 @@
         android:gravity="center"
         android:scrollbars="none"
         android:visibility="visible" />
-    <!--app:layout_behavior="@string/appbar_scrolling_view_behavior" -->
-
 
 </RelativeLayout>

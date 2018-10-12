@@ -84,7 +84,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        context = this
         val toolbar = findViewById<Toolbar>(R.id.main_toolbar)
         setSupportActionBar(toolbar)
 
@@ -101,7 +101,7 @@ class MainActivity : AppCompatActivity() {
 
 //        val localLayoutParams = window.attributes
 //        localLayoutParams.flags = (WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS or localLayoutParams.flags)
-        context = this
+
         val newPhotoFragment = NewPhotosFragment.newInstance()
         loadFragment(newPhotoFragment)
     }

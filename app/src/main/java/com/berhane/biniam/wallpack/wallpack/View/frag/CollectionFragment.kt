@@ -64,7 +64,7 @@ class CollectionFragment : Fragment() {
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val rootView = inflater!!.inflate(R.layout.collection_fragment, container, false)
+        val rootView = inflater.inflate(R.layout.collection_fragment, container, false)
         viewModel = ViewModelProviders.of(this).get(WallPackViewModel::class.java)
         mRecyclerView = rootView.findViewById(R.id.CollectionRecyclerView)
         mRecyclerView.setOnTouchListener(object : View.OnTouchListener {

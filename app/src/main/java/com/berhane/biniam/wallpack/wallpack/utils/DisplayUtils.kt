@@ -64,11 +64,11 @@ class DisplayUtils(context: Context) {
 
         @Size(2)
         fun getScreenSize(context: Context): IntArray {
-            if (DisplayUtils.isLandscape(context)) {
+            if(DisplayUtils.isLandscape(context)) {
                 return intArrayOf(context.resources.displayMetrics.widthPixels, context.resources.displayMetrics.heightPixels)
             } else {
                 val manager = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
-                if (manager == null) {
+                if(manager == null) {
                     return intArrayOf(context.resources.displayMetrics.widthPixels, context.resources.displayMetrics.heightPixels + DisplayUtils.getNavigationBarHeight(context.resources))
                 } else {
                     val size = Point()

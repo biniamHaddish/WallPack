@@ -60,28 +60,30 @@ interface UnSplashApi {
     fun getFeaturedCollections(@Query("page") page: Int,
                                @Query("per_page") per_page: Int): Call<List<PhotoCollection>>
 
-    @GET("users/{username}/collections")
-    fun getUserCollections(@Path("username") username: String,
-                           @Query("page") page: Int,
-                           @Query("per_page") per_page: Int): Call<List<PhotoCollection>>
 
     @POST("collections")
     fun createCollection(@Query("title") title: String,
                          @Query("description") description: String,
                          @Query("private") privateX: Boolean): Call<PhotoCollection>
 
-//    @GET("users/{username}/photos")
-//    fun getUserPhotos(@Path("username") username: String,
-//                      @Query("page") page: Int,
-//                      @Query("per_page") per_page: Int,
-//                      @Query("order_by") order_by: String): Call<List<Photos>>
-//
-//    @GET("users/{username}/likes")
-//    fun getUserLikes(@Path("username") username: String,
-//                     @Query("page") page: Int,
-//                     @Query("per_page") per_page: Int,
-//                     @Query("order_by") order_by: String): Call<List<Photos>>
-//
+    // user Collection, likes and photos
+    @GET("users/{username}/photos")
+    fun getPhotographerPhotos(@Path("username") username: String,
+                              @Query("page") page: Int,
+                              @Query("per_page") per_page: Int,
+                              @Query("sortOrder") sortOrder: String): Call<List<Photos>>
+
+    @GET("users/{username}/likes")
+    fun getPhotographerLikes(@Path("username") username: String,
+                     @Query("page") page: Int,
+                     @Query("per_page") per_page: Int,
+                     @Query("order_by") order_by: String): Call<List<Photos>>
+
+    @GET("users/{username}/collections")
+    fun getPhotographerCollections(@Path("username") username: String,
+                           @Query("page") page: Int,
+                           @Query("per_page") per_page: Int): Call<List<PhotoCollection>>
+
 //    @GET("collections/{id}/photos")
 //    fun getCollectionPhotos(@Path("id") id: Int,
 //                            @Query("page") page: Int,

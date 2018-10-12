@@ -51,8 +51,7 @@
                         android:layout_width="28dp"
                         android:layout_height="28dp"
                         android:layout_marginStart="310dp"
-                        android:src="@drawable/ic_account_circle"
-                        />
+                        android:src="@drawable/ic_account_circle" />
                 </android.support.v7.widget.Toolbar>
             </LinearLayout>
 
@@ -72,17 +71,9 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:scrollbars="none"
-            android:visibility="visible"
-             />
+            android:visibility="visible" />
 
-        <!--app:layout_behavior="@string/appbar_scrolling_view_behavior"-->
     </com.berhane.biniam.wallpack.wallpack.utils.SwipeBackCoordinatorLayout>
-
-    <!--<com.berhane.biniam.wallpack.wallpack.utils.StatusBarView-->
-        <!--android:id="@+id/activity_collection_statusBar"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--app:sbv_translucent_mode="true" />-->
 
 
 </FrameLayout>

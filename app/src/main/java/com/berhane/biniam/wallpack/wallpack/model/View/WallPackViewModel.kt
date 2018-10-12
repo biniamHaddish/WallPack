@@ -10,6 +10,7 @@ import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.ViewModel
 import com.berhane.biniam.wallpack.wallpack.model.data.PhotoCollection
 import com.berhane.biniam.wallpack.wallpack.model.data.Photos
+import com.berhane.biniam.wallpack.wallpack.model.data.User
 import com.berhane.biniam.wallpack.wallpack.utils.PhotoConstants
 import com.berhane.biniam.wallpack.wallpack.utils.connectivity.RetrofitClient
 
@@ -38,7 +39,7 @@ class WallPackViewModel : ViewModel() {
     /**
      * get All the collection
      */
-    fun getPhotoCollection(page: Int, perPage: Int): LiveData<List<PhotoCollection>>?{
+    fun getPhotoCollection(page: Int, perPage: Int): LiveData<List<PhotoCollection>>? {
         if (null == retrofitClient) {
             retrofitClient = RetrofitClient.getRetrofitClient()
         }
@@ -56,6 +57,39 @@ class WallPackViewModel : ViewModel() {
         }
         this.wallPackLiveData = retrofitClient!!.requestPhotosCollectionsById(collections, page, perPage)
         return wallPackLiveData!!
+    }
+
+    /**
+     * Will show the Photographers Photos and Collection with Likes by Sort Order
+     */
+    fun getPhotographersPhotos(photographer: User, page: Int, perPage: Int, sortOrder: String): LiveData<List<Photos>>? {
+        if (null == retrofitClient) {
+            retrofitClient = RetrofitClient.getRetrofitClient()
+        }
+        this.wallPackLiveData = retrofitClient!!.requestPhotographerPhotos(photographer, page, perPage, sortOrder)
+        return wallPackLiveData!!
+    }
+
+    /**
+     * fetch the photographer Likes
+     */
+    fun getPhotographerLikes(photographer: User, page: Int, perPage: Int, sortOrder: String): LiveData<List<Photos>>? {
+        if (null == retrofitClient) {
+            retrofitClient = RetrofitClient.getRetrofitClient()
+        }
+        this.wallPackLiveData = retrofitClient!!.requestPhotographerLikes(photographer, page, perPage, sortOrder)
+        return wallPackLiveData!!
+    }
+
+    /**
+     * Photographer Collection will be  collected from this end
+     */
+    fun getPhotographerCollection(photographer: User, page: Int, perPage: Int): LiveData<List<PhotoCollection>>? {
+        if (null == retrofitClient) {
+            retrofitClient = RetrofitClient.getRetrofitClient()
+        }
+        this.wallPackPhotoCollection = retrofitClient!!.requestPhotographerCollection(photographer, page, perPage)
+        return wallPackPhotoCollection!!
     }
 
     /**
@@ -81,6 +115,7 @@ class WallPackViewModel : ViewModel() {
         return wallPackPhotoCollection!!
 
     }
+
     /**
      * LiveData Curated Photos
      */

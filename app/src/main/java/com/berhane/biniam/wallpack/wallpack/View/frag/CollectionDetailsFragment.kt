@@ -64,7 +64,7 @@ class CollectionDetailsFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val rootView = inflater!!.inflate(R.layout.detailed_collection_fragment, container, false)
+        val rootView = inflater.inflate(R.layout.detailed_collection_fragment, container, false)
         viewModel = ViewModelProviders.of(this).get(WallPackViewModel::class.java)
         mRecyclerView = rootView.findViewById(R.id.detailedCollectionRecyclerView)
         return rootView
@@ -123,7 +123,7 @@ class CollectionDetailsFragment : Fragment() {
 
     private fun loadDetailedPhotoCollections(moreCollection: Boolean) {
         val args = arguments
-        var collection: PhotoCollection = args!!.getParcelable<PhotoCollection>("collectionWithId")
+        var collection: PhotoCollection = args!!.getParcelable("collectionWithId")
         Log.d(TAG, "coll_id" + collection.id)
         viewModel.getPhotoCollectionById(collection, pageNumber, PhotoConstants.PERPAGE)!!.observe(this@CollectionDetailsFragment,
                 Observer<List<Photos>> { t: List<Photos>? ->

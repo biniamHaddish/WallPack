@@ -26,7 +26,6 @@ import com.berhane.biniam.wallpack.wallpack.utils.adapter.WallPackPhotoAdapter
 import com.bumptech.glide.Glide
 import com.jcodecraeer.xrecyclerview.ProgressStyle
 import com.jcodecraeer.xrecyclerview.XRecyclerView
-import timber.log.Timber
 
 
 class FeaturedFragment : Fragment() {
@@ -38,7 +37,7 @@ class FeaturedFragment : Fragment() {
 
 
     private var sortOrder by FragmentArgumentDelegate<String>()
-    val TAG = "FeaturedFragment"
+    private val TAG = "FeaturedFragment"
 
     companion object {
         fun newInstance(sortOrder: String) = FeaturedFragment().apply {
@@ -65,17 +64,19 @@ class FeaturedFragment : Fragment() {
 
     }
 
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val rootView = inflater!!.inflate(R.layout.curated_fragment, container, false)
+        val rootView = inflater.inflate(R.layout.curated_fragment, container, false)
         viewModel = ViewModelProviders.of(this).get(WallPackViewModel::class.java)
         mRecyclerView = rootView.findViewById(R.id.CuratedRecyclerView)
 
         return rootView
     }
 
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        initCollection()
+        initFeaturedFragment()
     }
 
     fun loadCuratedPhotos(loadMore: Boolean) {
@@ -99,7 +100,7 @@ class FeaturedFragment : Fragment() {
     /**
      * initializing the value of our CollectionFragment here
      */
-    fun initCollection() {
+    private fun initFeaturedFragment() {
         mRecyclerView.layoutManager = StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL)
         mRecyclerView.setRefreshProgressStyle(ProgressStyle.BallClipRotatePulse)
         mRecyclerView.setLoadingMoreProgressStyle(ProgressStyle.BallPulseSync)

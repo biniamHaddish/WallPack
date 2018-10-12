@@ -15,7 +15,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:scaleType="fitXY"
-            android:transitionName="viewDetail" />
+            android:transitionName="viewDetail"
+            android:contentDescription="@string/todo" />
 
         <com.berhane.biniam.wallpack.wallpack.utils.image_utills.CircularAuthorImage
             android:id="@+id/author_image"
@@ -23,6 +24,7 @@
             android:layout_height="30dp"
             android:layout_alignBottom="@+id/image_preview"
             android:layout_margin="10dp"
+            android:elevation="8dp"
             />
 
     </RelativeLayout>

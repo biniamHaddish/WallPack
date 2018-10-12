@@ -52,8 +52,7 @@ class NewPhotosFragment : Fragment() {
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        Log.d(TAG, "onCreateView")
-        val rootView = inflater!!.inflate(R.layout.new_photo_frag_layout, container, false)
+        val rootView = inflater.inflate(R.layout.new_photo_frag_layout, container, false)
         viewModel = ViewModelProviders.of(this).get(WallPackViewModel::class.java)
         mRecyclerView = rootView.findViewById(R.id.photo_recycler_view)
 

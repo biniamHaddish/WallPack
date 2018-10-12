@@ -12,6 +12,7 @@ import android.util.Log
 import com.berhane.biniam.wallpack.wallpack.api.UnSplashApi
 import com.berhane.biniam.wallpack.wallpack.model.data.PhotoCollection
 import com.berhane.biniam.wallpack.wallpack.model.data.Photos
+import com.berhane.biniam.wallpack.wallpack.model.data.User
 import com.berhane.biniam.wallpack.wallpack.utils.PhotoConstants
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
@@ -20,6 +21,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+
 
 class RetrofitClient {
 
@@ -34,16 +36,16 @@ class RetrofitClient {
     }
 
     /**
-     * OkHttp Client
+     * OkHttp Client instance
      */
-    private fun okhttpClient(): OkHttpClient {
+    private fun okHttpClient(): OkHttpClient {
         return OkHttpClient().newBuilder()
                 .addInterceptor(WallPackInterceptor())
                 .build()
     }
 
     /**
-     *
+     * retrofit Client baseline
      */
     private fun retrofitClient(client: OkHttpClient): UnSplashApi {
         return Retrofit.Builder()
@@ -59,7 +61,7 @@ class RetrofitClient {
      * will request some images from Unsplash.com
      */
     fun requestImages(page: Int, perPage: Int, orderBy: String): LiveData<List<Photos>> {
-        val getPhotos = retrofitClient(okhttpClient()).getPhotos(page, perPage, orderBy)
+        val getPhotos = retrofitClient(okHttpClient()).getPhotos(page, perPage, orderBy)
         val data: MutableLiveData<List<Photos>> = MutableLiveData()
         getPhotos.enqueue(object : retrofit2.Callback<List<Photos>> {
             override fun onResponse(call: Call<List<Photos>>, response: retrofit2.Response<List<Photos>>) {
@@ -76,10 +78,10 @@ class RetrofitClient {
     }
 
     /**
-     *
+     * requesting photo by given category
      */
     fun requestPhotosByCategory(id: Int, page: Int, per_page: Int): LiveData<List<Photos>> {
-        val getPhotosInAGivenCategory = retrofitClient(okhttpClient()).getPhotosInAGivenCategory(id, page, per_page)
+        val getPhotosInAGivenCategory = retrofitClient(okHttpClient()).getPhotosInAGivenCategory(id, page, per_page)
         val data: MutableLiveData<List<Photos>> = MutableLiveData()
         getPhotosInAGivenCategory.enqueue(object : Callback<List<Photos>> {
             override fun onResponse(call: Call<List<Photos>>, response: retrofit2.Response<List<Photos>>) {
@@ -89,17 +91,17 @@ class RetrofitClient {
 
             override fun onFailure(call: Call<List<Photos>>, t: Throwable) {
                 t.printStackTrace()
-                Log.d("Retrofit", t.message)
+                Log.e("Retrofit", t.message)
             }
         })
         return data
     }
 
     /**
-     * Returning the collection of Photos
+     * Returning the collection of Photos Collected by UnSplash and Photographers around the world
      */
     fun requestPhotoCollections(page: Int, perPage: Int): LiveData<List<PhotoCollection>> {
-        val getPhotoCollections = retrofitClient(okhttpClient()).getAllCollections(page, perPage)
+        val getPhotoCollections = retrofitClient(okHttpClient()).getAllCollections(page, perPage)
         val data: MutableLiveData<List<PhotoCollection>> = MutableLiveData()
         getPhotoCollections.enqueue(object : Callback<List<PhotoCollection>> {
             override fun onResponse(call: Call<List<PhotoCollection>>, response: retrofit2.Response<List<PhotoCollection>>) {
@@ -115,8 +117,11 @@ class RetrofitClient {
         return data
     }
 
-    fun requestPhotosCollectionsById(collection:PhotoCollection,page:Int,perPage: Int):LiveData<List<Photos>> {
-        val getPhotoCollectionsDetails = retrofitClient(okhttpClient()).getCollectionPhotos(collection.id,page, perPage)
+    /**
+     * getting the photos by the Collection id
+     */
+    fun requestPhotosCollectionsById(collection: PhotoCollection, page: Int, perPage: Int): LiveData<List<Photos>> {
+        val getPhotoCollectionsDetails = retrofitClient(okHttpClient()).getCollectionPhotos(collection.id, page, perPage)
         val data: MutableLiveData<List<Photos>> = MutableLiveData()
         getPhotoCollectionsDetails.enqueue(object : Callback<List<Photos>> {
             override fun onResponse(call: Call<List<Photos>>, response: retrofit2.Response<List<Photos>>) {
@@ -124,22 +129,26 @@ class RetrofitClient {
                 data.value = response.body()
 
             }
+
             override fun onFailure(call: Call<List<Photos>>, t: Throwable) {
 
                 t.printStackTrace()
-                Log.e(TAG, "fetching Error"+t.message)
+                Log.e(TAG, "fetching Error" + t.message)
             }
         })
         return data
     }
 
+    /**
+     * bring every collection from UnSplash.com
+     */
     fun requestFeaturedPhotoCollections(page: Int, perPage: Int): LiveData<List<PhotoCollection>> {
-        val getPhotoCollections = retrofitClient(okhttpClient()).getFeaturedCollections(page, perPage)
+        val getPhotoCollections = retrofitClient(okHttpClient()).getFeaturedCollections(page, perPage)
         val data: MutableLiveData<List<PhotoCollection>> = MutableLiveData()
         getPhotoCollections.enqueue(object : Callback<List<PhotoCollection>> {
             override fun onResponse(call: Call<List<PhotoCollection>>, response: retrofit2.Response<List<PhotoCollection>>) {
                 data.value = response.body()
-                Log.d(TAG, "" + response.body().toString())
+                Log.d(TAG, "FeaturedPhotoCollections\t" + response.body().toString())
             }
 
             override fun onFailure(call: Call<List<PhotoCollection>>, t: Throwable) {
@@ -150,14 +159,84 @@ class RetrofitClient {
         return data
     }
 
+    /**
+     * Requesting the particular photographer Photos
+     */
+    fun requestPhotographerPhotos(photographer: User, page: Int, PerPage: Int, sortOrder: String): LiveData<List<Photos>> {
+        val PhotographerPhotos = retrofitClient(okHttpClient()).getPhotographerPhotos(photographer.username, page, PerPage, sortOrder)
+        val data: MutableLiveData<List<Photos>> = MutableLiveData()
+        PhotographerPhotos.enqueue(object : Callback<List<Photos>> {
+            override fun onFailure(call: Call<List<Photos>>, t: Throwable) {
+                t.printStackTrace()
+                Log.e(TAG, t.message)
+            }
 
+            override fun onResponse(call: Call<List<Photos>>, response: Response<List<Photos>>) {
+                data.value = response.body()
+                Log.d(TAG, "thePhotographerCallCode\t" + response.code().toString())
+                Log.d(TAG, "requestPhotographerPhotos\t" + response.body()!!.iterator().forEach {
+                   Log.d(TAG,"listOf"+it.urls.regular)
+                })
+            }
+
+        })
+
+        return data
+    }
+
+
+    /**
+     * Requesting photographer Likes
+     */
+    fun requestPhotographerLikes(photographer: User, page: Int, PerPage: Int, sortOrder: String): LiveData<List<Photos>> {
+        val getPhotographerLikes = retrofitClient(okHttpClient()).getPhotographerLikes(photographer.username, page, PerPage, sortOrder)
+        val data: MutableLiveData<List<Photos>> = MutableLiveData()
+        getPhotographerLikes.enqueue(object : Callback<List<Photos>> {
+            override fun onFailure(call: Call<List<Photos>>, t: Throwable) {
+                t.printStackTrace()
+                Log.e(TAG, t.message)
+            }
+
+            override fun onResponse(call: Call<List<Photos>>, response: Response<List<Photos>>) {
+                data.value = response.body()
+                Log.d(TAG, "the Photographer Call Code\t" + response.code().toString())
+            }
+
+        })
+        return data
+    }
+
+    /**
+     * Requesting Photographer Collections
+     */
+    fun requestPhotographerCollection(photographer: User, page: Int, PerPage: Int): LiveData<List<PhotoCollection>> {
+        val getPhotographerCollection = retrofitClient(okHttpClient()).getPhotographerCollections(photographer.username, page, PerPage)
+        val data: MutableLiveData<List<PhotoCollection>> = MutableLiveData()
+        getPhotographerCollection.enqueue(object : Callback<List<PhotoCollection>> {
+            override fun onFailure(call: Call<List<PhotoCollection>>, t: Throwable) {
+                t.printStackTrace()
+                Log.e(TAG, t.message)
+            }
+
+            override fun onResponse(call: Call<List<PhotoCollection>>, response: Response<List<PhotoCollection>>) {
+                data.value = response.body()
+                Log.d(TAG, "the Photographer Call Code\t" + response.code().toString())
+            }
+
+        })
+        return data
+    }
+
+    /**
+     * Requesting  every Curated Collection Of Photos
+     */
     fun requestCuratedPhotoCollections(page: Int, perPage: Int): LiveData<List<PhotoCollection>> {
-        val getPhotoCollections = retrofitClient(okhttpClient()).getCuratedCollections(page, perPage)
+        val getPhotoCollections = retrofitClient(okHttpClient()).getCuratedCollections(page, perPage)
         val data: MutableLiveData<List<PhotoCollection>> = MutableLiveData()
         getPhotoCollections.enqueue(object : Callback<List<PhotoCollection>> {
             override fun onResponse(call: Call<List<PhotoCollection>>, response: retrofit2.Response<List<PhotoCollection>>) {
                 data.value = response.body()
-                Log.d(TAG, "" + response.body().toString())
+                Log.e(TAG, "" + response.body().toString())
             }
 
             override fun onFailure(call: Call<List<PhotoCollection>>, t: Throwable) {
@@ -172,7 +251,7 @@ class RetrofitClient {
      * Will return a Curated Photos depending on the Sort Order
      */
     fun requestCuratedPhotos(page: Int, perpage: Int, sortOrder: String): LiveData<List<Photos>> {
-        val getCuratedPhotos = retrofitClient(okhttpClient()).getCuratedPhotos(page, perpage, sortOrder)
+        val getCuratedPhotos = retrofitClient(okHttpClient()).getCuratedPhotos(page, perpage, sortOrder)
         val data: MutableLiveData<List<Photos>> = MutableLiveData()
         getCuratedPhotos.enqueue(object : Callback<List<Photos>> {
             override fun onFailure(call: Call<List<Photos>>, t: Throwable) {
@@ -189,4 +268,5 @@ class RetrofitClient {
         return data
     }
 }
+
 
