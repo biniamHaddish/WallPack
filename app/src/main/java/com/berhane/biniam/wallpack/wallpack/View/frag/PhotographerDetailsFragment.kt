@@ -32,23 +32,16 @@ import com.jcodecraeer.xrecyclerview.XRecyclerView
 
 class PhotographerDetailsFragment : Fragment() {
 
+    private val TAG: String = "PhotographerFrag"
     private var pageNumber: Int = 1
     private lateinit var viewModel: WallPackViewModel
     private lateinit var mRecyclerView: XRecyclerView
     private var viewAdapter: WallPackPhotoAdapter? = null
-    private var collectionAdapter: CollectionAdapter? = null
-
-    private val TAG: String = "PhotographerFrag"
-
-    private var sortOrder by FragmentArgumentDelegate<String>()
-    private var type by FragmentArgumentDelegate<String>()
 
     companion object {
         fun newInstance(photographer: Photos) = PhotographerDetailsFragment().apply {
-            //this.photographerReturnType = photographerRType
-            this.type= type
             val args = Bundle()
-            args.putParcelable("photographerCol", photographer)
+            args.putParcelable("photographerPhotos", photographer)
             val fragment = PhotographerDetailsFragment()
             fragment.arguments = args
             return fragment
@@ -109,17 +102,14 @@ class PhotographerDetailsFragment : Fragment() {
                 }
             }
         })
-
     }
 
     /**
      * Will Load all the Collections ,Likes and Photos of the Given Photographer
      */
     private fun loadPhotographerPhotos(loadMore: Boolean) {
-
-        //if (photographerReturnType != null) {
         val args = arguments
-        var photographerCol: Photos? = args!!.getParcelable("photographerCol")
+        var photographerCol: Photos? = args!!.getParcelable("photographerPhotos")
         viewModel.getPhotographersPhotos(photographerCol!!.user, pageNumber, PhotoConstants.PERPAGE, PhotoConstants.LATEST)!!.observe(this@PhotographerDetailsFragment,
                 Observer<List<Photos>> { t: List<Photos>? ->
                     if (viewAdapter == null) {
@@ -135,42 +125,6 @@ class PhotographerDetailsFragment : Fragment() {
                         }
                     }
                 })
-
-//            } else if (photographerReturnType == (PhotoConstants.LIKES)) {
-//                viewModel.getPhotographerLikes(photographerCol!!.user, pageNumber, PhotoConstants.PERPAGE, PhotoConstants.LATEST)!!.observe(this@PhotographerDetailsFragment,
-//                        Observer<List<Photos>> { t: List<Photos>? ->
-//                            if (viewAdapter == null) {
-//                                viewAdapter = WallPackPhotoAdapter(t!!, activity as Activity)
-//                                mRecyclerView.adapter = viewAdapter
-//                            } else {
-//                                if (loadMore) {
-//                                    viewAdapter!!.addImageInfo(t!!)
-//                                    mRecyclerView.loadMoreComplete()
-//                                } else {
-//                                    viewAdapter!!.setImageInfo(t!!)
-//                                    mRecyclerView.refreshComplete()
-//                                }
-//                            }
-//                        })
-//
-//            } else if (photographerReturnType == (PhotoConstants.COLLECTION)) {
-//                viewModel.getPhotographerCollection(photographerCol!!.user, pageNumber, PhotoConstants.PERPAGE)!!.observe(this@PhotographerDetailsFragment,
-//                        Observer<List<PhotoCollection>> { t: List<PhotoCollection>? ->
-//                            if (collectionAdapter == null) {
-//                                collectionAdapter = CollectionAdapter(t!!, activity as Activity)
-//                                mRecyclerView.adapter = collectionAdapter
-//                            } else {
-//                                if (loadMore) {
-//                                    collectionAdapter!!.addImageInfo(t!!)
-//                                    mRecyclerView.loadMoreComplete()
-//                                } else {
-//                                    collectionAdapter!!.setImageInfo(t!!)
-//                                    mRecyclerView.refreshComplete()
-//                                }
-//                            }
-//                        })
-//            }
-
     }
 
     override fun onDetach() {

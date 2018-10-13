@@ -26,5 +26,6 @@ data class User(var id: String,
                 var total_photos: Int,
                 var total_collections: Int,
                 var profile_image: UserProfileImageUrl,
+                var badge:Badge,
                 var links: UserLinks) : Parcelable
 

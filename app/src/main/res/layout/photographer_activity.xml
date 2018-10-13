@@ -11,6 +11,7 @@
     android:id="@+id/activity_user"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     tools:context="com.berhane.biniam.wallpack.wallpack.activities.PhotographerActivity">
 
     <View
@@ -40,6 +41,8 @@
             android:background="?attr/colorPrimary"
             app:theme="@style/WallPackToolbarTheme">
 
+
+
             <com.berhane.biniam.wallpack.wallpack.utils.CoverContainerLayout
                 android:id="@+id/photographerBar"
                 android:layout_width="match_parent"
@@ -55,19 +58,6 @@
                     app:cml_gradient_angle="90"
                     app:cml_mask_color="?attr/colorPrimary"
                     app:cml_to_alpha="0.25">
-
-                    <com.berhane.biniam.wallpack.wallpack.utils.StatusBarView
-                        android:id="@+id/photographer_appBarStatusBar"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:sbv_fill_in_mode="true" />
-
-                    <!--<android.support.v7.widget.Toolbar-->
-                    <!--android:id="@+id/photographer_toolbar"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="?attr/actionBarSize"-->
-                    <!--android:background="@android:color/transparent"-->
-                    <!--app:popupTheme="@style/WallPackPopupMenuTheme" />-->
 
                     <RelativeLayout
                         android:id="@+id/photographerContainer"
@@ -157,26 +147,30 @@
                     </RelativeLayout>
                 </com.berhane.biniam.wallpack.wallpack.utils.CoverMaskLayout>
             </com.berhane.biniam.wallpack.wallpack.utils.CoverContainerLayout>
-
-            <android.support.design.widget.TabLayout
-                android:id="@+id/photographer_tabs"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_scrollFlags="scroll|enterAlways">
+
+                <android.support.design.widget.TabLayout
+                    android:id="@+id/photographer_tabs"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+
         </com.berhane.biniam.wallpack.wallpack.utils.NestedScrollAppBarLayout>
 
         <android.support.v4.view.ViewPager
             android:id="@+id/photographer_viewpager"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="wrap_content" />
 
-            />
-        <!--fragment container-->
-        <FrameLayout
-            android:id="@+id/photographer_fragment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            />
     </com.berhane.biniam.wallpack.wallpack.utils.SwipeBackCoordinatorLayout>
-
+    <!--fragment container-->
+    <FrameLayout
+        android:id="@+id/photographer_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 </android.support.design.widget.CoordinatorLayout>

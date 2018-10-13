@@ -15,14 +15,14 @@ import com.berhane.biniam.wallpack.wallpack.utils.SmartFragmentStatePagerAdapter
 
 class PhotographerPager(fm: FragmentManager, Photographer: Photos) : SmartFragmentStatePagerAdapter(fm) {
 
-    private val  photos = Photographer
+    private val photos = Photographer
 
     override fun getItem(position: Int): Fragment {
 
         when (position) {
             0 -> return PhotographerDetailsFragment.newInstance(this.photos)
-            1 -> return PhotographerDetailsFragment.newInstance(this.photos)
-            2 -> return PhotographerDetailsFragment.newInstance(this.photos)
+            1 -> return PhotographerLikesFragment.newInstance(this.photos)
+            2 -> return PhotographerCollectionFragment.newInstance(this.photos)
         }
         return PhotographerDetailsFragment.newInstance(this.photos)
     }
@@ -33,9 +33,9 @@ class PhotographerPager(fm: FragmentManager, Photographer: Photos) : SmartFragme
 
     override fun getPageTitle(position: Int): CharSequence? {
         when (position) {
-            0 -> return "PHOTOS "
-            1 -> return "LIKES "
-            2 -> return "COLLECTION"
+            0 -> return photos.user.total_photos.toString() + "\tPHOTOS "
+            1 -> return photos.user.total_likes.toString() + "\tLIKES "
+            2 -> return photos.user.total_collections.toString() + "\tCOLLECTION"
         }
         return null
     }

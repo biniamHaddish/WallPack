@@ -12,16 +12,16 @@ import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.widget.ImageView
+import android.widget.Toast
 import com.berhane.biniam.wallpack.wallpack.R
-import com.berhane.biniam.wallpack.wallpack.View.frag.FeaturedFragment
+import com.berhane.biniam.wallpack.wallpack.View.frag.PhotographerCollectionFragment
 import com.berhane.biniam.wallpack.wallpack.View.frag.PhotographerDetailsFragment
 import com.berhane.biniam.wallpack.wallpack.View.frag.PhotographerPager
 import com.berhane.biniam.wallpack.wallpack.model.data.Photos
-import com.berhane.biniam.wallpack.wallpack.utils.PhotoConstants
 import com.bumptech.glide.Glide
 import com.google.gson.Gson
-import kotlinx.android.synthetic.main.new_photo_frag_layout.*
 import kotlinx.android.synthetic.main.photographer_activity.*
 
 
@@ -52,6 +52,7 @@ class PhotographerActivity : AppCompatActivity() {
         photographer_location.text = photographerInfo.user.location
         photographer_link.text = photographerInfo.user.portfolio_url
         photographer_bio.text = photographerInfo.user.bio
+//        badge_tv.text = photographerInfo.user.badge.slug
 
 
         //pager
@@ -74,21 +75,7 @@ class PhotographerActivity : AppCompatActivity() {
             override fun onPageSelected(position: Int) {
                 viewPager.currentItem = position
             }
-
         })
-        //loading the Photographer Collection,Photos and Likes
-        val newPhotoFragment = PhotographerDetailsFragment.newInstance(photographerInfo)
-        loadFragment(newPhotoFragment)
-    }
 
-    /**
-     *  load Fragment here using the fragment obj
-     */
-    private fun loadFragment(fragment: Fragment) {
-        val transaction = manager.beginTransaction()
-        transaction.replace(R.id.photographer_fragment, fragment)
-        transaction.addToBackStack(null)
-        transaction.commit()
     }
-
 }

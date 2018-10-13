@@ -36,22 +36,19 @@ class CollectionActivity : AppCompatActivity() {
         viewPager?.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
 
             override fun onPageScrollStateChanged(state: Int) {
-              // Timber.d("%d",state)
+
             }
 
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
-              //  Toast.makeText(context, "State \t$position offset\t$positionOffset positionPixel \t $positionOffsetPixels", Toast.LENGTH_LONG).show()
+
 
             }
 
             override fun onPageSelected(position: Int) {
-                   viewPager.currentItem = position
+                viewPager.currentItem = position
             }
 
         })
-
-
-
 
     }
 }
