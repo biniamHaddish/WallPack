@@ -9,8 +9,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_user"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:fitsSystemWindows="true"
     tools:context="com.berhane.biniam.wallpack.wallpack.activities.PhotographerActivity">
 
@@ -40,7 +40,6 @@
             android:layout_height="wrap_content"
             android:background="?attr/colorPrimary"
             app:theme="@style/WallPackToolbarTheme">
-
 
 
             <com.berhane.biniam.wallpack.wallpack.utils.CoverContainerLayout
@@ -147,6 +146,7 @@
                     </RelativeLayout>
                 </com.berhane.biniam.wallpack.wallpack.utils.CoverMaskLayout>
             </com.berhane.biniam.wallpack.wallpack.utils.CoverContainerLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -165,12 +165,12 @@
             android:id="@+id/photographer_viewpager"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
-
+        <!--fragment container-->
+        <FrameLayout
+            android:id="@+id/photographer_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
     </com.berhane.biniam.wallpack.wallpack.utils.SwipeBackCoordinatorLayout>
-    <!--fragment container-->
-    <FrameLayout
-        android:id="@+id/photographer_fragment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
 </android.support.design.widget.CoordinatorLayout>

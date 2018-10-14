@@ -39,8 +39,6 @@ class MainActivity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.photo_collection -> {
-//                val collectionFragment = CollectionFragment.newInstance()
-//                loadFragment(collectionFragment)
                 val activity = CollectionActivity()
                 loadActivity(activity)
                 return@OnNavigationItemSelectedListener true
@@ -50,9 +48,6 @@ class MainActivity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.featured -> {
-//                val curatedFrag = CuratedFrag.newInstance()
-//                loadFragment(curatedFrag)
-
                 val activity = FeaturedActivity()
                 loadActivity(activity)
                 return@OnNavigationItemSelectedListener true
@@ -62,46 +57,13 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-//    private val mOnDrawerNavigationItemSelectedListener = NavigationView.OnNavigationItemSelectedListener { item ->
-//        when (item.itemId) {
-//
-//            R.id.photo_collection -> {
-//                val collectionFragment = CollectionFragment.newInstance()
-//                loadFragment(collectionFragment)
-//                return@OnNavigationItemSelectedListener true
-//            }
-//            R.id.featured -> {
-//                val activity = FeaturedActivity()
-//                loadActivity(activity)
-//                return@OnNavigationItemSelectedListener true
-//            }
-//        }
-//        //drawerLayout?.closeDrawer(GravityCompat.START)
-//        true
-//    }
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         context = this
         val toolbar = findViewById<Toolbar>(R.id.main_toolbar)
         setSupportActionBar(toolbar)
-
-//        val accountImage= findViewById<ImageView>(R.id.AccountImage)
-//
-//        accountImage.setOnClickListener {
-//            Toast.makeText(this,"this is an entry point for the App",Toast.LENGTH_LONG).show()
-//        }
-        // val headerView = drawerNavigationView.inflateHeaderView(R.layout.nav_header)
-        //Navigation Listener
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
-        //drawerNavigationView.setNavigationItemSelectedListener(mOnDrawerNavigationItemSelectedListener)
-
-
-//        val localLayoutParams = window.attributes
-//        localLayoutParams.flags = (WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS or localLayoutParams.flags)
-
         val newPhotoFragment = NewPhotosFragment.newInstance()
         loadFragment(newPhotoFragment)
     }

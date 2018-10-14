@@ -52,8 +52,6 @@ class PhotographerActivity : AppCompatActivity() {
         photographer_location.text = photographerInfo.user.location
         photographer_link.text = photographerInfo.user.portfolio_url
         photographer_bio.text = photographerInfo.user.bio
-//        badge_tv.text = photographerInfo.user.badge.slug
-
 
         //pager
         val viewPager = findViewById<ViewPager>(R.id.photographer_viewpager)
