@@ -12,7 +12,7 @@ Clean unofficial Android client for https://unsplash.com.
 
 <img src="https://github.com/biniamHaddish/WallPack/blob/master/wallPack%20screen%20shots/collection.png" width="250"> <img src="https://github.com/biniamHaddish/WallPack/blob/master/wallPack%20screen%20shots/collection_details2.png" width="250">
 <img src="https://github.com/biniamHaddish/WallPack/blob/master/wallPack%20screen%20shots/mainActivity.png" width="250"> <img src="https://github.com/biniamHaddish/WallPack/blob/master/wallPack%20screen%20shots/featured_activity.png" width="250">
-<img src="https://github.com/biniamHaddish/WallPack/blob/master/wallPack%20screen%20shots/newPhotoDetails.png" width="250">
+<img src="https://github.com/biniamHaddish/WallPack/blob/master/wallPack%20screen%20shots/newPhotoDetails.png" width="250"><img src="https://github.com/biniamHaddish/WallPack/blob/master/wallPack%20screen%20shots/photographer2.png" width="250">
 
 # License
 
