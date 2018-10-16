@@ -83,14 +83,14 @@ class FeaturedFragment : Fragment() {
         viewModel.getCuratedPhotos(pageNumber, PhotoConstants.PERPAGE, sortOrder)!!.observe(this@FeaturedFragment,
                 Observer<List<Photos>> { t: List<Photos>? ->
                     if (viewAdapter == null) {
-                        viewAdapter = WallPackPhotoAdapter(t!!, activity as Activity)
+                        viewAdapter = WallPackPhotoAdapter((t as MutableList<Photos>?)!!, activity as Activity)
                         mRecyclerView.adapter = viewAdapter
                     } else {
                         if (loadMore) {
-                            viewAdapter!!.addImageInfo(t!!)
+                            viewAdapter!!.addAll(t!!)
                             mRecyclerView.loadMoreComplete()
                         } else {
-                            viewAdapter!!.setImageInfo(t!!)
+                            viewAdapter!!.setImageInfo((t as MutableList<Photos>?)!!)
                             mRecyclerView.refreshComplete()
                         }
                     }

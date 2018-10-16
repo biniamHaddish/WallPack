@@ -149,16 +149,6 @@
                         android:maxLines="1"
                         tools:ignore="RtlHardcoded"
                         tools:text="By Biniam _ haddish" />
-
-                <!--<TextView-->
-                    <!--android:id="@+id/photographerCollection"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_marginStart="20dp"-->
-                    <!--android:clickable="true"-->
-                    <!--android:focusable="true"-->
-                    <!--android:textSize="15sp" />-->
-
             </RelativeLayout>
 
             </RelativeLayout>

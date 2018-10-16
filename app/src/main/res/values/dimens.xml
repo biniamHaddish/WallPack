@@ -30,5 +30,6 @@
     <dimen name="low_elevation">2dp</dimen>
     <dimen name="middle_elevation">4dp</dimen>
     <dimen name="high_elevation">10dp</dimen>
+    <dimen name="recyclerViewPaddingTop">55dp</dimen>
 
 </resources>

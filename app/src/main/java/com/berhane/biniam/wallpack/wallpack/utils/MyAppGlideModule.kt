@@ -7,13 +7,12 @@
 package com.berhane.biniam.wallpack.wallpack.utils
 
 import android.content.Context
-import com.bumptech.glide.annotation.GlideModule
-import com.bumptech.glide.module.AppGlideModule
-import com.bumptech.glide.load.DecodeFormat
-import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.GlideBuilder
-
-
+import com.bumptech.glide.annotation.GlideModule
+import com.bumptech.glide.load.DecodeFormat
+import com.bumptech.glide.load.engine.cache.InternalCacheDiskCacheFactory
+import com.bumptech.glide.module.AppGlideModule
+import com.bumptech.glide.request.RequestOptions
 
 @GlideModule
 class MyAppGlideModule: AppGlideModule() {
@@ -23,5 +22,8 @@ class MyAppGlideModule: AppGlideModule() {
         // consumed just 50% memory footprint compared to ARGB_8888.
         // Increase memory usage for quality with:
         builder.setDefaultRequestOptions(RequestOptions().format(DecodeFormat.PREFER_ARGB_8888))
+
+        builder.setDiskCache(
+            InternalCacheDiskCacheFactory(context, 1024))
     }
 }
