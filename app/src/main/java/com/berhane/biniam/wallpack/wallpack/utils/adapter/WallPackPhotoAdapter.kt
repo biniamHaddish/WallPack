@@ -23,24 +23,25 @@ import com.berhane.biniam.wallpack.wallpack.model.data.Photos
 import com.berhane.biniam.wallpack.wallpack.utils.image_utills.ColorShifter
 import com.bumptech.glide.GenericTransitionOptions
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.transition.ViewPropertyTransition
 import com.google.gson.Gson
-import java.util.*
 
 
-class WallPackPhotoAdapter(private var wallPackList: List<Photos>, context: Context) :
+class WallPackPhotoAdapter(private var wallPackList: MutableList<Photos>, context: Context) :
         RecyclerView.Adapter<WallPackPhotoAdapter.WallPackHolder>() {
 
     private val TAG = "WallPackPhotoAdapter"
     var context: Context = context
+    var isLoading: Boolean = false
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WallPackHolder {
         val itemView = LayoutInflater.from(context).inflate(R.layout.photos_layout, null)
         return WallPackHolder(itemView)
     }
 
-    override fun getItemCount(): Int {
-        return wallPackList.size
-    }
+    override fun getItemCount() = wallPackList.size
 
     override fun onBindViewHolder(holder: WallPackHolder, position: Int) {
 
@@ -65,6 +66,7 @@ class WallPackPhotoAdapter(private var wallPackList: List<Photos>, context: Cont
                 .load(wallPackPhotos.urls.regular)
                 .transition(GenericTransitionOptions.with(fadeAnimation))
                 .into(holder.imagePreview)
+
         holder.imagePreview.minimumHeight = imageHeight.toInt()
 
         holder.imagePreview.setOnClickListener {
@@ -77,21 +79,33 @@ class WallPackPhotoAdapter(private var wallPackList: List<Photos>, context: Cont
 
     }
 
+
     class WallPackHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var cardView: FrameLayout = itemView.findViewById(R.id.cardview)
         var imagePreview: ImageView = itemView.findViewById(R.id.image_preview)
         var authorImage: ImageView = itemView.findViewById(R.id.author_image)
     }
 
-    fun setImageInfo(photosList: List<Photos>) {
+    fun setImageInfo(photosList: MutableList<Photos>) {
         this.wallPackList = photosList
         notifyDataSetChanged()
     }
 
-    fun addImageInfo(photosList: List<Photos>) {
+    fun addAll(photosList: List<Photos>) {
         if (this.wallPackList is ArrayList) {
             (this.wallPackList as ArrayList<Photos>).addAll(photosList)
+            notifyItemInserted(wallPackList.size - 1)
         }
+    }
+    fun remove(postition:Int){
+        wallPackList.removeAt(postition)
+        notifyItemRemoved(wallPackList.size)
+    }
+    /**
+     * clear all items and notify
+     */
+    fun clear() {
+        wallPackList.clear()
         notifyDataSetChanged()
     }
 }

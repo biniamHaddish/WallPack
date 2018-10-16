@@ -17,7 +17,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import com.berhane.biniam.wallpack.wallpack.R
 import com.berhane.biniam.wallpack.wallpack.model.View.WallPackViewModel
 import com.berhane.biniam.wallpack.wallpack.model.data.Photos
@@ -109,14 +108,14 @@ class PhotographerLikesFragment : Fragment() {
         viewModel.getPhotographerLikes(photographerCol!!.user, pageNumber, PhotoConstants.PERPAGE, PhotoConstants.LATEST)!!.observe(this@PhotographerLikesFragment,
                 Observer<List<Photos>> { t: List<Photos>? ->
                     if (viewAdapter == null) {
-                        viewAdapter = WallPackPhotoAdapter(t!!, activity as Activity)
+                        viewAdapter = WallPackPhotoAdapter((t as MutableList<Photos>?)!!, activity as Activity)
                         mRecyclerView.adapter = viewAdapter
                     } else {
                         if (loadMore) {
-                            viewAdapter!!.addImageInfo(t!!)
+                            viewAdapter!!.addAll(t!!)
                             mRecyclerView.loadMoreComplete()
                         } else {
-                            viewAdapter!!.setImageInfo(t!!)
+                            viewAdapter!!.setImageInfo((t as MutableList<Photos>?)!!)
                             mRecyclerView.refreshComplete()
                         }
                     }

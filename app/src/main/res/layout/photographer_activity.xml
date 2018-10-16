@@ -9,22 +9,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_user"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:fitsSystemWindows="true"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipToPadding="false"
     tools:context="com.berhane.biniam.wallpack.wallpack.activities.PhotographerActivity">
 
     <View
-        android:id="@+id/photographer_bg"
+        android:id="@+id/activity_collection_background"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
     <View
-        android:id="@+id/photographer_shadow"
+        android:id="@+id/activity_collection_shadow"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:alpha="0"
-        android:background="@android:color/black" />
+        android:background="@android:color/white" />
 
     <com.berhane.biniam.wallpack.wallpack.utils.SwipeBackCoordinatorLayout
         android:id="@+id/photographer_swipeBackView"
@@ -57,6 +57,11 @@
                     app:cml_gradient_angle="90"
                     app:cml_mask_color="?attr/colorPrimary"
                     app:cml_to_alpha="0.25">
+                    <com.berhane.biniam.wallpack.wallpack.utils.StatusBarView
+                        android:id="@+id/activity_collection_appBarStatusBar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:sbv_fill_in_mode="true" />
 
                     <RelativeLayout
                         android:id="@+id/photographerContainer"
@@ -152,7 +157,11 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 app:layout_scrollFlags="scroll|enterAlways">
-
+                <com.berhane.biniam.wallpack.wallpack.utils.StatusBarView
+                    android:id="@+id/photographer_creatorBarStatusBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:sbv_fill_in_mode="true" />
                 <android.support.design.widget.TabLayout
                     android:id="@+id/photographer_tabs"
                     android:layout_width="match_parent"
@@ -165,12 +174,19 @@
             android:id="@+id/photographer_viewpager"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
-        <!--fragment container-->
-        <FrameLayout
-            android:id="@+id/photographer_fragment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
     </com.berhane.biniam.wallpack.wallpack.utils.SwipeBackCoordinatorLayout>
+    <!--fragment container-->
+    <FrameLayout
+        android:id="@+id/photographer_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        />
+    <com.berhane.biniam.wallpack.wallpack.utils.StatusBarView
+        android:id="@+id/activity_collection_statusBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:sbv_translucent_mode="true" />
 
 </android.support.design.widget.CoordinatorLayout>

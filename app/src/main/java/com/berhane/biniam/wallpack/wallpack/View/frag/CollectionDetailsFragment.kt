@@ -9,8 +9,6 @@ package com.berhane.biniam.wallpack.wallpack.View.frag
 import android.app.Activity
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
-import android.content.ContentValues
-import android.content.ContentValues.TAG
 import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -24,13 +22,11 @@ import com.berhane.biniam.wallpack.wallpack.R
 import com.berhane.biniam.wallpack.wallpack.model.View.WallPackViewModel
 import com.berhane.biniam.wallpack.wallpack.model.data.PhotoCollection
 import com.berhane.biniam.wallpack.wallpack.model.data.Photos
-import com.berhane.biniam.wallpack.wallpack.utils.FragmentArgumentDelegate
 import com.berhane.biniam.wallpack.wallpack.utils.PhotoConstants
 import com.berhane.biniam.wallpack.wallpack.utils.adapter.WallPackPhotoAdapter
 import com.bumptech.glide.Glide
 import com.jcodecraeer.xrecyclerview.ProgressStyle
 import com.jcodecraeer.xrecyclerview.XRecyclerView
-import kotlin.math.log
 
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 class CollectionDetailsFragment : Fragment() {
@@ -128,14 +124,14 @@ class CollectionDetailsFragment : Fragment() {
         viewModel.getPhotoCollectionById(collection, pageNumber, PhotoConstants.PERPAGE)!!.observe(this@CollectionDetailsFragment,
                 Observer<List<Photos>> { t: List<Photos>? ->
                     if (viewAdapter == null) {
-                        viewAdapter = WallPackPhotoAdapter(t!!, activity as Activity)
+                        viewAdapter = WallPackPhotoAdapter((t as MutableList<Photos>?)!!, activity as Activity)
                         mRecyclerView.adapter = viewAdapter
                     } else {
                         if (moreCollection) {
-                            viewAdapter!!.addImageInfo(t!!)
+                            viewAdapter!!.addAll(t!!)
                             mRecyclerView.loadMoreComplete()
                         } else {
-                            viewAdapter!!.setImageInfo(t!!)
+                            viewAdapter!!.setImageInfo((t as MutableList<Photos>?)!!)
                             mRecyclerView.refreshComplete()
                         }
                     }

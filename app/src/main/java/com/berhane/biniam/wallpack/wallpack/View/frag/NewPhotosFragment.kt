@@ -11,6 +11,7 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.StaggeredGridLayoutManager
 import android.util.Log
@@ -19,27 +20,27 @@ import android.view.View
 import android.view.ViewGroup
 import com.berhane.biniam.wallpack.wallpack.R
 import com.berhane.biniam.wallpack.wallpack.model.View.WallPackViewModel
-import com.berhane.biniam.wallpack.wallpack.model.data.PhotoCollection
 import com.berhane.biniam.wallpack.wallpack.model.data.Photos
-import com.berhane.biniam.wallpack.wallpack.utils.FragmentArgumentDelegate
+import com.berhane.biniam.wallpack.wallpack.utils.EndlessRecyclerViewScrollListener
 import com.berhane.biniam.wallpack.wallpack.utils.adapter.WallPackPhotoAdapter
 import com.bumptech.glide.Glide
-import com.jcodecraeer.xrecyclerview.ProgressStyle
-import com.jcodecraeer.xrecyclerview.XRecyclerView
+import kotlinx.android.synthetic.main.new_photo_frag_layout.*
+
 
 class NewPhotosFragment : Fragment() {
-
+    val TAG = "NewPhotosFragment"
     private var pageNumber: Int = 1
+    private var isLoading = false
+    private var isLastPage = false
+    private val TOTAL_PAGES = 5
+    private var currentPage: Int = 0
+    private var totalPage: Int = 0
     private lateinit var viewModel: WallPackViewModel
-    private lateinit var mRecyclerView: XRecyclerView
+    private lateinit var mRecyclerView: RecyclerView
     private var viewAdapter: WallPackPhotoAdapter? = null
     private var categoryId = -1
-
-//    private var collectionType by FragmentArgumentDelegate<String>()
-//    private var photocollection by FragmentArgumentDelegate<PhotoCollection>()
-
-    val TAG = "NewPhotosFragment"
-
+    // Store a member variable for the listener
+    private var scrollListener: EndlessRecyclerViewScrollListener? = null
 
     companion object {
         fun newInstance() = NewPhotosFragment()
@@ -50,19 +51,17 @@ class NewPhotosFragment : Fragment() {
         Log.d(TAG, "onCreate")
     }
 
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.new_photo_frag_layout, container, false)
         viewModel = ViewModelProviders.of(this).get(WallPackViewModel::class.java)
         mRecyclerView = rootView.findViewById(R.id.photo_recycler_view)
-
         return rootView
 
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        initWallpackPhotoView()
+        initRecyclerImageView()
 
     }
 
@@ -82,58 +81,71 @@ class NewPhotosFragment : Fragment() {
                 }
             }
         })
-
     }
 
-    private fun initWallpackPhotoView() {
-        mRecyclerView.layoutManager = StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL)
-        mRecyclerView.setRefreshProgressStyle(ProgressStyle.BallClipRotatePulse)
-        mRecyclerView.setLoadingMoreProgressStyle(ProgressStyle.BallPulseSync)
-        mRecyclerView.setArrowImageView(R.drawable.ic_pulltorefresh_arrow)
-        mRecyclerView.defaultFootView
-        mRecyclerView.visibility = View.VISIBLE
-        mRecyclerView.setLoadingListener(object : XRecyclerView.LoadingListener {
-            override fun onLoadMore() {
+    private fun initRecyclerImageView() {
+        mRecyclerView.itemAnimator = DefaultItemAnimator()
+        var linearLayoutManager = StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL)
+        mRecyclerView.layoutManager = linearLayoutManager
+        // Retain an instance so that you can call `resetState()` for fresh Loading
+        scrollListener = object : EndlessRecyclerViewScrollListener(linearLayoutManager) {
+
+            override fun onLoadMore(page: Int, totalItemsCount: Int) {
+                if (currentPage <= totalPage) {
+                    newPhotoProgressLayout.showLoading()
+                } else isLastPage = true
+                isLoading = false
+                if(!isLoading&& isLastPage)newPhotoProgressLayout.showContent()
+            }
+
+            override fun getFooterViewType(defaultNoFooterViewType: Int): Int {
+                newPhotoProgressLayout.showLoading()
+                return defaultNoFooterViewType
+            }
+
+            override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView) {
+                // Triggered only when new data needs to be appended to the list
+                // Add whatever code is needed to append new items to the bottom of the list
+                newPhotoProgressLayout.showContent()
+                currentPage = page
+                totalPage = totalItemsCount
+                isLoading = true
                 ++pageNumber
                 loadPhotos(true)
             }
-
-            override fun onRefresh() {
-                pageNumber = 1
-                loadPhotos(false)
-            }
-        })
-
+        }
+        // Adds the scroll listener to RecyclerView
+        mRecyclerView.addOnScrollListener(scrollListener as EndlessRecyclerViewScrollListener)
     }
 
     /**
      *
      */
     private fun loadPhotos(onLoadNext: Boolean) {
-
         viewModel.getPhotosList(pageNumber, categoryId)!!.observe(this@NewPhotosFragment,
                 Observer<List<Photos>> { t: List<Photos>? ->
                     if (viewAdapter == null) {
-                        viewAdapter = WallPackPhotoAdapter(t!!, activity as Activity)
+                        viewAdapter = WallPackPhotoAdapter((t as MutableList<Photos>?)!!, activity as Activity)
                         mRecyclerView.adapter = viewAdapter
                     } else {
                         if (onLoadNext) {
-                            viewAdapter!!.addImageInfo(t!!)
-                            mRecyclerView.loadMoreComplete()
+                            viewAdapter!!.addAll(t!!)
                         } else {
-                            viewAdapter!!.setImageInfo(t!!)
-                            mRecyclerView.refreshComplete()
+                            viewAdapter!!.setImageInfo((t as MutableList<Photos>?)!!)
                         }
                     }
                 })
-
+        isLoading = false
+        scrollListener!!.resetState()
 
     }
+
 
     override fun onDetach() {
         Log.d(TAG, "onDetach")
         super.onDetach()
         viewAdapter = null
+        scrollListener!!.resetState()
     }
 
 
@@ -141,7 +153,7 @@ class NewPhotosFragment : Fragment() {
         Log.d(TAG, "onDestroy")
         super.onDestroy()
         if (mRecyclerView != null) {
-            mRecyclerView.destroy()
+            scrollListener!!.resetState()
         }
     }
 }

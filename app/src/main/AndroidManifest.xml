@@ -17,8 +17,12 @@
         android:largeHeap="true"
         android:allowTaskReparenting="true"
         android:theme="@style/WallPackTheme_light.TranslucentNavigation.Main"
-        tools:ignore="GoogleAppIndexingWarning">
-
+        tools:ignore="GoogleAppIndexingWarning"
+        >
+        <!--<meta-data-->
+            <!--android:name=" com.berhane.biniam.wallpack.wallpack.utils.MyAppGlideModule"-->
+            <!--android:value="GlideModule"-->
+            <!--/>-->
         <activity
             android:name=".activities.MainActivity"
             android:launchMode="singleTask"
