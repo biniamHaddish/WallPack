@@ -9,7 +9,8 @@
     android:id="@+id/newPhotoFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorPrimary">
+    android:background="?attr/colorPrimary"
+    >
 
     <com.berhane.biniam.wallpack.wallpack.utils.SwipeBackCoordinatorLayout
         android:id="@+id/activity_collection_swipeBackView"
@@ -31,17 +32,14 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 app:layout_scrollFlags="scroll|enterAlways">
-
-                <com.berhane.biniam.wallpack.wallpack.utils.StatusBarView
-                    android:id="@+id/activity_collection_appBarStatusBar"
+                <View
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:sbv_fill_in_mode="true" />
-
+                    android:layout_height="@dimen/design_title_text_size"
+                    />
                 <android.support.v7.widget.Toolbar
                     android:id="@+id/main_toolbar"
                     android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
+                    android:layout_height="wrap_content"
                     android:background="?attr/colorPrimary"
                     app:popupTheme="@style/WallPackPopupMenuTheme"
                     tools:ignore="UnusedAttribute">
@@ -50,7 +48,7 @@
                         android:id="@+id/AccountImage"
                         android:layout_width="28dp"
                         android:layout_height="28dp"
-                        android:layout_marginStart="310dp"
+                        android:layout_marginStart="325dp"
                         android:src="@drawable/ic_account_circle" />
                 </android.support.v7.widget.Toolbar>
             </LinearLayout>
@@ -65,7 +63,8 @@
             android:layout_gravity="bottom"
             app:emptyBackgroundColor="#FFFFFF"
             app:errorBackgroundColor="#FFFFFF"
-            app:loadingBackgroundColor="#FFFFFF">
+            app:loadingBackgroundColor="#FFFFFF"
+            >
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/photo_recycler_view"

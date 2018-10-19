@@ -11,6 +11,7 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.StaggeredGridLayoutManager
 import android.util.Log
@@ -20,21 +21,25 @@ import android.view.ViewGroup
 import com.berhane.biniam.wallpack.wallpack.R
 import com.berhane.biniam.wallpack.wallpack.model.View.WallPackViewModel
 import com.berhane.biniam.wallpack.wallpack.model.data.Photos
+import com.berhane.biniam.wallpack.wallpack.utils.EndlessRecyclerViewScrollListener
 import com.berhane.biniam.wallpack.wallpack.utils.FragmentArgumentDelegate
 import com.berhane.biniam.wallpack.wallpack.utils.PhotoConstants
 import com.berhane.biniam.wallpack.wallpack.utils.adapter.WallPackPhotoAdapter
 import com.bumptech.glide.Glide
-import com.jcodecraeer.xrecyclerview.ProgressStyle
-import com.jcodecraeer.xrecyclerview.XRecyclerView
+import kotlinx.android.synthetic.main.curated_fragment.*
 
 
 class FeaturedFragment : Fragment() {
-
+    private var isLoading = false
+    private var currentPage: Int = 0
+    private var totalPage: Int = 0
     private var pageNumber: Int = 1
     private lateinit var viewModel: WallPackViewModel
-    private lateinit var mRecyclerView: XRecyclerView
+    private lateinit var mRecyclerView: RecyclerView
     private var viewAdapter: WallPackPhotoAdapter? = null
 
+    private var scrollListener: EndlessRecyclerViewScrollListener? = null
+    private var progress_layout = curated_Progress
 
     private var sortOrder by FragmentArgumentDelegate<String>()
     private val TAG = "FeaturedFragment"
@@ -61,25 +66,31 @@ class FeaturedFragment : Fragment() {
                 }
             }
         })
-
     }
 
-
+    /**
+     *
+     */
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.curated_fragment, container, false)
         viewModel = ViewModelProviders.of(this).get(WallPackViewModel::class.java)
+        progress_layout = rootView.findViewById(R.id.curated_Progress)
         mRecyclerView = rootView.findViewById(R.id.CuratedRecyclerView)
-
         return rootView
     }
 
-
+    /**
+     *
+     */
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         initFeaturedFragment()
     }
 
-    fun loadCuratedPhotos(loadMore: Boolean) {
+    /**
+     *
+     */
+    private fun loadCuratedPhotos(loadMore: Boolean) {
         viewModel.getCuratedPhotos(pageNumber, PhotoConstants.PERPAGE, sortOrder)!!.observe(this@FeaturedFragment,
                 Observer<List<Photos>> { t: List<Photos>? ->
                     if (viewAdapter == null) {
@@ -88,42 +99,59 @@ class FeaturedFragment : Fragment() {
                     } else {
                         if (loadMore) {
                             viewAdapter!!.addAll(t!!)
-                            mRecyclerView.loadMoreComplete()
+                            mRecyclerView.recycledViewPool.clear()
                         } else {
                             viewAdapter!!.setImageInfo((t as MutableList<Photos>?)!!)
-                            mRecyclerView.refreshComplete()
+                            mRecyclerView.recycledViewPool.clear()
                         }
                     }
                 })
     }
 
     /**
-     * initializing the value of our CollectionFragment here
+     * initializing the value of our FeaturedFragment here
      */
     private fun initFeaturedFragment() {
-        mRecyclerView.layoutManager = StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL)
-        mRecyclerView.setRefreshProgressStyle(ProgressStyle.BallClipRotatePulse)
-        mRecyclerView.setLoadingMoreProgressStyle(ProgressStyle.BallPulseSync)
-        mRecyclerView.setArrowImageView(R.drawable.ic_pulltorefresh_arrow)
-        mRecyclerView.defaultFootView
-        mRecyclerView.visibility = View.VISIBLE
-        mRecyclerView.setLoadingListener(object : XRecyclerView.LoadingListener {
-            override fun onLoadMore() {
+        //Add which views you don't want to hide. In this case don't hide the toolbar
+        mRecyclerView.itemAnimator = DefaultItemAnimator()
+        var linearLayoutManager = StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL)
+        mRecyclerView.layoutManager = linearLayoutManager
+        // Ids to show while the loading view is showing
+        excludeViewWhileLoading()
+        scrollListener = object : EndlessRecyclerViewScrollListener(linearLayoutManager) {
+            override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView) {
+                // Triggered only when new data needs to be appended to the list
+                // Add whatever code is needed to append new items to the bottom of the list
+                progress_layout.showContent()
+                currentPage = page
+                totalPage = totalItemsCount
+                excludeViewWhileLoading()
                 ++pageNumber
                 loadCuratedPhotos(true)
             }
-
-            override fun onRefresh() {
-                pageNumber = 1
-                loadCuratedPhotos(false)
-            }
-        })
+        }
+        // Adds the scroll listener to RecyclerView
+        mRecyclerView.addOnScrollListener(scrollListener as EndlessRecyclerViewScrollListener)
     }
 
+    /**
+     *
+     */
+    private fun excludeViewWhileLoading() {
+        var viewId = arrayListOf<Int>()
+        viewId.add(R.id.CuratedRecyclerView)
+        viewId.add(R.id.featured_viewpager)
+        progress_layout.showLoading(viewId)
+    }
+
+    /**
+     *
+     */
     override fun onDetach() {
         Log.d(TAG, "onDetach")
         super.onDetach()
         viewAdapter = null
+        scrollListener!!.resetState()
     }
 
 
@@ -131,7 +159,7 @@ class FeaturedFragment : Fragment() {
         Log.d(TAG, "onDestroy")
         super.onDestroy()
         if (mRecyclerView != null) {
-            mRecyclerView.destroy()
+            scrollListener!!.resetState()
         }
     }
 }

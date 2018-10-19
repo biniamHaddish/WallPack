@@ -8,7 +8,7 @@
     android:clipToPadding="false"
     android:fitsSystemWindows="true"
     tools:context="com.berhane.biniam.wallpack.wallpack.activities.PhotoDetails">
-    <!--app:layout_behavior="@string/appbar_scrolling_view_behavior"-->
+
 
 
     <android.support.v4.widget.NestedScrollView

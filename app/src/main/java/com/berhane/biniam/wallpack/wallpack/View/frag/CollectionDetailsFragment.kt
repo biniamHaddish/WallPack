@@ -12,6 +12,7 @@ import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.StaggeredGridLayoutManager
 import android.util.Log
@@ -22,21 +23,25 @@ import com.berhane.biniam.wallpack.wallpack.R
 import com.berhane.biniam.wallpack.wallpack.model.View.WallPackViewModel
 import com.berhane.biniam.wallpack.wallpack.model.data.PhotoCollection
 import com.berhane.biniam.wallpack.wallpack.model.data.Photos
+import com.berhane.biniam.wallpack.wallpack.utils.EndlessRecyclerViewScrollListener
 import com.berhane.biniam.wallpack.wallpack.utils.PhotoConstants
 import com.berhane.biniam.wallpack.wallpack.utils.adapter.WallPackPhotoAdapter
 import com.bumptech.glide.Glide
-import com.jcodecraeer.xrecyclerview.ProgressStyle
-import com.jcodecraeer.xrecyclerview.XRecyclerView
+import kotlinx.android.synthetic.main.detailed_collection_fragment.*
+
 
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 class CollectionDetailsFragment : Fragment() {
 
-    private var pageNumber: Int = 1
-    private lateinit var viewModel: WallPackViewModel
-    private lateinit var mRecyclerView: XRecyclerView
-    private var viewAdapter: WallPackPhotoAdapter? = null
-
     private val TAG: String = "CollectionDFragment"
+    private var pageNumber: Int = 1
+    private var currentPage: Int = 0
+    private var totalPage: Int = 0
+    private lateinit var viewModel: WallPackViewModel
+    private lateinit var mRecyclerView: RecyclerView
+    private var viewAdapter: WallPackPhotoAdapter? = null
+    private var scrollListener: EndlessRecyclerViewScrollListener? = null
+    private var progress_layout = detailedCollectionProgress
 
     companion object {
         fun newInstance(collectionId: PhotoCollection): CollectionDetailsFragment {
@@ -62,6 +67,7 @@ class CollectionDetailsFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.detailed_collection_fragment, container, false)
         viewModel = ViewModelProviders.of(this).get(WallPackViewModel::class.java)
+        progress_layout = rootView.findViewById(R.id.detailedCollectionProgress)
         mRecyclerView = rootView.findViewById(R.id.detailedCollectionRecyclerView)
         return rootView
     }
@@ -75,23 +81,26 @@ class CollectionDetailsFragment : Fragment() {
     }
 
     private fun initCollection() {
-        mRecyclerView.layoutManager = StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL)
-        mRecyclerView.setRefreshProgressStyle(ProgressStyle.BallClipRotatePulse)
-        mRecyclerView.setLoadingMoreProgressStyle(ProgressStyle.BallPulseSync)
-        mRecyclerView.setArrowImageView(R.drawable.ic_pulltorefresh_arrow)
-        mRecyclerView.defaultFootView
-        mRecyclerView.visibility = View.VISIBLE
-        mRecyclerView.setLoadingListener(object : XRecyclerView.LoadingListener {
-            override fun onLoadMore() {
+        //Add which views you don't want to hide. In this case don't hide the toolbar
+        mRecyclerView.itemAnimator = DefaultItemAnimator()
+        var linearLayoutManager = StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL)
+        mRecyclerView.layoutManager = linearLayoutManager
+        // Ids to show while the loading view is showing
+        excludeViewWhileLoading()
+        scrollListener = object : EndlessRecyclerViewScrollListener(linearLayoutManager) {
+            override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView) {
+                // Triggered only when new data needs to be appended to the list
+                // Add whatever code is needed to append new items to the bottom of the list
+                progress_layout.showContent()
+                currentPage = page
+                totalPage = totalItemsCount
+                excludeViewWhileLoading()
                 ++pageNumber
                 loadDetailedPhotoCollections(true)
             }
-
-            override fun onRefresh() {
-                pageNumber = 1
-                loadDetailedPhotoCollections(false)
-            }
-        })
+        }
+        // Adds the scroll listener to RecyclerView
+        mRecyclerView.addOnScrollListener(scrollListener as EndlessRecyclerViewScrollListener)
     }
 
     override fun onResume() {
@@ -116,7 +125,6 @@ class CollectionDetailsFragment : Fragment() {
     /**
      *
      */
-
     private fun loadDetailedPhotoCollections(moreCollection: Boolean) {
         val args = arguments
         var collection: PhotoCollection = args!!.getParcelable("collectionWithId")
@@ -129,15 +137,25 @@ class CollectionDetailsFragment : Fragment() {
                     } else {
                         if (moreCollection) {
                             viewAdapter!!.addAll(t!!)
-                            mRecyclerView.loadMoreComplete()
+                            mRecyclerView.recycledViewPool.clear()
                         } else {
                             viewAdapter!!.setImageInfo((t as MutableList<Photos>?)!!)
-                            mRecyclerView.refreshComplete()
+                            mRecyclerView.recycledViewPool.clear()
                         }
                     }
 
                 }
         )
+    }
+
+    /**
+     * excluding some views while showing the  loading progress bar
+     */
+    private fun excludeViewWhileLoading() {
+        var viewId = arrayListOf<Int>()
+        viewId.add(R.id.photographer_photos_recycler)
+        viewId.add(R.id.photographer_viewpager)
+        progress_layout.showLoading(viewId)
     }
 
     override fun onDetach() {
@@ -150,6 +168,6 @@ class CollectionDetailsFragment : Fragment() {
     override fun onDestroy() {
         Log.d(TAG, "onDestroy")
         super.onDestroy()
-        mRecyclerView.destroy()
+        scrollListener!!.resetState()
     }
 }

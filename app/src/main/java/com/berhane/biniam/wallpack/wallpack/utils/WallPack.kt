@@ -31,6 +31,9 @@ class WallPack : Application() {
             circularProgressDrawable.setColorSchemeColors(ContextCompat.getColor(applicationContext(), R.color.tokyoColorAccent))
             circularProgressDrawable.start()
         }
+
+
+
     }
 
     override fun onCreate() {

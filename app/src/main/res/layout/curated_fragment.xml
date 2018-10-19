@@ -4,24 +4,39 @@
   ~ Author:bini :
   -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/curated_fragment"
+    xmlns:progressActivity="http://schemas.android.com/tools"
+    android:id="@+id/featuredFragment"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent">
 
-    <ProgressBar
-        android:id="@+id/curated_Progress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_gravity="center"
-        android:visibility="visible" />
-
-    <com.jcodecraeer.xrecyclerview.XRecyclerView
-        android:id="@+id/CuratedRecyclerView"
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/featuredFrameFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:scrollbars="none"
-        android:visibility="visible" />
+        android:layout_height="match_parent">
 
+        <com.vlonjatg.progressactivity.ProgressRelativeLayout
+            android:id="@+id/curated_Progress"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="bottom"
+            progressActivity:emptyBackgroundColor="#FFFFFF"
+            progressActivity:emptyContentTextColor="#FFFFFF"
+            progressActivity:emptyTitleTextColor="#FFFFFF"
+            progressActivity:errorBackgroundColor="#42a5f5"
+            progressActivity:errorButtonBackgroundColor="#f44242"
+            progressActivity:errorButtonTextColor="#FFFFFF"
+            progressActivity:errorContentTextColor="#FFFFFF"
+            progressActivity:errorTitleTextColor="#FFFFFF"
+            progressActivity:loadingBackgroundColor="#FFFFFF"
+            progressActivity:loadingProgressBarColor="#F97242">
+
+        </com.vlonjatg.progressactivity.ProgressRelativeLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/CuratedRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="none"
+            android:visibility="visible" />
+    </FrameLayout>
 </RelativeLayout>

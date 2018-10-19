@@ -3,30 +3,34 @@
   ~ Year:2018 :
   ~ Author:bini :
   -->
-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:progressActivity="http://schemas.android.com/tools"
     android:id="@+id/photographer_photos_fragment"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    >
+    android:layout_height="match_parent">
 
-
-    <ProgressBar
+    <com.vlonjatg.progressactivity.ProgressRelativeLayout
         android:id="@+id/photographer_progress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_gravity="center"
-        android:visibility="visible" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="bottom"
+        progressActivity:emptyBackgroundColor="#FFFFFF"
+        progressActivity:emptyContentTextColor="#FFFFFF"
+        progressActivity:emptyTitleTextColor="#FFFFFF"
+        progressActivity:errorBackgroundColor="#42a5f5"
+        progressActivity:errorButtonBackgroundColor="#f44242"
+        progressActivity:errorButtonTextColor="#FFFFFF"
+        progressActivity:errorContentTextColor="#FFFFFF"
+        progressActivity:errorTitleTextColor="#FFFFFF"
+        progressActivity:loadingBackgroundColor="#FFFFFF"
+        progressActivity:loadingProgressBarColor="#F97242">
 
+    </com.vlonjatg.progressactivity.ProgressRelativeLayout>
 
-    <com.jcodecraeer.xrecyclerview.XRecyclerView
+    <android.support.v7.widget.RecyclerView
         android:id="@+id/photographer_photos_recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
         android:scrollbars="none"
-        android:visibility="visible"
-        />
-
+        android:visibility="visible" />
 </RelativeLayout>

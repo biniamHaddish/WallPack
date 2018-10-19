@@ -4,8 +4,7 @@
   ~ Author:bini :
   -->
 
-<android.support.design.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -50,11 +49,10 @@
                     android:id="@+id/collection_topCover"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:scaleType="centerCrop"
-                    tools:ignore="ContentDescription"
-                    android:alpha="0.98"
                     android:adjustViewBounds="true"
-                    />
+                    android:alpha="0.98"
+                    android:scaleType="centerCrop"
+                    tools:ignore="ContentDescription" />
 
                 <com.berhane.biniam.wallpack.wallpack.utils.CoverMaskLayout
                     android:layout_width="match_parent"
@@ -121,23 +119,22 @@
                     android:id="@+id/activity_collection_touchBar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/normal_margin"
-                    android:layout_marginEnd="@dimen/normal_margin"
                     android:layout_below="@id/activity_collection_creatorBarStatusBar"
                     android:layout_centerHorizontal="true"
+                    android:layout_marginStart="@dimen/normal_margin"
+                    android:layout_marginEnd="@dimen/normal_margin"
                     android:background="?attr/selectableItemBackground">
 
-                <com.berhane.biniam.wallpack.wallpack.utils.image_utills.CircularAuthorImage
-                    android:id="@+id/collectionPhotographerImg"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    app:sbv_fill_in_mode="true"
-                    android:layout_margin="@dimen/normal_margin"
-                    android:scaleType="centerCrop"
-                    android:src="?attr/line_color"
-                    android:transitionName="@string/transition_collection_avatar"
-                    tools:ignore="ContentDescription,RtlHardcoded"
-                    />
+                    <com.berhane.biniam.wallpack.wallpack.utils.image_utills.CircularAuthorImage
+                        android:id="@+id/collectionPhotographerImg"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_margin="@dimen/normal_margin"
+                        android:scaleType="centerCrop"
+                        android:src="?attr/line_color"
+                        android:transitionName="@string/transition_collection_avatar"
+                        app:sbv_fill_in_mode="true"
+                        tools:ignore="ContentDescription,RtlHardcoded" />
 
                     <TextView
                         android:id="@+id/photographerCollection"
@@ -149,7 +146,7 @@
                         android:maxLines="1"
                         tools:ignore="RtlHardcoded"
                         tools:text="By Biniam _ haddish" />
-            </RelativeLayout>
+                </RelativeLayout>
 
             </RelativeLayout>
         </com.berhane.biniam.wallpack.wallpack.utils.NestedScrollAppBarLayout>

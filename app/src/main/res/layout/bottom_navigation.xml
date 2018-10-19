@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ DayTime:10/17/18 10:50 PM :
+  ~ Year:2018 :
+  ~ Author:bini :
+  -->
+<com.aurelhubert.ahbottomnavigation.AHBottomNavigation
+    android:id="@+id/navigation"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom"
+    xmlns:android="http://schemas.android.com/apk/res/android" />
+

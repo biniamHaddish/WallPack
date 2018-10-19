@@ -29,7 +29,7 @@ import com.bumptech.glide.request.transition.ViewPropertyTransition
 import com.google.gson.Gson
 import java.util.*
 
-class CollectionAdapter(collectionPhotos: List<PhotoCollection>, context: Context)
+class CollectionAdapter(collectionPhotos: MutableList<PhotoCollection>, context: Context)
     : RecyclerView.Adapter<CollectionAdapter.CollectionViewHolder>() {
 
 
@@ -103,7 +103,7 @@ class CollectionAdapter(collectionPhotos: List<PhotoCollection>, context: Contex
         notifyDataSetChanged()
     }
 
-    fun addImageInfo(photosList: List<PhotoCollection>) {
+    fun addCollectionPhotos(photosList: List<PhotoCollection>) {
         if (this.collectionPhotoList is ArrayList) {
             (this.collectionPhotoList as ArrayList<PhotoCollection>).addAll(photosList)
         }

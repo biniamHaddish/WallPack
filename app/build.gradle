@@ -66,9 +66,11 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-gson:$retrofit2_converter_gson"
     implementation 'com.squareup.okhttp3:logging-interceptor:3.8.0'
     implementation "com.github.vlonjatg:progress-activity:2.0.5"
+    implementation 'com.aurelhubert:ahbottomnavigation:2.1.0'
+
 
     //xrecyclerview
-    implementation 'com.jcodecraeer:xrecyclerview:1.5.9'
+    //implementation 'com.jcodecraeer:xrecyclerview:1.5.9'
     def lifecycle_version = "1.1.1"
 
     //def paging_version="1.0.0"

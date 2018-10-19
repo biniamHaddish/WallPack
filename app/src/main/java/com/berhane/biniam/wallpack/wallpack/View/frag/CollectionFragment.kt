@@ -13,33 +13,35 @@ import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.StaggeredGridLayoutManager
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import com.berhane.biniam.wallpack.wallpack.R
 import com.berhane.biniam.wallpack.wallpack.model.View.WallPackViewModel
 import com.berhane.biniam.wallpack.wallpack.model.data.PhotoCollection
-import com.berhane.biniam.wallpack.wallpack.model.data.Photos
+import com.berhane.biniam.wallpack.wallpack.utils.EndlessRecyclerViewScrollListener
 import com.berhane.biniam.wallpack.wallpack.utils.FragmentArgumentDelegate
 import com.berhane.biniam.wallpack.wallpack.utils.PhotoConstants
 import com.berhane.biniam.wallpack.wallpack.utils.adapter.CollectionAdapter
 import com.bumptech.glide.Glide
-import com.jcodecraeer.xrecyclerview.ProgressStyle
-import com.jcodecraeer.xrecyclerview.XRecyclerView
+import kotlinx.android.synthetic.main.collection_fragment.*
+import kotlinx.android.synthetic.main.collection_fragment.view.*
 
 class CollectionFragment : Fragment() {
-
-    private var pageNumber: Int = 1
-    private lateinit var viewModel: WallPackViewModel
-    private lateinit var mRecyclerView: XRecyclerView
-    private var viewAdapter: CollectionAdapter? = null
-
     val TAG = "CollectionFragment"
+    private var pageNumber: Int = 1
+    private var isLoading = false
+    private var currentPage: Int = 0
+    private var totalPage: Int = 0
+    private lateinit var viewModel: WallPackViewModel
+    private lateinit var mRecyclerView: RecyclerView
+    private var viewAdapter: CollectionAdapter? = null
+    private var scrollListener: EndlessRecyclerViewScrollListener? = null
+    private var progress_layout = collection_Progress_layout
 
     private var collectionType by FragmentArgumentDelegate<String>()
 
@@ -49,10 +51,8 @@ class CollectionFragment : Fragment() {
         }
     }
 
-
     override fun onAttach(context: Context?) {
         super.onAttach(context)
-
         Log.d(TAG, "fragment Attatched")
     }
 
@@ -67,14 +67,8 @@ class CollectionFragment : Fragment() {
         val rootView = inflater.inflate(R.layout.collection_fragment, container, false)
         viewModel = ViewModelProviders.of(this).get(WallPackViewModel::class.java)
         mRecyclerView = rootView.findViewById(R.id.CollectionRecyclerView)
-        mRecyclerView.setOnTouchListener(object : View.OnTouchListener {
-            override fun onTouch(v: View?, event: MotionEvent?): Boolean {
-                when (event?.action) {
-                    MotionEvent.ACTION_DOWN -> false
-                }
-                return v?.onTouchEvent(event) ?: true
-            }
-        })
+        progress_layout = rootView.findViewById(R.id.collection_Progress_layout)
+        rootView.collection_Progress_layout.findViewById<View>(R.id.collection_Progress_layout)
         return rootView
     }
 
@@ -106,6 +100,33 @@ class CollectionFragment : Fragment() {
     }
 
     /**
+     * initializing the value of our CollectionFragment here
+     */
+    private fun initCollection() {
+
+        //Add which views you don't want to hide. In this case don't hide the toolbar
+        mRecyclerView.itemAnimator = DefaultItemAnimator()
+        var linearLayoutManager = StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL)
+        mRecyclerView.layoutManager = linearLayoutManager
+        // Ids to show while the loading view is showing
+        excludeViewWhileLoading()
+        scrollListener = object : EndlessRecyclerViewScrollListener(linearLayoutManager) {
+            override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView) {
+                // Triggered only when new data needs to be appended to the list
+                // Add whatever code is needed to append new items to the bottom of the list
+                progress_layout.showContent()
+                currentPage = page
+                totalPage = totalItemsCount
+                excludeViewWhileLoading()
+                ++pageNumber
+                loadPhotoCollections(true)
+            }
+        }
+        // Adds the scroll listener to RecyclerView
+        mRecyclerView.addOnScrollListener(scrollListener as EndlessRecyclerViewScrollListener)
+    }
+
+    /**
      * Will Load more CollectionFragment if the value is true
      */
     fun loadPhotoCollections(moreCollection: Boolean) {
@@ -114,15 +135,18 @@ class CollectionFragment : Fragment() {
             viewModel.getPhotoCollection(pageNumber, PhotoConstants.PERPAGE)!!.observe(this@CollectionFragment,
                     Observer<List<PhotoCollection>> { t: List<PhotoCollection>? ->
                         if (viewAdapter == null) {
-                            viewAdapter = CollectionAdapter(t!!, activity as Activity)
+                            viewAdapter = CollectionAdapter((t as MutableList<PhotoCollection>?)!!, activity as Activity)
                             mRecyclerView.adapter = viewAdapter
                         } else {
+                            isLoading=true
                             if (moreCollection) {
-                                viewAdapter!!.addImageInfo(t!!)
-                                mRecyclerView.loadMoreComplete()
+                                viewAdapter!!.addCollectionPhotos(t!!)
+                                mRecyclerView.recycledViewPool.clear()
                             } else {
+                                isLoading=false
+                                progress_layout.showContent()
                                 viewAdapter!!.setImageInfo(t!!)
-                                mRecyclerView.refreshComplete()
+                                mRecyclerView.recycledViewPool.clear()
                             }
                         }
 
@@ -133,15 +157,14 @@ class CollectionFragment : Fragment() {
             viewModel.getFeaturedCollection(pageNumber, PhotoConstants.PERPAGE)!!.observe(this@CollectionFragment,
                     Observer<List<PhotoCollection>> { t: List<PhotoCollection>? ->
                         if (viewAdapter == null) {
-                            viewAdapter = CollectionAdapter(t!!, activity as Activity)
+                            viewAdapter = CollectionAdapter((t as MutableList<PhotoCollection>?)!!, activity as Activity)
                             mRecyclerView.adapter = viewAdapter
                         } else {
                             if (moreCollection) {
-                                viewAdapter!!.addImageInfo(t!!)
-                                mRecyclerView.loadMoreComplete()
+                                viewAdapter!!.addCollectionPhotos(t!!)
+
                             } else {
                                 viewAdapter!!.setImageInfo(t!!)
-                                mRecyclerView.refreshComplete()
                             }
                         }
 
@@ -153,71 +176,44 @@ class CollectionFragment : Fragment() {
             viewModel.getCuratedCollection(pageNumber, PhotoConstants.PERPAGE)!!.observe(this@CollectionFragment,
                     Observer<List<PhotoCollection>> { t: List<PhotoCollection>? ->
                         if (viewAdapter == null) {
-                            viewAdapter = CollectionAdapter(t!!, activity as Activity)
+                            viewAdapter = CollectionAdapter((t as MutableList<PhotoCollection>?)!!, activity as Activity)
                             mRecyclerView.adapter = viewAdapter
                         } else {
                             if (moreCollection) {
-                                viewAdapter!!.addImageInfo(t!!)
-                                mRecyclerView.loadMoreComplete()
+                                viewAdapter!!.addCollectionPhotos(t!!)
+
                             } else {
                                 viewAdapter!!.setImageInfo(t!!)
-                                mRecyclerView.refreshComplete()
+                                // mRecyclerView.refreshComplete()
                             }
                         }
-
                     }
             )
         }
-
+        isLoading = false
     }
 
-    /**
-     * initializing the value of our CollectionFragment here
-     */
-    fun initCollection() {
-        mRecyclerView.layoutManager = StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL)
-        mRecyclerView.setRefreshProgressStyle(ProgressStyle.BallClipRotatePulse)
-        mRecyclerView.setLoadingMoreProgressStyle(ProgressStyle.BallPulseSync)
-        mRecyclerView.setArrowImageView(R.drawable.ic_pulltorefresh_arrow)
-        mRecyclerView.defaultFootView
-        mRecyclerView.visibility = View.VISIBLE
-        mRecyclerView.setLoadingListener(object : XRecyclerView.LoadingListener {
-            override fun onLoadMore() {
-                ++pageNumber
-                loadPhotoCollections(true)
-            }
 
-            override fun onRefresh() {
-                pageNumber = 1
-                loadPhotoCollections(false)
-            }
-        })
-        mRecyclerView.setOnClickListener(onClickListener)
-    }
-
-    private val onClickListener = object : View.OnClickListener {
-        override fun onClick(p0: View?) {
-            Log.d(TAG, p0.toString())
-        }
-//
-//        fun onClick(v: View, adapter: CollectionAdapter, item: PhotoCollection, position: Int): Boolean {
-//            val i = Intent(context, CollectionDetailActivity::class.java)
-//            i.putExtra("Collection", Gson().toJson(item))
-//            startActivity(i)
-//            return false
-//        }
+    private fun excludeViewWhileLoading() {
+        var viewId = arrayListOf<Int>()
+        viewId.add(R.id.CollectionRecyclerView)
+        viewId.add(R.id.collection_viewPager)
+        progress_layout.showLoading(viewId)
     }
 
     override fun onDetach() {
         Log.d(TAG, "onDetach")
         super.onDetach()
         viewAdapter = null
+        scrollListener!!.resetState()
     }
 
 
     override fun onDestroy() {
         Log.d(TAG, "onDestroy")
         super.onDestroy()
-            mRecyclerView.destroy()
+        if (mRecyclerView != null) {
+            scrollListener!!.resetState()
+        }
     }
 }

@@ -4,29 +4,40 @@
   ~ Author:bini :
   -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:progressActivity="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/detailedCollectionFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ProgressBar
+        <com.vlonjatg.progressactivity.ProgressRelativeLayout
             android:id="@+id/detailedCollectionProgress"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:visibility="visible" />
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="bottom"
+            progressActivity:emptyBackgroundColor="#FFFFFF"
+            progressActivity:emptyContentTextColor="#FFFFFF"
+            progressActivity:emptyTitleTextColor="#FFFFFF"
+            progressActivity:errorBackgroundColor="#42a5f5"
+            progressActivity:errorButtonBackgroundColor="#f44242"
+            progressActivity:errorButtonTextColor="#FFFFFF"
+            progressActivity:errorContentTextColor="#FFFFFF"
+            progressActivity:errorTitleTextColor="#FFFFFF"
+            progressActivity:loadingBackgroundColor="#FFFFFF"
+            progressActivity:loadingProgressBarColor="#F97242">
 
-        <com.jcodecraeer.xrecyclerview.XRecyclerView
+        </com.vlonjatg.progressactivity.ProgressRelativeLayout>
+
+        <android.support.v7.widget.RecyclerView
             android:id="@+id/detailedCollectionRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
             android:scrollbars="none"
-            android:visibility="gone"
+            android:visibility="visible"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     </FrameLayout>

@@ -31,8 +31,6 @@ class NewPhotosFragment : Fragment() {
     val TAG = "NewPhotosFragment"
     private var pageNumber: Int = 1
     private var isLoading = false
-    private var isLastPage = false
-    private val TOTAL_PAGES = 5
     private var currentPage: Int = 0
     private var totalPage: Int = 0
     private lateinit var viewModel: WallPackViewModel
@@ -89,20 +87,6 @@ class NewPhotosFragment : Fragment() {
         mRecyclerView.layoutManager = linearLayoutManager
         // Retain an instance so that you can call `resetState()` for fresh Loading
         scrollListener = object : EndlessRecyclerViewScrollListener(linearLayoutManager) {
-
-            override fun onLoadMore(page: Int, totalItemsCount: Int) {
-                if (currentPage <= totalPage) {
-                    newPhotoProgressLayout.showLoading()
-                } else isLastPage = true
-                isLoading = false
-                if(!isLoading&& isLastPage)newPhotoProgressLayout.showContent()
-            }
-
-            override fun getFooterViewType(defaultNoFooterViewType: Int): Int {
-                newPhotoProgressLayout.showLoading()
-                return defaultNoFooterViewType
-            }
-
             override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView) {
                 // Triggered only when new data needs to be appended to the list
                 // Add whatever code is needed to append new items to the bottom of the list

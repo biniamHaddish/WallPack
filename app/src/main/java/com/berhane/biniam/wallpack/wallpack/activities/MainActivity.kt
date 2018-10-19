@@ -3,59 +3,31 @@
  * Year:2018 :
  * Author:bini :
  */
-
-/*
- * DayTime:9/5/18 2:40 PM :
- * Year:2018 :
- * Author:bini :
- */
-
 package com.berhane.biniam.wallpack.wallpack.activities
 
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
-import android.support.design.widget.BottomNavigationView
+import android.support.annotation.ColorRes
 import android.support.v4.app.Fragment
+import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
+import android.view.View
+import android.widget.Toast
+import com.aurelhubert.ahbottomnavigation.AHBottomNavigation
+import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem
 import com.berhane.biniam.wallpack.wallpack.R
 import com.berhane.biniam.wallpack.wallpack.View.frag.NewPhotosFragment
-import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var context: Context
     private val manager = supportFragmentManager
-    val TAG: String = "MainActivity"
-
-    private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
-        when (item.itemId) {
-            R.id.navigation_home -> {
-                val newPhotoFragment = NewPhotosFragment.newInstance()
-                loadFragment(newPhotoFragment)
-                return@OnNavigationItemSelectedListener true
-            }
-            R.id.photo_collection -> {
-                val activity = CollectionActivity()
-                loadActivity(activity)
-                return@OnNavigationItemSelectedListener true
-            }
-            R.id.photo_search -> {
-                // search fragment should be here
-                return@OnNavigationItemSelectedListener true
-            }
-            R.id.featured -> {
-                val activity = FeaturedActivity()
-                loadActivity(activity)
-                return@OnNavigationItemSelectedListener true
-            }
-        }
-        false
-    }
-
+    private val TAG: String = "MainActivity"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,7 +35,7 @@ class MainActivity : AppCompatActivity() {
         context = this
         val toolbar = findViewById<Toolbar>(R.id.main_toolbar)
         setSupportActionBar(toolbar)
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+        bottomNavSetUp()
         val newPhotoFragment = NewPhotosFragment.newInstance()
         loadFragment(newPhotoFragment)
     }
@@ -71,19 +43,67 @@ class MainActivity : AppCompatActivity() {
     /**
      *  load Fragment here using the fragment obj
      */
-    fun loadFragment(fragment: Fragment) {
+    private fun loadFragment(fragment: Fragment) {
         val transaction = manager.beginTransaction()
         transaction.replace(R.id.fragmentContainer, fragment)
         transaction.addToBackStack(null)
         transaction.commit()
     }
 
-    fun loadActivity(activity: Activity) {
+    private fun loadActivity(activity: Activity) {
         val intent = Intent(context, activity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
         startActivity(intent)
     }
 
+    private fun fetchColor(@ColorRes color: Int): Int {
+        return ContextCompat.getColor(context, color)
+    }
+
+    private fun bottomNavSetUp() {
+        // preparing the view
+        val bottomNavigation = findViewById<View>(R.id.navigation) as AHBottomNavigation
+        val home = AHBottomNavigationItem(R.string.title_home, R.drawable.ic_round_home_24px, R.color.whiteSmoke)
+        val collection = AHBottomNavigationItem(R.string.photo_collections, R.drawable.ic_round_photo_library_24px, R.color.whiteSmoke)
+        val features = AHBottomNavigationItem(R.string.trending, R.drawable.ic_round_trending_up_24px, R.color.whiteSmoke)
+        val searching = AHBottomNavigationItem(R.string.search_menu_title, R.drawable.ic_magnify, R.color.whiteSmoke)
+
+        // Setting the Colors
+        bottomNavigation.defaultBackgroundColor = Color.WHITE
+        bottomNavigation.accentColor = fetchColor(R.color.tokyoColorAccent)
+        bottomNavigation.inactiveColor = fetchColor(R.color.colorBottomNavigationInactive)
+
+        // behaviour for the bottom nav
+        bottomNavigation.isTranslucentNavigationEnabled = true
+        bottomNavigation.isBehaviorTranslationEnabled = true
+        // Force to tint the drawable (useful for font with icon for example)
+        bottomNavigation.isForceTint = true
+        bottomNavigation.titleState = AHBottomNavigation.TitleState.ALWAYS_SHOW
+
+        //Adding the elements to the bottom Navigation
+        bottomNavigation.addItem(home)
+        bottomNavigation.addItem(collection)
+        bottomNavigation.addItem(features)
+        bottomNavigation.addItem(searching)
+
+        // Setting the very 1st item as home screen.
+        bottomNavigation.currentItem = 0
+        // Set listeners
+        bottomNavigation.setOnTabSelectedListener { position, wasSelected ->
+            // Do something cool here...
+            val mainActivity=MainActivity()
+            val activity = CollectionActivity()
+            val featuredActivity = FeaturedActivity()
+
+            when (position) {
+                0 -> loadActivity(mainActivity)
+                1 -> loadActivity(activity)
+                2 -> loadActivity(featuredActivity)
+                3 -> Toast.makeText(context, "" + position, Toast.LENGTH_LONG).show()
+            }
+            true
+        }
+    }
 
 }
 
