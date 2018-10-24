@@ -15,16 +15,14 @@ import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.*
-import android.view.inputmethod.EditorInfo
+import android.view.KeyEvent
+import android.view.Menu
+import android.view.MenuItem
+import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
-import android.widget.EditText
 import android.widget.TextView
-import android.widget.Toast
 import com.berhane.biniam.wallpack.wallpack.R
-import com.berhane.biniam.wallpack.wallpack.View.frag.PhotographerPager
 import com.berhane.biniam.wallpack.wallpack.View.frag.SearchPagerAdapter
-
 import kotlinx.android.synthetic.main.activity_search__photos.*
 
 class SearchPhotos : AppCompatActivity(), TextView.OnEditorActionListener {
@@ -55,6 +53,7 @@ class SearchPhotos : AppCompatActivity(), TextView.OnEditorActionListener {
         }
         viewPager = findViewById(R.id.search_viewpager)
         tabsCollection = findViewById(R.id.searchView_tabs)
+        tabsCollection!!.setupWithViewPager(viewPager)
 
     }
 
@@ -94,7 +93,6 @@ class SearchPhotos : AppCompatActivity(), TextView.OnEditorActionListener {
             //pager
             val fragmentAdapter = SearchPagerAdapter(supportFragmentManager, text)
             viewPager!!.adapter = fragmentAdapter
-            tabsCollection!!.setupWithViewPager(viewPager)
 
             viewPager?.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
 
@@ -110,8 +108,6 @@ class SearchPhotos : AppCompatActivity(), TextView.OnEditorActionListener {
                     viewPager!!.currentItem = position
                 }
             })
-
-           // Toast.makeText(mContext, text, Toast.LENGTH_LONG).show()
         }
         val view = this.currentFocus
         if (view != null) {

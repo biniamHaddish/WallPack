@@ -260,8 +260,10 @@ class RetrofitClient {
             }
 
             override fun onResponse(call: Call<SearchResult>, response: Response<SearchResult>) {
-                Log.d(TAG, "SearchResult\t" + response.body().toString())
-                data.value = response.body()?.results
+                if (response.body()!!.results != null) {
+                    data.value = response.body()?.results
+                    Log.d(TAG, "SearchResult\t" + response.body().toString())
+                }
             }
 
         })
@@ -281,8 +283,9 @@ class RetrofitClient {
             }
 
             override fun onResponse(call: Call<SearchUserResult>, response: Response<SearchUserResult>) {
-                Log.d(TAG, "Photographer_\t" + response.body().toString())
-                data.value = response.body()?.results
+                if (response.body()!!.results != null) {
+                    data.value = response.body()?.results
+                }
             }
 
         })
@@ -294,8 +297,11 @@ class RetrofitClient {
         val data: MutableLiveData<List<PhotoCollection>> = MutableLiveData()
         getPhotoCollections.enqueue(object : Callback<CollectionSerachResult> {
             override fun onResponse(call: Call<CollectionSerachResult>, response: retrofit2.Response<CollectionSerachResult>) {
-                data.value = response.body()?.results
-                Log.e(TAG, "CollectionSearchResult" + response.body().toString())
+                if (response.body()!!.results != null) {
+                    data.value = response.body()!!.results
+                    Log.e(TAG, "CollectionSearchResult" + response.body().toString())
+                }
+
             }
 
             override fun onFailure(call: Call<CollectionSerachResult>, t: Throwable) {

@@ -48,7 +48,6 @@
                         android:id="@+id/AccountImage"
                         android:layout_width="28dp"
                         android:layout_height="28dp"
-                        android:layout_marginStart="325dp"
                         android:src="@drawable/ic_account_circle" />
                 </android.support.v7.widget.Toolbar>
             </LinearLayout>
