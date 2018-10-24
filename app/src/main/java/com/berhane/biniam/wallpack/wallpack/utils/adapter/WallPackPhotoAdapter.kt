@@ -70,11 +70,9 @@ class WallPackPhotoAdapter(private var wallPackList: MutableList<Photos>, contex
         holder.imagePreview.minimumHeight = imageHeight.toInt()
 
         holder.imagePreview.setOnClickListener {
-            val gSon = Gson().toJson(wallPackPhotos)
             val i = Intent(context, PhotoDetails::class.java)
             i.putExtra("Photo", Gson().toJson(wallPackPhotos))
             context.startActivity(i)
-            Log.d(TAG, "ImageClicked$gSon")
         }
 
     }

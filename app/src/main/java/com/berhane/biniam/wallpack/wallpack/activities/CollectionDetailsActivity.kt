@@ -7,6 +7,7 @@
 package com.berhane.biniam.wallpack.wallpack.activities
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
@@ -27,12 +28,13 @@ import com.google.gson.Gson
 
 class CollectionDetailsActivity : AppCompatActivity() {
 
-    private val Context: Context? = null
+    private val mContext: Context? = null
     private val TAG: String = "CollectionDActivity"
     private val manager = supportFragmentManager
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.collection_details_activity)
         // Getting the Photo Collection data from Json
@@ -42,7 +44,7 @@ class CollectionDetailsActivity : AppCompatActivity() {
         val activityCollectionTitle = findViewById<TextView>(R.id.activity_collection_title)
         val photographerImg = findViewById<ImageView>(R.id.collectionPhotographerImg)
         val photographerCollection = findViewById<TextView>(R.id.photographerCollection)
-        val collection_topCover = findViewById<ImageView>(R.id.collection_topCover)
+        val collectionTopCover = findViewById<ImageView>(R.id.collection_topCover)
 
         // load the image here
         val circularProgressDrawable = CircularProgressDrawable(this)
@@ -50,17 +52,17 @@ class CollectionDetailsActivity : AppCompatActivity() {
         circularProgressDrawable.centerRadius = 30f
         circularProgressDrawable.setColorSchemeColors(ContextCompat.getColor(this, R.color.tokyoColorAccent))
         circularProgressDrawable.start()
+
         activityCollectionTitle.text = collectionPhotos.title
         collectionDescription.text = collectionPhotos.description
         val requestOption = RequestOptions().placeholder(circularProgressDrawable).centerCrop()
         photographerCollection.text = "By\t" + collectionPhotos.user.name
 
 
-
         Glide.with(this@CollectionDetailsActivity)
                 .load(collectionPhotos.cover_photo.urls.regular)
                 .transition(DrawableTransitionOptions.withCrossFade())
-                .into(collection_topCover)
+                .into(collectionTopCover)
 
         Glide.with(this@CollectionDetailsActivity)
                 .load(collectionPhotos.user.profile_image.medium)
@@ -76,6 +78,12 @@ class CollectionDetailsActivity : AppCompatActivity() {
             val newPhotoFragment = CollectionDetailsFragment.newInstance(collectionPhotos)
             loadFragment(newPhotoFragment)
         }
+        // On Click even on the Photographer photo to see the details of the photographer
+        photographerImg.setOnClickListener {
+            val i = Intent(this, PhotoDetails::class.java)
+            i.putExtra("Photo", Gson().toJson(collectionPhotos))
+            startActivity(i)
+        }
     }
 
     private fun loadFragment(fragment: Fragment) {
@@ -88,6 +96,5 @@ class CollectionDetailsActivity : AppCompatActivity() {
     override fun onBackPressed() {
         finish()
         super.onBackPressed()
-
     }
 }

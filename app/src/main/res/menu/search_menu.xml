@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ DayTime:10/24/18 12:45 PM :
+  ~ Year:2018 :
+  ~ Author:bini :
+  -->
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_clear_text"
+        android:orderInCategory="100"
+        android:icon="@drawable/ic_clear_24px"
+        android:title="@string/clear_search_bar"
+        app:showAsAction="always"
+        android:visible="false"/>
+
+</menu>

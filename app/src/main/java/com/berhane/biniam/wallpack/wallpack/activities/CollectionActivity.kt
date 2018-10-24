@@ -80,7 +80,7 @@ class CollectionActivity : AppCompatActivity() {
         val bottomNavigation = findViewById<View>(R.id.navigation) as AHBottomNavigation
         val home = AHBottomNavigationItem(R.string.title_home, R.drawable.ic_round_home_24px, R.color.whiteSmoke)
         val collection = AHBottomNavigationItem(R.string.photo_collections, R.drawable.ic_round_photo_library_24px, R.color.whiteSmoke)
-        val features = AHBottomNavigationItem(R.string.trending, R.drawable.ic_round_trending_up_24px, R.color.whiteSmoke)
+        val features = AHBottomNavigationItem(R.string.trending, R.drawable.ic_fire, R.color.whiteSmoke)
         val searching = AHBottomNavigationItem(R.string.search_menu_title, R.drawable.ic_magnify, R.color.whiteSmoke)
 
         // Setting the Colors
@@ -109,12 +109,13 @@ class CollectionActivity : AppCompatActivity() {
             val mainActivity=MainActivity()
             val activity = CollectionActivity()
             val featuredActivity = FeaturedActivity()
+            val searchPhoto=SearchPhotos()
 
             when (position) {
                 0 -> loadActivity(mainActivity)
                 1 -> loadActivity(activity)
                 2 -> loadActivity(featuredActivity)
-                3 -> Toast.makeText(context, "" + position, Toast.LENGTH_LONG).show()
+                3 -> loadActivity(searchPhoto)
             }
             true
         }

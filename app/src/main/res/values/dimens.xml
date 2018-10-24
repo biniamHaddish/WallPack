@@ -32,5 +32,6 @@
     <dimen name="high_elevation">10dp</dimen>
     <dimen name="recyclerViewPaddingTop">55dp</dimen>
     <dimen name="recyclerViewMarginBottom">45dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 
 </resources>

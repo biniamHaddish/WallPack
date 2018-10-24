@@ -6,46 +6,41 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
-
     <application
         android:name=".utils.WallPack"
         android:allowBackup="false"
+        android:allowTaskReparenting="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:largeHeap="true"
-        android:allowTaskReparenting="true"
         android:theme="@style/WallPackTheme_light.TranslucentNavigation.Main"
-        tools:ignore="GoogleAppIndexingWarning"
-        >
-        <!--<meta-data-->
-            <!--android:name=" com.berhane.biniam.wallpack.wallpack.utils.MyAppGlideModule"-->
-            <!--android:value="GlideModule"-->
-            <!--/>-->
+        tools:ignore="GoogleAppIndexingWarning">
+
+        <!-- <meta-data -->
+        <!-- android:name=" com.berhane.biniam.wallpack.wallpack.utils.MyAppGlideModule" -->
+        <!-- android:value="GlideModule" -->
+        <!-- /> -->
         <activity
             android:name=".activities.MainActivity"
+            android:label="@string/app_name"
             android:launchMode="singleTask"
-            android:screenOrientation="user"
-            android:label="@string/app_name">
+            android:screenOrientation="user">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".activities.FeaturedActivity">
-
-        </activity>
+        <activity android:name=".activities.FeaturedActivity"></activity>
         <activity
             android:name=".activities.PhotoDetails"
             android:parentActivityName=".activities.MainActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/WallPackTheme_light"
-            />
+            android:theme="@style/WallPackTheme_light" />
+        <activity android:name=".activities.CollectionActivity" />
 
-        <activity android:name=".activities.CollectionActivity"/>
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.biniam.berhane.wallpack.fileprovider"
@@ -55,16 +50,19 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
+
         <activity
             android:name=".activities.PhotographerActivity"
-            android:theme="@style/WallPackTheme_light"
             android:screenOrientation="portrait"
-            />
+            android:theme="@style/WallPackTheme_light" />
         <activity
             android:name=".activities.CollectionDetailsActivity"
-            android:theme="@style/WallPackTheme_light.TranslucentNavigation.Collection"
             android:parentActivityName=".activities.CollectionActivity"
-            />
+            android:theme="@style/WallPackTheme_light.TranslucentNavigation.Collection" />
+        <activity
+            android:name=".activities.SearchPhotos"
+            android:label="@string/title_activity_search__photos"
+            android:theme="@style/WallPackTheme_light.TranslucentNavigation.Main"></activity>
     </application>
 
 </manifest>

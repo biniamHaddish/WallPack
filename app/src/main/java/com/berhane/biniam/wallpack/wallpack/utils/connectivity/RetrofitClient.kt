@@ -9,10 +9,9 @@ package com.berhane.biniam.wallpack.wallpack.utils.connectivity
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.util.Log
+import com.berhane.biniam.wallpack.wallpack.View.frag.SearchCollection
 import com.berhane.biniam.wallpack.wallpack.api.UnSplashApi
-import com.berhane.biniam.wallpack.wallpack.model.data.PhotoCollection
-import com.berhane.biniam.wallpack.wallpack.model.data.Photos
-import com.berhane.biniam.wallpack.wallpack.model.data.User
+import com.berhane.biniam.wallpack.wallpack.model.data.*
 import com.berhane.biniam.wallpack.wallpack.utils.PhotoConstants
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
@@ -175,7 +174,7 @@ class RetrofitClient {
                 data.value = response.body()
                 Log.d(TAG, "thePhotographerCallCode\t" + response.code().toString())
                 Log.d(TAG, "requestPhotographerPhotos\t" + response.body()!!.iterator().forEach {
-                   Log.d(TAG,"listOf"+it.urls.regular)
+                    Log.d(TAG, "listOf" + it.urls.regular)
                 })
             }
 
@@ -247,6 +246,66 @@ class RetrofitClient {
         return data
     }
 
+
+    /**
+     *Will request photo my name from unsplash.com
+     */
+    fun requestSearchedPhoto(query: String, page: Int, PerPage: Int): LiveData<List<Photos>> {
+        val getSearchedPhotos = retrofitClient(okHttpClient()).searchPhotos(query, page, PerPage)
+        val data: MutableLiveData<List<Photos>> = MutableLiveData()
+        getSearchedPhotos.enqueue(object : Callback<SearchResult> {
+            override fun onFailure(call: Call<SearchResult>, t: Throwable) {
+                t.printStackTrace()
+                Log.e(TAG, t.message)
+            }
+
+            override fun onResponse(call: Call<SearchResult>, response: Response<SearchResult>) {
+                Log.d(TAG, "SearchResult\t" + response.body().toString())
+                data.value = response.body()?.results
+            }
+
+        })
+        return data
+    }
+
+    /**
+     * request Photographer Data from UnSplash.com
+     */
+    fun requestPhotographerSearchResult(query: String, page: Int, PerPage: Int): LiveData<List<User>> {
+        val getSearchedPhotos = retrofitClient(okHttpClient()).searchPhotographers(query, page, PerPage)
+        val data: MutableLiveData<List<User>> = MutableLiveData()
+        getSearchedPhotos.enqueue(object : Callback<SearchUserResult> {
+            override fun onFailure(call: Call<SearchUserResult>, t: Throwable) {
+                t.printStackTrace()
+                Log.e(TAG, t.message)
+            }
+
+            override fun onResponse(call: Call<SearchUserResult>, response: Response<SearchUserResult>) {
+                Log.d(TAG, "Photographer_\t" + response.body().toString())
+                data.value = response.body()?.results
+            }
+
+        })
+        return data
+    }
+
+    fun requestCollectionSearchResult(query: String, page: Int, PerPage: Int): LiveData<List<PhotoCollection>> {
+        val getPhotoCollections = retrofitClient(okHttpClient()).searchCollections(query, page, PerPage)
+        val data: MutableLiveData<List<PhotoCollection>> = MutableLiveData()
+        getPhotoCollections.enqueue(object : Callback<CollectionSerachResult> {
+            override fun onResponse(call: Call<CollectionSerachResult>, response: retrofit2.Response<CollectionSerachResult>) {
+                data.value = response.body()?.results
+                Log.e(TAG, "CollectionSearchResult" + response.body().toString())
+            }
+
+            override fun onFailure(call: Call<CollectionSerachResult>, t: Throwable) {
+                t.printStackTrace()
+                Log.e(TAG, t.message)
+            }
+        })
+        return data
+    }
+
     /**
      * Will return a Curated Photos depending on the Sort Order
      */
@@ -268,5 +327,6 @@ class RetrofitClient {
         return data
     }
 }
+
 
 

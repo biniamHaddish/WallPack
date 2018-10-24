@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ DayTime:10/20/18 6:07 PM :
+  ~ Year:2018 :
+  ~ Author:bini :
+  -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:progressActivity="http://schemas.android.com/tools"
+    android:id="@+id/photoFragmentSearch"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/photoSearchFrameFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.vlonjatg.progressactivity.ProgressRelativeLayout
+            android:id="@+id/photoSearchProgress"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="bottom"
+            progressActivity:emptyBackgroundColor="#FFFFFF"
+            progressActivity:emptyContentTextColor="#FFFFFF"
+            progressActivity:emptyTitleTextColor="#FFFFFF"
+            progressActivity:errorBackgroundColor="#42a5f5"
+            progressActivity:errorButtonBackgroundColor="#f44242"
+            progressActivity:errorButtonTextColor="#FFFFFF"
+            progressActivity:errorContentTextColor="#FFFFFF"
+            progressActivity:errorTitleTextColor="#FFFFFF"
+            progressActivity:loadingBackgroundColor="#FFFFFF"
+            progressActivity:loadingProgressBarColor="#F97242">
+
+        </com.vlonjatg.progressactivity.ProgressRelativeLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/photoSearchRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="none"
+            android:visibility="visible" />
+    </FrameLayout>
+</RelativeLayout>

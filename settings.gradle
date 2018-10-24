@@ -1,1 +1,1 @@
-include ':app', ':ozito'
+include ':app'

@@ -1,7 +1,6 @@
 package com.berhane.biniam.wallpack.wallpack.api
 
-import com.berhane.biniam.wallpack.wallpack.model.data.PhotoCollection
-import com.berhane.biniam.wallpack.wallpack.model.data.Photos
+import com.berhane.biniam.wallpack.wallpack.model.data.*
 import retrofit2.Call
 import okhttp3.ResponseBody
 import retrofit2.http.*
@@ -75,14 +74,14 @@ interface UnSplashApi {
 
     @GET("users/{username}/likes")
     fun getPhotographerLikes(@Path("username") username: String,
-                     @Query("page") page: Int,
-                     @Query("per_page") per_page: Int,
-                     @Query("order_by") order_by: String): Call<List<Photos>>
+                             @Query("page") page: Int,
+                             @Query("per_page") per_page: Int,
+                             @Query("order_by") order_by: String): Call<List<Photos>>
 
     @GET("users/{username}/collections")
     fun getPhotographerCollections(@Path("username") username: String,
-                           @Query("page") page: Int,
-                           @Query("per_page") per_page: Int): Call<List<PhotoCollection>>
+                                   @Query("page") page: Int,
+                                   @Query("per_page") per_page: Int): Call<List<PhotoCollection>>
 
 //    @GET("collections/{id}/photos")
 //    fun getCollectionPhotos(@Path("id") id: Int,
@@ -104,5 +103,22 @@ interface UnSplashApi {
 
     @GET("photos/{id}/download")
     fun reportDownload(@Path("id") id: String): Call<ResponseBody>
+
+
+    // Search Api
+    @GET("search/photos")
+    fun searchPhotos(@Query("query") query: String,
+                     @Query("page") page: Int,
+                     @Query("perPage") perPage: Int): Call<SearchResult>
+
+    @GET("search/users")
+    fun searchPhotographers(@Query("query") query: String,
+                            @Query("page") page: Int,
+                            @Query("perPage") perPage: Int): Call<SearchUserResult>
+
+    @GET("search/collections")
+    fun searchCollections(@Query("query") query: String,
+                          @Query("page") page: Int,
+                          @Query("perPage") perPage: Int): Call<CollectionSerachResult>
 
 }
