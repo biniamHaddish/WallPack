@@ -8,6 +8,7 @@ package com.berhane.biniam.wallpack.wallpack.activities
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Bundle
 import android.support.annotation.ColorRes
@@ -15,11 +16,16 @@ import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
+import android.text.TextUtils
 import android.view.View
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem
 import com.berhane.biniam.wallpack.wallpack.R
 import com.berhane.biniam.wallpack.wallpack.View.frag.NewPhotosFragment
+import com.berhane.biniam.wallpack.wallpack.utils.PhotoConstants
+import com.bumptech.glide.GenericTransitionOptions
+import com.bumptech.glide.Glide
+import kotlinx.android.synthetic.main.new_photo_frag_layout.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -28,15 +34,18 @@ class MainActivity : AppCompatActivity() {
     private val manager = supportFragmentManager
     private val TAG: String = "MainActivity"
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         context = this
+
         val toolbar = findViewById<Toolbar>(R.id.main_toolbar)
         setSupportActionBar(toolbar)
         bottomNavSetUp()
         val newPhotoFragment = NewPhotosFragment.newInstance()
         loadFragment(newPhotoFragment)
+
     }
 
     /**
@@ -65,7 +74,7 @@ class MainActivity : AppCompatActivity() {
         val home = AHBottomNavigationItem(R.string.title_home, R.drawable.ic_round_home_24px, R.color.whiteSmoke)
         val collection = AHBottomNavigationItem(R.string.photo_collections, R.drawable.ic_round_photo_library_24px, R.color.whiteSmoke)
         val features = AHBottomNavigationItem(R.string.trending, R.drawable.ic_fire, R.color.whiteSmoke)
-        val searching = AHBottomNavigationItem(R.string.search_menu_title, R.drawable.ic_magnify, R.color.whiteSmoke)
+        val searching = AHBottomNavigationItem(R.string.search_menu_title, R.drawable.ic_search_24px, R.color.whiteSmoke)
 
         // Setting the Colors
         bottomNavigation.defaultBackgroundColor = Color.WHITE
@@ -90,10 +99,10 @@ class MainActivity : AppCompatActivity() {
         // Set listeners
         bottomNavigation.setOnTabSelectedListener { position, wasSelected ->
             // Do something cool here...
-            val mainActivity=MainActivity()
+            val mainActivity = MainActivity()
             val activity = CollectionActivity()
             val featuredActivity = FeaturedActivity()
-            val searchPhoto=SearchPhotos()
+            val searchPhoto = SearchPhotos()
 
             when (position) {
                 0 -> loadActivity(mainActivity)
@@ -104,6 +113,7 @@ class MainActivity : AppCompatActivity() {
             true
         }
     }
+
 
 }
 

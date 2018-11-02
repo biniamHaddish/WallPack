@@ -8,10 +8,7 @@ package com.berhane.biniam.wallpack.wallpack.model.View
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.ViewModel
-import com.berhane.biniam.wallpack.wallpack.model.data.PhotoCollection
-import com.berhane.biniam.wallpack.wallpack.model.data.Photos
-import com.berhane.biniam.wallpack.wallpack.model.data.SearchResult
-import com.berhane.biniam.wallpack.wallpack.model.data.User
+import com.berhane.biniam.wallpack.wallpack.model.data.*
 import com.berhane.biniam.wallpack.wallpack.utils.PhotoConstants
 import com.berhane.biniam.wallpack.wallpack.utils.connectivity.RetrofitClient
 
@@ -21,7 +18,7 @@ class WallPackViewModel : ViewModel() {
     private var wallPackLiveData: LiveData<List<Photos>>? = null
     private var PhotographerLiveData: LiveData<List<User>>? = null
     private var wallPackPhotoCollection: LiveData<List<PhotoCollection>>? = null
-//    private var searchPhoto: LiveData<SearchResult>? = null
+    //    private var searchPhoto: LiveData<SearchResult>? = null
     private var retrofitClient: RetrofitClient? = null
 
     /**
@@ -122,30 +119,30 @@ class WallPackViewModel : ViewModel() {
     /**
      * Will load the search result of the photo being searched
      */
-    fun getSearchedPhotos(query:String,page:Int,perPage: Int): LiveData<List<Photos>>?{
+    fun getSearchedPhotos(query: String, page: Int, perPage: Int): LiveData<List<Photos>>? {
         if (null == retrofitClient) {
             retrofitClient = RetrofitClient.getRetrofitClient()
         }
-        this.wallPackLiveData = retrofitClient!!.requestSearchedPhoto(query, page,perPage)
+        this.wallPackLiveData = retrofitClient!!.requestSearchedPhoto(query, page, perPage)
         return wallPackLiveData!!
     }
 
     /**
      * load Photographer info
      */
-    fun getPhotographerSearchResult(query:String,page:Int,perPage: Int): LiveData<List<User>>?{
+    fun getPhotographerSearchResult(query: String, page: Int, perPage: Int): LiveData<List<User>>? {
         if (null == retrofitClient) {
             retrofitClient = RetrofitClient.getRetrofitClient()
         }
-        this.PhotographerLiveData = retrofitClient!!.requestPhotographerSearchResult(query, page,perPage)
+        this.PhotographerLiveData = retrofitClient!!.requestPhotographerSearchResult(query, page, perPage)
         return PhotographerLiveData!!
     }
 
-    fun getCollectionSearchResult(query:String,page:Int,perPage: Int):LiveData<List<PhotoCollection>>?{
+    fun getCollectionSearchResult(query: String, page: Int, perPage: Int): LiveData<List<PhotoCollection>>? {
         if (null == retrofitClient) {
             retrofitClient = RetrofitClient.getRetrofitClient()
         }
-        this.wallPackPhotoCollection = retrofitClient!!.requestCollectionSearchResult(query, page,perPage)
+        this.wallPackPhotoCollection = retrofitClient!!.requestCollectionSearchResult(query, page, perPage)
         return wallPackPhotoCollection!!
     }
 
@@ -159,4 +156,15 @@ class WallPackViewModel : ViewModel() {
         this.wallPackLiveData = retrofitClient!!.requestCuratedPhotos(page, perPage, sortOrder)
         return wallPackLiveData!!
     }
+
+//    /**
+//     * LiveData of getting an AccessToken
+//     */
+//    fun getAccessToken(code: String){
+//        if (null == retrofitClient) {
+//            retrofitClient = RetrofitClient.getRetrofitClient()
+//        }
+//        return retrofitClient!!.requestAccessToken(code,)
+//
+//    }
 }

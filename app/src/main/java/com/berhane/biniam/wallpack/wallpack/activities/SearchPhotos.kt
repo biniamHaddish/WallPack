@@ -31,6 +31,7 @@ class SearchPhotos : AppCompatActivity(), TextView.OnEditorActionListener {
     private var mClearTextAction: MenuItem? = null
     private var viewPager: ViewPager? = null
     private var tabsCollection: TabLayout? = null
+    private var mText:String=""
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -53,7 +54,10 @@ class SearchPhotos : AppCompatActivity(), TextView.OnEditorActionListener {
         }
         viewPager = findViewById(R.id.search_viewpager)
         tabsCollection = findViewById(R.id.searchView_tabs)
+        val fragmentAdapter = SearchPagerAdapter(supportFragmentManager, mText)
+        viewPager!!.adapter = fragmentAdapter
         tabsCollection!!.setupWithViewPager(viewPager)
+
 
     }
 
@@ -91,9 +95,10 @@ class SearchPhotos : AppCompatActivity(), TextView.OnEditorActionListener {
         if (text != "") {
             // Try to implement the fragment adapter here
             //pager
+            mText=text
+
             val fragmentAdapter = SearchPagerAdapter(supportFragmentManager, text)
             viewPager!!.adapter = fragmentAdapter
-
             viewPager?.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
 
                 override fun onPageScrollStateChanged(state: Int) {

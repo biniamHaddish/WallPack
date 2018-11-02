@@ -9,23 +9,28 @@ package com.berhane.biniam.wallpack.wallpack.utils.connectivity
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.util.Log
-import com.berhane.biniam.wallpack.wallpack.View.frag.SearchCollection
+import com.berhane.biniam.wallpack.wallpack.api.Authorization
 import com.berhane.biniam.wallpack.wallpack.api.UnSplashApi
 import com.berhane.biniam.wallpack.wallpack.model.data.*
 import com.berhane.biniam.wallpack.wallpack.utils.PhotoConstants
+import com.berhane.biniam.wallpack.wallpack.utils.TLSUtill
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
+import android.content.ClipData.Item
 
 
-class RetrofitClient {
+class RetrofitClient : TLSUtill() {
 
 
     val TAG = "RetrofitClient"
+    private var call: Call<*>? = null
 
     //To make a reference for the retrofit Class to other Classes
     companion object {
@@ -34,12 +39,25 @@ class RetrofitClient {
         }
     }
 
+    var gson = GsonBuilder().setLenient().create()!!
+    val interceptor = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)!!
     /**
      * OkHttp Client instance
      */
     private fun okHttpClient(): OkHttpClient {
         return OkHttpClient().newBuilder()
+                .retryOnConnectionFailure(true)
+                .connectTimeout(15, TimeUnit.SECONDS)
                 .addInterceptor(WallPackInterceptor())
+                .build()
+    }
+
+
+    private fun buildClient(): OkHttpClient {
+        return getClientBuilder()
+                .retryOnConnectionFailure(true)
+                .connectTimeout(15, TimeUnit.SECONDS)
+                .addInterceptor(AuthenticationInterceptor())
                 .build()
     }
 
@@ -54,6 +72,18 @@ class RetrofitClient {
                 (PhotoConstants.DATE_FORMAT).create()))
                 .build()
                 .create(UnSplashApi::class.java)
+    }
+
+    /**
+     * Authorization Retrofit Client
+     */
+    private fun authorizationRetrofitClient(client: OkHttpClient): Authorization {
+        return Retrofit.Builder()
+                .baseUrl(PhotoConstants.UnSplash_URL)
+                .client(client)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build()
+                .create(Authorization::class.java)
     }
 
     /**
@@ -331,6 +361,88 @@ class RetrofitClient {
 
         })
         return data
+    }
+
+
+    fun requestAccessToken(code: String, l: OnRequestAccessTokenListener?) {
+
+        val getAccessToken = authorizationRetrofitClient(buildClient()).getAccessToken(
+                PhotoConstants.ACCESS_KEY,
+                PhotoConstants.SECRET_KEY,
+                PhotoConstants.REDIRECT_URI,
+                code,
+                PhotoConstants.GRANTE_TYPE)
+
+        getAccessToken.enqueue(object : Callback<AccessToken> {
+            override fun onResponse(call: Call<AccessToken>, response: Response<AccessToken>) {
+                l?.onRequestAccessTokenSuccess(call, response)
+            }
+
+            override fun onFailure(call: Call<AccessToken>, t: Throwable) {
+                l?.onRequestAccessTokenFailed(call, t)
+            }
+        })
+        call = getAccessToken
+    }
+
+    fun requestMeProfile(l: OnRequestMeProfileListener?) {
+        val getMeProfile = retrofitClient(buildClient()).getMeProfile()
+        getMeProfile.enqueue(object : Callback<Me> {
+            override fun onResponse(call: Call<Me>, response: Response<Me>) {
+                l?.onRequestMeProfileSuccess(call, response)
+            }
+
+            override fun onFailure(call: Call<Me>, t: Throwable) {
+                l?.onRequestMeProfileFailed(call, t)
+            }
+        })
+        call = getMeProfile
+    }
+
+    fun requestUserProfile(username: String, l: OnRequestUserProfileListener?) {
+        val getUserProfile = retrofitClient(buildClient()).getUserProfile(username, 256, 256)
+        getUserProfile.enqueue(object : Callback<User> {
+            override fun onResponse(call: Call<User>, response: Response<User>) {
+                l?.onRequestUserProfileSuccess(call, response)
+            }
+
+            override fun onFailure(call: Call<User>, t: Throwable) {
+                l?.onRequestUserProfileFailed(call, t)
+            }
+        })
+        call = getUserProfile
+    }
+
+    /**
+     * Cancel the call for the end point
+     */
+    fun cancelCall() {
+        if (call != null) {
+            call!!.cancel()
+        }
+    }
+
+// interface.
+
+    interface OnRequestUserProfileListener {
+        fun onRequestUserProfileSuccess(call: Call<User>, response: Response<User>)
+        fun onRequestUserProfileFailed(call: Call<User>, t: Throwable)
+    }
+
+    interface OnRequestMeProfileListener {
+        fun onRequestMeProfileSuccess(call: Call<Me>, response: Response<Me>)
+        fun onRequestMeProfileFailed(call: Call<Me>, t: Throwable)
+    }
+
+    interface OnRequestUsersListener {
+        fun onRequestUsersSuccess(call: Call<List<User>>, response: Response<List<User>>)
+        fun onRequestUsersFailed(call: Call<List<User>>, t: Throwable)
+    }
+
+    interface OnRequestAccessTokenListener {
+        fun onRequestAccessTokenSuccess(call: Call<AccessToken>, response: retrofit2.Response<AccessToken>)
+
+        fun onRequestAccessTokenFailed(call: Call<AccessToken>, t: Throwable)
     }
 }
 

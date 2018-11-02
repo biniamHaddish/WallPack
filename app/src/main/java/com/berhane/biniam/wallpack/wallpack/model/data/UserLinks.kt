@@ -18,3 +18,5 @@ data class UserLinks(var self: String,
                      var following: String,
                      var followers: String
 ) : Parcelable
+
+

@@ -10,6 +10,8 @@
     <string name="share_via">Share via</string>
     <string name="search_hint">Search Photo,User,Collection....</string>
     <string name="clear_search_bar">Clear Search</string>
+    <string name="login_btn">Login</string>
+    <string name="join_btn">Join</string>
 
 
     <string name="theme_name_tokyo">Tokyo</string>

@@ -9,19 +9,25 @@ package com.berhane.biniam.wallpack.wallpack.View.frag
 import android.app.Activity
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.StaggeredGridLayoutManager
+import android.text.TextUtils
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.berhane.biniam.wallpack.wallpack.R
+import com.berhane.biniam.wallpack.wallpack.activities.LoginActivity
 import com.berhane.biniam.wallpack.wallpack.model.View.WallPackViewModel
 import com.berhane.biniam.wallpack.wallpack.model.data.Photos
 import com.berhane.biniam.wallpack.wallpack.utils.EndlessRecyclerViewScrollListener
+import com.berhane.biniam.wallpack.wallpack.utils.PhotoConstants
+import com.berhane.biniam.wallpack.wallpack.utils.WallPack
 import com.berhane.biniam.wallpack.wallpack.utils.adapter.WallPackPhotoAdapter
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.new_photo_frag_layout.*
@@ -29,6 +35,8 @@ import kotlinx.android.synthetic.main.new_photo_frag_layout.*
 
 class NewPhotosFragment : Fragment() {
     val TAG = "NewPhotosFragment"
+    private var authPref: SharedPreferences? = null
+    private var  avatarInfo:String?=null
     private var pageNumber: Int = 1
     private var isLoading = false
     private var currentPage: Int = 0
@@ -53,14 +61,21 @@ class NewPhotosFragment : Fragment() {
         val rootView = inflater.inflate(R.layout.new_photo_frag_layout, container, false)
         viewModel = ViewModelProviders.of(this).get(WallPackViewModel::class.java)
         mRecyclerView = rootView.findViewById(R.id.photo_recycler_view)
+        authPref = WallPack.applicationContext().getSharedPreferences(PhotoConstants.PREFERENCE_NAME, 0)
+        avatarInfo = authPref!!.getString(PhotoConstants.KEY_AVATAR_PATH, "")
         return rootView
 
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        AccountImage.setOnClickListener {
+            val intent = Intent(activity as Activity, LoginActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+            startActivity(intent)
+        }
         initRecyclerImageView()
-
+        loadProfileInfo()
     }
 
     override fun onResume() {
@@ -121,6 +136,14 @@ class NewPhotosFragment : Fragment() {
                 })
         isLoading = false
         scrollListener!!.resetState()
+
+    }
+    private fun loadProfileInfo(){
+        if (!TextUtils.isEmpty(avatarInfo)) {
+            Glide.with(context)
+                    .load(avatarInfo)
+                    .into(AccountImage)
+        }
 
     }
 

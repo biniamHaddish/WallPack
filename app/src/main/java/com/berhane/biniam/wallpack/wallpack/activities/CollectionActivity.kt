@@ -81,7 +81,7 @@ class CollectionActivity : AppCompatActivity() {
         val home = AHBottomNavigationItem(R.string.title_home, R.drawable.ic_round_home_24px, R.color.whiteSmoke)
         val collection = AHBottomNavigationItem(R.string.photo_collections, R.drawable.ic_round_photo_library_24px, R.color.whiteSmoke)
         val features = AHBottomNavigationItem(R.string.trending, R.drawable.ic_fire, R.color.whiteSmoke)
-        val searching = AHBottomNavigationItem(R.string.search_menu_title, R.drawable.ic_magnify, R.color.whiteSmoke)
+        val searching = AHBottomNavigationItem(R.string.search_menu_title, R.drawable.ic_search_24px, R.color.whiteSmoke)
 
         // Setting the Colors
         bottomNavigation.defaultBackgroundColor = Color.WHITE

@@ -66,11 +66,6 @@ class SearchPhotoFragment : Fragment() {
             }
         })
     }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         initPhotoSearch()
@@ -81,6 +76,7 @@ class SearchPhotoFragment : Fragment() {
         viewModel = ViewModelProviders.of(this).get(WallPackViewModel::class.java)
         progressLayout = rootView.findViewById(R.id.photoSearchProgress)
         mRecyclerView = rootView.findViewById(R.id.photoSearchRecyclerView)
+        progressLayout.showEmpty(R.drawable.ic_hourglass_empty_24px,"Search Photos","")
         return rootView
     }
 
@@ -90,7 +86,7 @@ class SearchPhotoFragment : Fragment() {
         var linearLayoutManager = StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL)
         mRecyclerView.layoutManager = linearLayoutManager
         // Ids to show while the loading view is showing
-        excludeViewWhileLoading()
+        //excludeViewWhileLoading()
         scrollListener = object : EndlessRecyclerViewScrollListener(linearLayoutManager) {
             override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView) {
                 // Triggered only when new data needs to be appended to the list

@@ -121,4 +121,24 @@ interface UnSplashApi {
                           @Query("page") page: Int,
                           @Query("perPage") perPage: Int): Call<CollectionSerachResult>
 
+
+
+
+    @GET("users/{username}")
+    fun getUserProfile(@Path("username") username: String,
+                       @Query("w") w: Int,
+                       @Query("h") h: Int): Call<User>
+
+    @GET("me")
+    fun getMeProfile(): Call<Me>
+
+    @PUT("me")
+    fun updateMeProfile(@Query("username") username: String,
+                        @Query("first_name") first_name: String,
+                        @Query("last_name") last_name: String,
+                        @Query("email") email: String,
+                        @Query("url") url: String,
+                        @Query("location") location: String,
+                        @Query("bio") bio: String): Call<Me>
+
 }
