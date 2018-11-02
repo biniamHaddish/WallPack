@@ -45,9 +45,7 @@ class LoginActivity : AppCompatActivity(), RetrofitClient.OnRequestAccessTokenLi
         authPref = this.getSharedPreferences(PhotoConstants.PREFERENCE_NAME, 0)
 
         val accessToken = authPref!!.getString(PhotoConstants.KEY_ACCESS_TOKEN, "")
-        val username = authPref!!.getString(PhotoConstants.KEY_USERNAME, "")
 
-        Toast.makeText(this, username, Toast.LENGTH_LONG).show()
         this.authorized = !TextUtils.isEmpty(accessToken)
         // Login Button Clicked event
         login_btn.setOnClickListener {
