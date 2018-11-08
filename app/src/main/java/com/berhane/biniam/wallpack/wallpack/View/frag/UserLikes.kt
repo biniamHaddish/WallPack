@@ -1,5 +1,5 @@
 /*
- * DayTime:10/10/18 10:40 AM :
+ * DayTime:11/6/18 1:07 PM :
  * Year:2018 :
  * Author:bini :
  */
@@ -21,15 +21,16 @@ import android.view.ViewGroup
 import com.berhane.biniam.wallpack.wallpack.R
 import com.berhane.biniam.wallpack.wallpack.model.View.WallPackViewModel
 import com.berhane.biniam.wallpack.wallpack.model.data.Photos
+import com.berhane.biniam.wallpack.wallpack.model.data.User
 import com.berhane.biniam.wallpack.wallpack.utils.EndlessRecyclerViewScrollListener
 import com.berhane.biniam.wallpack.wallpack.utils.PhotoConstants
 import com.berhane.biniam.wallpack.wallpack.utils.adapter.WallPackPhotoAdapter
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.photographer_fragment.*
 
-class PhotographerLikesFragment : Fragment() {
+class UserLikes : Fragment() {
 
-    private val TAG: String = "PhotographerFrag"
+    private val TAG: String = "UserLikes"
     private var pageNumber: Int = 1
     private var currentPage: Int = 0
     private var totalPage: Int = 0
@@ -40,10 +41,10 @@ class PhotographerLikesFragment : Fragment() {
     private var progress_layout = photographer_progress
 
     companion object {
-        fun newInstance(photographer: Photos) = PhotographerLikesFragment().apply {
+        fun newInstance(usr: User) = UserLikes().apply {
             val args = Bundle()
-            args.putParcelable("photographerLikes", photographer)
-            val fragment = PhotographerLikesFragment()
+            args.putParcelable("User_likes", usr)
+            val fragment = UserLikes()
             fragment.arguments = args
             return fragment
         }
@@ -68,7 +69,7 @@ class PhotographerLikesFragment : Fragment() {
     }
 
     private fun initPhotographerPhotos() {
-        //Add which views you don't want to hide. In this case don't hide the toolbar
+
         mRecyclerView.itemAnimator = DefaultItemAnimator()
         var linearLayoutManager = StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL)
         mRecyclerView.layoutManager = linearLayoutManager
@@ -81,6 +82,7 @@ class PhotographerLikesFragment : Fragment() {
                 progress_layout.showContent()
                 currentPage = page
                 totalPage = totalItemsCount
+                //Add which views you don't want to hide. In this case don't hide the toolbar
                 excludeViewWhileLoading()
                 ++pageNumber
                 loadPhotographerPhotos(true)
@@ -98,10 +100,10 @@ class PhotographerLikesFragment : Fragment() {
                 super.onScrollStateChanged(recyclerView, newState)
                 when (newState) {
                     RecyclerView.SCROLL_STATE_IDLE -> {
-                        Glide.with(this@PhotographerLikesFragment).resumeRequests()
+                        Glide.with(this@UserLikes).resumeRequests()
                     }
                     else -> {
-                        Glide.with(this@PhotographerLikesFragment).pauseRequests()
+                        Glide.with(this@UserLikes).pauseRequests()
                     }
                 }
             }
@@ -113,8 +115,8 @@ class PhotographerLikesFragment : Fragment() {
      */
     private fun loadPhotographerPhotos(loadMore: Boolean) {
         val args = arguments
-        var photographerCol: Photos? = args!!.getParcelable("photographerLikes")
-        viewModel.getPhotographerLikes(photographerCol!!.user, pageNumber, PhotoConstants.PERPAGE, PhotoConstants.LATEST)!!.observe(this@PhotographerLikesFragment,
+        var user: User? = args!!.getParcelable("User_likes")
+        viewModel.getPhotographerLikes(user!!, pageNumber, PhotoConstants.PERPAGE, PhotoConstants.LATEST)!!.observe(this@UserLikes,
                 Observer<List<Photos>> { t: List<Photos>? ->
                     if (viewAdapter == null) {
                         viewAdapter = WallPackPhotoAdapter((t as MutableList<Photos>?)!!, activity as Activity)
@@ -140,6 +142,7 @@ class PhotographerLikesFragment : Fragment() {
         viewId.add(R.id.photographer_viewpager)
         progress_layout.showLoading(viewId)
     }
+
     override fun onDetach() {
         Log.d(TAG, "onDetach")
         super.onDetach()

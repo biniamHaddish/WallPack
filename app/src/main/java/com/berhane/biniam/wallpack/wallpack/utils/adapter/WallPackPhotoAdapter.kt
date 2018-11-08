@@ -61,7 +61,7 @@ class WallPackPhotoAdapter(private var wallPackList: MutableList<Photos>, contex
         val displayMetrics = context.resources.displayMetrics
         val imageHeight: Float = displayMetrics.widthPixels / (wallPackPhotos.width.toFloat() / wallPackPhotos.height.toFloat())
 
-
+        //Main Image
         Glide.with(context)
                 .load(wallPackPhotos.urls.regular)
                 .transition(GenericTransitionOptions.with(fadeAnimation))
@@ -93,6 +93,7 @@ class WallPackPhotoAdapter(private var wallPackList: MutableList<Photos>, contex
         if (this.wallPackList is ArrayList) {
             (this.wallPackList as ArrayList<Photos>).addAll(photosList)
             notifyItemInserted(wallPackList.size - 1)
+            notifyDataSetChanged() // Notifying the data Change in the RXView
         }
     }
     fun remove(postition:Int){

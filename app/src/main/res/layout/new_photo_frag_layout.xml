@@ -48,7 +48,9 @@
                         android:id="@+id/AccountImage"
                         android:layout_width="35dp"
                         android:layout_height="35dp"
-                        android:src="@drawable/ic_account_circle" />
+                        android:src="@drawable/ic_account_circle"
+                        android:onClick="getUserDetails"
+                        />
                 </android.support.v7.widget.Toolbar>
             </LinearLayout>
 

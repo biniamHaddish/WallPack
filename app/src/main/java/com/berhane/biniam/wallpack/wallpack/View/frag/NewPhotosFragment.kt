@@ -23,6 +23,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.berhane.biniam.wallpack.wallpack.R
 import com.berhane.biniam.wallpack.wallpack.activities.LoginActivity
+import com.berhane.biniam.wallpack.wallpack.activities.PhotographerActivity
 import com.berhane.biniam.wallpack.wallpack.model.View.WallPackViewModel
 import com.berhane.biniam.wallpack.wallpack.model.data.Photos
 import com.berhane.biniam.wallpack.wallpack.utils.EndlessRecyclerViewScrollListener
@@ -30,13 +31,15 @@ import com.berhane.biniam.wallpack.wallpack.utils.PhotoConstants
 import com.berhane.biniam.wallpack.wallpack.utils.WallPack
 import com.berhane.biniam.wallpack.wallpack.utils.adapter.WallPackPhotoAdapter
 import com.bumptech.glide.Glide
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.new_photo_frag_layout.*
 
 
 class NewPhotosFragment : Fragment() {
     val TAG = "NewPhotosFragment"
     private var authPref: SharedPreferences? = null
-    private var  avatarInfo:String?=null
+    private var avatarInfo: String? = null
+    private var accessToken: String? = null
     private var pageNumber: Int = 1
     private var isLoading = false
     private var currentPage: Int = 0
@@ -63,16 +66,28 @@ class NewPhotosFragment : Fragment() {
         mRecyclerView = rootView.findViewById(R.id.photo_recycler_view)
         authPref = WallPack.applicationContext().getSharedPreferences(PhotoConstants.PREFERENCE_NAME, 0)
         avatarInfo = authPref!!.getString(PhotoConstants.KEY_AVATAR_PATH, "")
+        accessToken = authPref!!.getString(PhotoConstants.KEY_ACCESS_TOKEN, "")
+
         return rootView
 
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
         AccountImage.setOnClickListener {
-            val intent = Intent(activity as Activity, LoginActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
-            startActivity(intent)
+            if (TextUtils.isEmpty(accessToken) && TextUtils.isEmpty(avatarInfo)) {
+                val intent = Intent(activity as Activity, LoginActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+                startActivity(intent)
+            } else {
+                val intent = Intent(activity as Activity, PhotographerActivity::class.java)
+                val photos = Gson().fromJson<Photos>(intent.getStringExtra("Photo"), Photos::class.java)
+                val gSon = Gson().toJson(photos)
+                intent.putExtra("Photo", gSon)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+                startActivity(intent)
+            }
         }
         initRecyclerImageView()
         loadProfileInfo()
@@ -138,7 +153,8 @@ class NewPhotosFragment : Fragment() {
         scrollListener!!.resetState()
 
     }
-    private fun loadProfileInfo(){
+
+    private fun loadProfileInfo() {
         if (!TextUtils.isEmpty(avatarInfo)) {
             Glide.with(context)
                     .load(avatarInfo)

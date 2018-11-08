@@ -157,14 +157,4 @@ class WallPackViewModel : ViewModel() {
         return wallPackLiveData!!
     }
 
-//    /**
-//     * LiveData of getting an AccessToken
-//     */
-//    fun getAccessToken(code: String){
-//        if (null == retrofitClient) {
-//            retrofitClient = RetrofitClient.getRetrofitClient()
-//        }
-//        return retrofitClient!!.requestAccessToken(code,)
-//
-//    }
 }

@@ -1,5 +1,5 @@
 /*
- * DayTime:10/10/18 10:40 AM :
+ * DayTime:11/6/18 12:18 PM :
  * Year:2018 :
  * Author:bini :
  */
@@ -21,15 +21,16 @@ import android.view.ViewGroup
 import com.berhane.biniam.wallpack.wallpack.R
 import com.berhane.biniam.wallpack.wallpack.model.View.WallPackViewModel
 import com.berhane.biniam.wallpack.wallpack.model.data.Photos
+import com.berhane.biniam.wallpack.wallpack.model.data.User
 import com.berhane.biniam.wallpack.wallpack.utils.EndlessRecyclerViewScrollListener
 import com.berhane.biniam.wallpack.wallpack.utils.PhotoConstants
 import com.berhane.biniam.wallpack.wallpack.utils.adapter.WallPackPhotoAdapter
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.photographer_fragment.*
 
-class PhotographerLikesFragment : Fragment() {
+class UserPhotos:Fragment() {
 
-    private val TAG: String = "PhotographerFrag"
+    private val TAG: String = "UserPhotos"
     private var pageNumber: Int = 1
     private var currentPage: Int = 0
     private var totalPage: Int = 0
@@ -40,10 +41,10 @@ class PhotographerLikesFragment : Fragment() {
     private var progress_layout = photographer_progress
 
     companion object {
-        fun newInstance(photographer: Photos) = PhotographerLikesFragment().apply {
+        fun newInstance(user_data: User) = UserPhotos().apply {
             val args = Bundle()
-            args.putParcelable("photographerLikes", photographer)
-            val fragment = PhotographerLikesFragment()
+            args.putParcelable("User_Photos", user_data)
+            val fragment = UserPhotos()
             fragment.arguments = args
             return fragment
         }
@@ -83,7 +84,7 @@ class PhotographerLikesFragment : Fragment() {
                 totalPage = totalItemsCount
                 excludeViewWhileLoading()
                 ++pageNumber
-                loadPhotographerPhotos(true)
+                loadPhotographerLikedPhotos(true)
             }
         }
         // Adds the scroll listener to RecyclerView
@@ -92,16 +93,16 @@ class PhotographerLikesFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        loadPhotographerPhotos(false)
+        loadPhotographerLikedPhotos(false)
         mRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
                 when (newState) {
                     RecyclerView.SCROLL_STATE_IDLE -> {
-                        Glide.with(this@PhotographerLikesFragment).resumeRequests()
+                        Glide.with(this@UserPhotos).resumeRequests()
                     }
                     else -> {
-                        Glide.with(this@PhotographerLikesFragment).pauseRequests()
+                        Glide.with(this@UserPhotos).pauseRequests()
                     }
                 }
             }
@@ -111,10 +112,10 @@ class PhotographerLikesFragment : Fragment() {
     /**
      * Will Load all the Collections ,Likes and Photos of the Given Photographer
      */
-    private fun loadPhotographerPhotos(loadMore: Boolean) {
+    private fun loadPhotographerLikedPhotos(loadMore: Boolean) {
         val args = arguments
-        var photographerCol: Photos? = args!!.getParcelable("photographerLikes")
-        viewModel.getPhotographerLikes(photographerCol!!.user, pageNumber, PhotoConstants.PERPAGE, PhotoConstants.LATEST)!!.observe(this@PhotographerLikesFragment,
+        var UserPhotos: User? = args!!.getParcelable("User_Photos")
+        viewModel.getPhotographersPhotos(UserPhotos!!, pageNumber, PhotoConstants.PERPAGE, PhotoConstants.LATEST)!!.observe(this@UserPhotos,
                 Observer<List<Photos>> { t: List<Photos>? ->
                     if (viewAdapter == null) {
                         viewAdapter = WallPackPhotoAdapter((t as MutableList<Photos>?)!!, activity as Activity)

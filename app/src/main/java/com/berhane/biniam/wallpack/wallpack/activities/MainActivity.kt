@@ -8,7 +8,6 @@ package com.berhane.biniam.wallpack.wallpack.activities
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Bundle
 import android.support.annotation.ColorRes
@@ -16,16 +15,11 @@ import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
-import android.text.TextUtils
 import android.view.View
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem
 import com.berhane.biniam.wallpack.wallpack.R
 import com.berhane.biniam.wallpack.wallpack.View.frag.NewPhotosFragment
-import com.berhane.biniam.wallpack.wallpack.utils.PhotoConstants
-import com.bumptech.glide.GenericTransitionOptions
-import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.new_photo_frag_layout.*
 
 
 class MainActivity : AppCompatActivity() {

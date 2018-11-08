@@ -18,13 +18,17 @@ class PhotographerPager(fm: FragmentManager, Photographer: Photos) : SmartFragme
     private val photos = Photographer
 
     override fun getItem(position: Int): Fragment {
+      //  if (photos != null) {
 
-        when (position) {
-            0 -> return PhotographerDetailsFragment.newInstance(this.photos)
-            1 -> return PhotographerLikesFragment.newInstance(this.photos)
-            2 -> return PhotographerCollectionFragment.newInstance(this.photos)
-        }
-        return PhotographerDetailsFragment.newInstance(this.photos)
+            when (position) {
+                0 -> return PhotographerDetailsFragment.newInstance(this.photos)
+                1 -> return PhotographerLikesFragment.newInstance(this.photos)
+                2 -> return PhotographerCollectionFragment.newInstance(this.photos)
+            }
+
+            return PhotographerDetailsFragment.newInstance(this.photos)
+
+
     }
 
     override fun getCount(): Int {

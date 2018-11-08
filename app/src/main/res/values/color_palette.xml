@@ -7,6 +7,7 @@
 <resources>
     <color name="sanguineRed">#F97242</color>
     <color name="carrotOrange">#FA961F</color>
+    <color name="favRed">#d10c0c</color>
     <color name="seaFoam">#9DBDBE</color>
     <color name="lakeBlue">#5894BC</color>
     <color name="winterBlue">#9BE7FF</color>

@@ -1,36 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/detailed_photo"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:clipToPadding="false"
-    android:fitsSystemWindows="true"
+    android:background="@android:color/black"
     tools:context="com.berhane.biniam.wallpack.wallpack.activities.PhotoDetails">
 
 
+    <com.berhane.biniam.wallpack.wallpack.utils.SwipeBackCoordinatorLayout
+    android:id="@+id/activity_preview_swipeBackView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <android.support.v4.widget.NestedScrollView
+    <com.berhane.biniam.wallpack.wallpack.utils.image_utills.NestedScrollPhotoView
+        android:id="@+id/image_detailed"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbars="none"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        android:scaleType="centerInside" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_info"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_gravity="end|bottom"
+            app:backgroundTint="@color/gray"
+            android:src="@drawable/ic_info"
+            android:elevation="@dimen/bottom_navigation_elevation"
+            android:layout_margin="16dp" />
 
-            <ImageView
-                android:id="@+id/image_detailed"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:adjustViewBounds="true"
-                android:contentDescription="@string/todo"
-                android:scaleType="fitXY"
-                android:src="@drawable/ic_placeholder"
-                android:transitionName="photoScale" />
+    <!--<android.support.v4.widget.NestedScrollView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:scrollbars="none"-->
+        <!--app:layout_behavior="@string/appbar_scrolling_view_behavior">-->
+
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:orientation="vertical">-->
+
+            <!--<ImageView-->
+                <!--android:id="@+id/image_detailed"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:adjustViewBounds="true"-->
+                <!--android:contentDescription="@string/todo"-->
+                <!--android:scaleType="fitXY"-->
+                <!--android:src="@drawable/ic_placeholder"-->
+                <!--android:transitionName="photoScale" />-->
 
 
             <LinearLayout
@@ -43,7 +62,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:background="@drawable/transparent_gradient"
                     android:orientation="horizontal"
                     android:paddingLeft="20dp"
                     android:paddingTop="10dp"
@@ -68,19 +86,20 @@
                         android:clickable="true"
                         android:focusable="true"
                         android:text="@string/app_name"
-                        android:textColor="@color/raisinBlack" />
+                        android:textColor="@color/white_87" />
 
-                    <ImageButton
+                    <ToggleButton
                         android:id="@+id/like_details_btn"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:layout_gravity="center"
                         android:layout_marginStart="20dp"
                         android:adjustViewBounds="true"
-                        android:background="@color/transparent"
-                        android:contentDescription="@string/todo"
-                        android:scaleType="fitCenter"
-                        android:src="@drawable/ic_heart" />
+                        android:background="@drawable/button_favorite"
+                        android:checked="false"
+                        android:text=""
+                        android:textOff=""
+                        android:textOn="" />
 
                     <ImageButton
                         android:id="@+id/share_photo_btn"
@@ -90,6 +109,8 @@
                         android:layout_marginStart="20dp"
                         android:adjustViewBounds="true"
                         android:background="@color/transparent"
+                        app:backgroundTint="@color/white_87"
+                        android:backgroundTint="@color/white_87"
                         android:clickable="true"
                         android:contentDescription="@string/todo"
                         android:focusable="true"
@@ -101,98 +122,79 @@
                 </LinearLayout>
 
 
-                <TextView
-                    android:id="@+id/detailed_user_location"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="20dp"
-                    android:layout_marginBottom="10dp"
-                    android:drawableStart="@drawable/ic_map_marker"
-                    android:drawablePadding="20dp"
-                    android:gravity="center_vertical"
-                    android:textColor="@color/black" />
+                <!--<TextView-->
+                    <!--android:id="@+id/detailed_user_location"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_gravity="center_vertical"-->
+                    <!--android:layout_marginStart="20dp"-->
+                    <!--android:layout_marginTop="10dp"-->
+                    <!--android:layout_marginEnd="20dp"-->
+                    <!--android:layout_marginBottom="10dp"-->
+                    <!--android:drawableStart="@drawable/ic_map_marker"-->
+                    <!--android:drawablePadding="20dp"-->
+                    <!--android:gravity="center_vertical"-->
+                    <!--android:textColor="@color/black" />-->
 
-                <TextView
-                    android:id="@+id/published_date"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="20dp"
-                    android:layout_marginBottom="10dp"
-                    android:drawableStart="@drawable/ic_calendar_clock"
-                    android:drawablePadding="20dp"
-                    android:gravity="center_vertical"
-                    android:textColor="@color/black" />
+                <!--<TextView-->
+                    <!--android:id="@+id/published_date"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_gravity="center_vertical"-->
+                    <!--android:layout_marginStart="20dp"-->
+                    <!--android:layout_marginTop="10dp"-->
+                    <!--android:layout_marginEnd="20dp"-->
+                    <!--android:layout_marginBottom="10dp"-->
+                    <!--android:drawableStart="@drawable/ic_calendar_clock"-->
+                    <!--android:drawablePadding="20dp"-->
+                    <!--android:gravity="center_vertical"-->
+                    <!--android:textColor="@color/black" />-->
 
-                <TextView
-                    android:id="@+id/likes_details"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="20dp"
-                    android:layout_marginBottom="10dp"
-                    android:drawableStart="@drawable/ic_heart_full"
-                    android:drawablePadding="20dp"
-                    android:gravity="center_vertical"
-                    android:textColor="@color/black" />
+                <!--<TextView-->
+                    <!--android:id="@+id/likes_details"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_gravity="center_vertical"-->
+                    <!--android:layout_marginStart="20dp"-->
+                    <!--android:layout_marginTop="10dp"-->
+                    <!--android:layout_marginEnd="20dp"-->
+                    <!--android:layout_marginBottom="10dp"-->
+                    <!--android:drawableStart="@drawable/ic_heart_full"-->
+                    <!--android:drawablePadding="20dp"-->
+                    <!--android:gravity="center_vertical"-->
+                    <!--android:textColor="@color/black" />-->
 
-                <TextView
-                    android:id="@+id/details_download"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="20dp"
-                    android:layout_marginBottom="10dp"
-                    android:drawableStart="@drawable/ic_cloud_download"
-                    android:drawablePadding="20dp"
-                    android:gravity="center_vertical"
-                    android:textColor="@color/black" />
+                <!--<TextView-->
+                    <!--android:id="@+id/details_download"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_gravity="center_vertical"-->
+                    <!--android:layout_marginStart="20dp"-->
+                    <!--android:layout_marginTop="10dp"-->
+                    <!--android:layout_marginEnd="20dp"-->
+                    <!--android:layout_marginBottom="10dp"-->
+                    <!--android:drawableStart="@drawable/ic_cloud_download"-->
+                    <!--android:drawablePadding="20dp"-->
+                    <!--android:gravity="center_vertical"-->
+                    <!--android:textColor="@color/black" />-->
 
-                <TextView
-                    android:id="@+id/color_details"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="20dp"
-                    android:layout_marginBottom="10dp"
-                    android:drawableStart="@drawable/ic_palette"
-                    android:drawablePadding="20dp"
-                    android:gravity="center_vertical"
-                    android:textColor="@color/black" />
+                <!--<TextView-->
+                    <!--android:id="@+id/color_details"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_gravity="center_vertical"-->
+                    <!--android:layout_marginStart="20dp"-->
+                    <!--android:layout_marginTop="10dp"-->
+                    <!--android:layout_marginEnd="20dp"-->
+                    <!--android:layout_marginBottom="10dp"-->
+                    <!--android:drawableStart="@drawable/ic_palette"-->
+                    <!--android:drawablePadding="20dp"-->
+                    <!--android:gravity="center_vertical"-->
+                    <!--android:textColor="@color/black" />-->
 
 
             </LinearLayout>
-            <!--<LinearLayout-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:orientation="horizontal"-->
-            <!--android:layout_marginLeft="300dp"-->
-            <!--&gt;-->
-
-            <!--<android.support.design.widget.FloatingActionButton-->
-            <!--android:id="@+id/info_fab"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_margin="16dp"-->
-            <!--app:backgroundTint="@color/white"-->
-            <!--app:rippleColor="@color/gray_38"-->
-            <!--app:srcCompat="@drawable/ic_info" />-->
-            <!--</LinearLayout>-->
-        </LinearLayout>
-
-
-    </android.support.v4.widget.NestedScrollView>
-
-
+        <!--</LinearLayout>-->
+    <!--</android.support.v4.widget.NestedScrollView>-->
+    </com.berhane.biniam.wallpack.wallpack.utils.SwipeBackCoordinatorLayout>
 </android.support.design.widget.CoordinatorLayout>
