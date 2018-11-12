@@ -28,14 +28,14 @@ interface UnSplashApi {
                                   @Query("page") page: Int,
                                   @Query("per_page") per_page: Int): Call<List<Photos>>
 
-//    @POST("photos/{id}/like")
-//    fun likeAPhoto(@Path("id") id: String): Call<LikePhotoResult>
-//
-//    @DELETE("photos/{id}/like")
-//    fun unlikeAPhoto(@Path("id") id: String): Call<LikePhotoResult>
-//
-//    @GET("photos/{id}")
-//    fun getAPhoto(@Path("id") id: String): Call<PhotoDetails>
+    @POST("photos/{id}/like")
+    fun likeAPhoto(@Path("id") id: String): Call<PhotoLike>
+
+    @DELETE("photos/{id}/like")
+    fun unlikeAPhoto(@Path("id") id: String): Call<PhotoLike>
+
+    @GET("photos/{id}")
+    fun getSinglePhoto(@Path("id") id: String): Call<PhotoDetails>
 
     @GET("collections/{id}/photos")
     fun getCollectionPhotos(@Path("id") id: Int,
@@ -102,7 +102,7 @@ interface UnSplashApi {
                         @Query("count") count: Int): Call<List<Photos>>
 
     @GET("photos/{id}/download")
-    fun reportDownload(@Path("id") id: String): Call<ResponseBody>
+    fun reportPhotoDownload(@Path("id") id: String): Call<ResponseBody>
 
 
     // Search Api

@@ -11,6 +11,12 @@ import android.content.Context
 import android.support.v4.content.ContextCompat
 import android.support.v4.widget.CircularProgressDrawable
 import com.berhane.biniam.wallpack.wallpack.R
+import android.support.v4.app.ActivityCompat
+import android.content.pm.PackageManager
+import android.os.Build
+import android.app.Activity
+
+
 
 class WallPack : Application() {
 
@@ -30,6 +36,20 @@ class WallPack : Application() {
             circularProgressDrawable.centerRadius = 30f
             circularProgressDrawable.setColorSchemeColors(ContextCompat.getColor(applicationContext(), R.color.tokyoColorAccent))
             circularProgressDrawable.start()
+        }
+
+
+        fun isStoragePermissionGranted(activity: Activity): Boolean {
+            if (Build.VERSION.SDK_INT >= 23) {
+                if (ActivityCompat.checkSelfPermission(activity, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                    return true
+                } else {
+                    ActivityCompat.requestPermissions(activity, arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE), 1)
+                    return false
+                }
+            } else {
+                return true
+            }
         }
 
 

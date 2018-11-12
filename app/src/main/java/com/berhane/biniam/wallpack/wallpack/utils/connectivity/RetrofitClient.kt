@@ -24,6 +24,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import android.content.ClipData.Item
+import okhttp3.ResponseBody
 
 
 class RetrofitClient : TLSUtill() {
@@ -413,6 +414,59 @@ class RetrofitClient : TLSUtill() {
         call = getUserProfile
     }
 
+    fun reportPhotoDownload(id: String, l: OnReportDownloadListener?) {
+        val reportDownload = retrofitClient(buildClient()).reportPhotoDownload(id)
+        reportDownload.enqueue(object : Callback<ResponseBody> {
+            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                if (l != null) {
+                    l!!.onReportDownloadSuccess(call, response)
+                }
+            }
+
+            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                if (l != null) {
+                    l!!.onReportDownloadFailed(call, t)
+                }
+            }
+        })
+    }
+
+    fun setLikeForAPhoto(id: String, like: Boolean, l: OnSetLikeListener?) {
+        val setLikeForAPhoto = if (like) retrofitClient(buildClient()).likeAPhoto(id)
+        else
+            retrofitClient(buildClient()).unlikeAPhoto(id)
+        setLikeForAPhoto.enqueue(object : Callback<PhotoLike> {
+            override fun onResponse(call: Call<PhotoLike>, response: Response<PhotoLike>) {
+                if (l != null) {
+                    l!!.onSetLikeSuccess(call, response)
+                }
+            }
+
+            override fun onFailure(call: Call<PhotoLike>, t: Throwable) {
+                if (l != null) {
+                    l!!.onSetLikeFailed(call, t)
+                }
+            }
+        })
+    }
+
+    fun requestPhotoDetails(id: String, l: OnRequestPhotoDetailsListener?) {
+        val getAPhoto = retrofitClient(buildClient()).getSinglePhoto(id)
+        getAPhoto.enqueue(object : Callback<PhotoDetails> {
+            override fun onResponse(call: Call<PhotoDetails>, response: Response<PhotoDetails>) {
+                if (l != null) {
+                    l!!.onRequestPhotoDetailsSuccess(call, response)
+                }
+            }
+
+            override fun onFailure(call: Call<PhotoDetails>, t: Throwable) {
+                if (l != null) {
+                    l!!.onRequestPhotoDetailsFailed(call, t)
+                }
+            }
+        })
+    }
+
     /**
      * Cancel the call for the end point
      */
@@ -422,7 +476,12 @@ class RetrofitClient : TLSUtill() {
         }
     }
 
-// interface.
+    // interface.
+    interface OnRequestPhotoDetailsListener {
+        fun onRequestPhotoDetailsSuccess(call: Call<PhotoDetails>, response: Response<PhotoDetails>)
+
+        fun onRequestPhotoDetailsFailed(call: Call<PhotoDetails>, t: Throwable)
+    }
 
     interface OnRequestUserProfileListener {
         fun onRequestUserProfileSuccess(call: Call<User>, response: Response<User>)
@@ -437,6 +496,18 @@ class RetrofitClient : TLSUtill() {
     interface OnRequestUsersListener {
         fun onRequestUsersSuccess(call: Call<List<User>>, response: Response<List<User>>)
         fun onRequestUsersFailed(call: Call<List<User>>, t: Throwable)
+    }
+
+    interface OnSetLikeListener {
+        fun onSetLikeSuccess(call: Call<PhotoLike>, response: Response<PhotoLike>)
+
+        fun onSetLikeFailed(call: Call<PhotoLike>, t: Throwable)
+    }
+
+    interface OnReportDownloadListener {
+        fun onReportDownloadSuccess(call: Call<ResponseBody>, response: Response<ResponseBody>)
+
+        fun onReportDownloadFailed(call: Call<ResponseBody>, t: Throwable)
     }
 
     interface OnRequestAccessTokenListener {

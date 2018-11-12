@@ -92,8 +92,9 @@ class WallPackPhotoAdapter(private var wallPackList: MutableList<Photos>, contex
     fun addAll(photosList: List<Photos>) {
         if (this.wallPackList is ArrayList) {
             (this.wallPackList as ArrayList<Photos>).addAll(photosList)
-            notifyItemInserted(wallPackList.size - 1)
             notifyDataSetChanged() // Notifying the data Change in the RXView
+            notifyItemInserted(wallPackList.size - 1)
+
         }
     }
     fun remove(postition:Int){

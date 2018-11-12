@@ -20,6 +20,7 @@ import com.aurelhubert.ahbottomnavigation.AHBottomNavigation
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem
 import com.berhane.biniam.wallpack.wallpack.R
 import com.berhane.biniam.wallpack.wallpack.View.frag.NewPhotosFragment
+import com.berhane.biniam.wallpack.wallpack.utils.WallPack
 
 
 class MainActivity : AppCompatActivity() {
@@ -39,6 +40,8 @@ class MainActivity : AppCompatActivity() {
         bottomNavSetUp()
         val newPhotoFragment = NewPhotosFragment.newInstance()
         loadFragment(newPhotoFragment)
+        // Setting the Permission
+        WallPack.isStoragePermissionGranted(this)
 
     }
 

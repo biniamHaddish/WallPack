@@ -13,6 +13,15 @@
     <string name="login_btn">Login</string>
     <string name="join_btn">Join</string>
 
+    <!-- Fab String -->
+    <string name="stats">Stats</string>
+    <string name="photo_info">Info</string>
+    <string name="bottomSheetContent">Content</string>
+    <string name="set_as_wallpaper">Set as wallpaper</string>
+    <string name="download">Download</string>
+    <string name="setting_wallpaper">Setting wallpaper&#8230;</string>
+    <string name="cancel">Cancel</string>
+    <string name="download_started">Download started</string>
 
     <string name="theme_name_tokyo">Tokyo</string>
     <string name="theme_name_illini">Illini</string>
@@ -51,4 +60,19 @@
     <string name="menu_popular">Popular</string>
     <string name="todo">TODO</string>
     <string name="title_activity_search__photos">Search_Photos</string>
+
+    <!--    -->
+    <string name="feedback_views">Views</string>
+    <string name="feedback_downloads">Downloads</string>
+    <string name="feedback_likes">Likes</string>
+    <string name="feedback_size">Size</string>
+    <string name="feedback_color">Color</string>
+    <string name="feedback_location">Location</string>
+    <string name="feedback_camera_make">Camera make</string>
+    <string name="feedback_camera_model">Camera model</string>
+    <string name="feedback_exposure">Exposure time</string>
+    <string name="feedback_aperture">Aperture</string>
+    <string name="feedback_focal">Focal length</string>
+    <string name="feedback_iso">Iso</string>
+
 </resources>
