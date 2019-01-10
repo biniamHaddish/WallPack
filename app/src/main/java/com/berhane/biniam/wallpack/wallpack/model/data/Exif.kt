@@ -11,7 +11,6 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class Exif(
-
         var make: String,
         var model: String,
         var exposure_time: String,

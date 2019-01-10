@@ -18,14 +18,12 @@ data class Photos(var id: String,
                   var width: Int,
                   var height: Int,
                   var color: String,
-                  var downloads: Int,
-                  var likes: Int,
                   var liked_by_user: Boolean,
                   var description: String,
-                  var user:User,
+                  var user: User,
+                  var exif:Exif,
                   var current_user_collections: List<PhotoCollection>,
                   var urls: PhotoUrls,
                   var categories: List<PhotoCategory>,
                   var links: PhotoDownloadLinks
-
 ) : Parcelable

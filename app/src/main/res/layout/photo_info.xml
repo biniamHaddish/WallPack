@@ -5,6 +5,7 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:background="?attr/root_color"
+    android:layout_marginBottom="30dp"
     tools:ignore="DisableBaselineAlignment">
 
     <LinearLayout
@@ -27,7 +28,7 @@
             style="@style/subtitle_text" />
 
         <com.berhane.biniam.wallpack.wallpack.utils.NumberDeco
-            android:id="@+id/item_photo_2_info_views"
+            android:id="@+id/NumberDeco_views"
             android:layout_width="wrap_content"
             android:maxLines="1"
             style="@style/content_text"
@@ -55,7 +56,7 @@
             style="@style/subtitle_text" />
 
         <com.berhane.biniam.wallpack.wallpack.utils.NumberDeco
-            android:id="@+id/item_photo_2_info_downloads"
+            android:id="@+id/NumberDeco_downloads"
             android:layout_width="wrap_content"
             android:maxLines="1"
             style="@style/content_text"
@@ -83,7 +84,7 @@
             style="@style/subtitle_text" />
 
         <com.berhane.biniam.wallpack.wallpack.utils.NumberDeco
-            android:id="@+id/item_photo_2_info_likes"
+            android:id="@+id/NumberDeco_likes"
             android:layout_width="wrap_content"
             android:maxLines="1"
             style="@style/content_text"

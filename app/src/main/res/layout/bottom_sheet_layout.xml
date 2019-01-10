@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ DayTime:11/11/18 1:49 PM :
   ~ Year:2018 :
   ~ Author:bini :
@@ -9,32 +8,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/bottom_sheet"
     android:layout_width="match_parent"
-    android:layout_height="340dp"
+    android:layout_height="wrap_content"
     android:background="@android:color/white"
+    android:elevation="16dp"
     android:orientation="vertical"
     app:behavior_hideable="true"
     app:behavior_peekHeight="80dp"
-    android:elevation="16dp"
     app:layout_behavior="android.support.design.widget.BottomSheetBehavior">
 
-    <TextView
-        android:id="@+id/PhotoDescription_tv"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:background="@color/white_87"
-        android:gravity="left"
-        android:text="@string/photo_info"
-        android:textColor="@android:color/darker_gray" />
 
-    <include layout="@layout/photo_info"
-        />
-    <!--<TextView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:gravity="center"-->
-        <!--android:text="@string/bottomSheetContent"-->
-        <!--android:textColor="@android:color/white"-->
-        <!--/>-->
+
+    <include layout="@layout/photo_info" />
+
+    <include layout="@layout/grid_layout"/>
 
 
 </FrameLayout>

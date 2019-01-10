@@ -11,7 +11,6 @@ import android.animation.ObjectAnimator
 import android.content.Context
 import android.content.Intent
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,11 +22,8 @@ import com.berhane.biniam.wallpack.wallpack.model.data.Photos
 import com.berhane.biniam.wallpack.wallpack.utils.image_utills.ColorShifter
 import com.bumptech.glide.GenericTransitionOptions
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.transition.ViewPropertyTransition
 import com.google.gson.Gson
-
 
 class WallPackPhotoAdapter(private var wallPackList: MutableList<Photos>, context: Context) :
         RecyclerView.Adapter<WallPackPhotoAdapter.WallPackHolder>() {
@@ -90,17 +86,17 @@ class WallPackPhotoAdapter(private var wallPackList: MutableList<Photos>, contex
     }
 
     fun addAll(photosList: List<Photos>) {
-        if (this.wallPackList is ArrayList) {
-            (this.wallPackList as ArrayList<Photos>).addAll(photosList)
-            notifyDataSetChanged() // Notifying the data Change in the RXView
-            notifyItemInserted(wallPackList.size - 1)
+        (this.wallPackList as ArrayList<Photos>).addAll(photosList)
+        notifyDataSetChanged() // Notifying the data Change in the RXView
+        notifyItemInserted(wallPackList.size - 1)
 
-        }
     }
-    fun remove(postition:Int){
+
+    fun remove(postition: Int) {
         wallPackList.removeAt(postition)
         notifyItemRemoved(wallPackList.size)
     }
+
     /**
      * clear all items and notify
      */

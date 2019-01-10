@@ -467,6 +467,19 @@ class RetrofitClient : TLSUtill() {
         })
     }
 
+    fun requestStats(id: String, l: OnRequestStatsListener?) {
+        val getStats = retrofitClient(buildClient()).getPhotoStats(id)
+        getStats.enqueue(object : Callback<Stats> {
+            override fun onResponse(call: Call<Stats>, response: Response<Stats>) {
+                l?.onRequestStatsSuccess(call, response)
+            }
+
+            override fun onFailure(call: Call<Stats>, t: Throwable) {
+                l?.onRequestStatsFailed(call, t)
+            }
+        })
+        call = getStats
+    }
     /**
      * Cancel the call for the end point
      */
@@ -515,6 +528,13 @@ class RetrofitClient : TLSUtill() {
 
         fun onRequestAccessTokenFailed(call: Call<AccessToken>, t: Throwable)
     }
+
+    interface OnRequestStatsListener {
+        fun onRequestStatsSuccess(call: Call<Stats>, response: Response<Stats>)
+
+        fun onRequestStatsFailed(call: Call<Stats>, t: Throwable)
+    }
+
 }
 
 

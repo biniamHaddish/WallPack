@@ -20,8 +20,8 @@ interface UnSplashApi {
                          @Query("per_page") per_page: Int,
                          @Query("order_by") order_by: String): Call<List<Photos>>
 
-//   @GET("photos/{id}/stats")
-//    fun getPhotoStats(@Path("id") id: String): Call<PhotoStats>
+   @GET("photos/{id}/stats")
+   fun getPhotoStats(@Path("id") id: String): Call<Stats>
 
     @GET("categories/{id}/photos")
     fun getPhotosInAGivenCategory(@Path("id") id: Int,

@@ -10,10 +10,12 @@ import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.PorterDuff
+import android.os.Build
 import android.os.Bundle
 import android.support.design.widget.BottomSheetBehavior
 import android.support.design.widget.CoordinatorLayout
@@ -23,21 +25,21 @@ import android.support.v4.widget.CircularProgressDrawable
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
+import android.view.ViewTreeObserver
 import android.view.WindowManager
 import android.view.animation.Animation
 import android.view.animation.BounceInterpolator
 import android.view.animation.OvershootInterpolator
 import android.view.animation.ScaleAnimation
-import android.widget.CompoundButton
-import android.widget.FrameLayout
-import android.widget.ImageView
-import android.widget.Toast
+import android.widget.*
 import com.berhane.biniam.wallpack.wallpack.R
 import com.berhane.biniam.wallpack.wallpack.model.data.PhotoDetails
 import com.berhane.biniam.wallpack.wallpack.model.data.PhotoLike
 import com.berhane.biniam.wallpack.wallpack.model.data.Photos
+import com.berhane.biniam.wallpack.wallpack.model.data.Stats
 import com.berhane.biniam.wallpack.wallpack.utils.DownloadHelper
 import com.berhane.biniam.wallpack.wallpack.utils.DownloadHelper.DownloadType.DOWNLOAD
+import com.berhane.biniam.wallpack.wallpack.utils.NumberDeco
 import com.berhane.biniam.wallpack.wallpack.utils.PhotoConstants
 import com.berhane.biniam.wallpack.wallpack.utils.WallPack
 import com.berhane.biniam.wallpack.wallpack.utils.connectivity.RetrofitClient
@@ -50,12 +52,15 @@ import com.github.clans.fab.FloatingActionButton
 import com.github.clans.fab.FloatingActionMenu
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.detailed_photo.*
+import kotlinx.android.synthetic.main.grid_layout.*
+import kotlinx.android.synthetic.main.photo_info.*
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Response
+import kotlin.random.Random
 
 
-class PhotoDetails : AppCompatActivity(), RetrofitClient.OnReportDownloadListener, RetrofitClient.OnSetLikeListener, RetrofitClient.OnRequestPhotoDetailsListener {
+class PhotoDetails : AppCompatActivity(), RetrofitClient.OnReportDownloadListener, RetrofitClient.OnSetLikeListener, RetrofitClient.OnRequestPhotoDetailsListener, RetrofitClient.OnRequestStatsListener {
 
 
     var context: Context? = null
@@ -66,20 +71,34 @@ class PhotoDetails : AppCompatActivity(), RetrofitClient.OnReportDownloadListene
     private var fabWallpaper: FloatingActionButton? = null
     private var fabStats: FloatingActionButton? = null
     private var fabInfo: FloatingActionButton? = null
-    private var photos: Photos? = null
+    private lateinit var photos: Photos
     private var retrofitClient: RetrofitClient? = null
     private var coordinatorLayout: CoordinatorLayout? = null
     private var likedByUser: Boolean? = null
     private var photoDetails: PhotoDetails? = null
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<FrameLayout>
-    var bottomSheet:FrameLayout?=null
+    var bottomSheet: FrameLayout? = null
+
+
+    private lateinit var views: NumberDeco
+    private lateinit var likes: NumberDeco
+    private lateinit var downloads: NumberDeco
+
+    override fun onStart() {
+        super.onStart()
+        retrofitClient = RetrofitClient.getRetrofitClient()
+        retrofitClient!!.requestPhotoDetails(photos.id, this@PhotoDetails)
+        retrofitClient!!.requestStats(photos.id, this@PhotoDetails)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.detailed_photo)
         photos = Gson().fromJson<Photos>(intent.getStringExtra("Photo"), Photos::class.java)
+//        retrofitClient!!.requestPhotoDetails(photos.id, this@PhotoDetails)
+//        retrofitClient!!.requestStats(photos.id, this@PhotoDetails)
         // Making the status bar translucent
-        retrofitClient = RetrofitClient.getRetrofitClient()
+
         coordinatorLayout = findViewById(R.id.detailed_photo)
         val localLayoutParams = window.attributes
         localLayoutParams.flags = (WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS or localLayoutParams.flags)
@@ -87,6 +106,7 @@ class PhotoDetails : AppCompatActivity(), RetrofitClient.OnReportDownloadListene
         // Hide the status bar.
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
         actionBar?.hide()
+
 
         val imageView = findViewById<NestedScrollPhotoView>(R.id.image_detailed)
         // val progressbar=findViewById<ProgressBar>(R.id.detail_progress)
@@ -98,12 +118,13 @@ class PhotoDetails : AppCompatActivity(), RetrofitClient.OnReportDownloadListene
         fabInfo = findViewById(R.id.fab_info)
 
         //setting the click Listener
-        retrofitClient!!.requestPhotoDetails(photos!!.id, this@PhotoDetails)
+
         fabDownload!!.setOnClickListener(onClickListener)
         fabInfo!!.setOnClickListener(onClickListener)
         fabStats!!.setOnClickListener(onClickListener)
         fabWallpaper!!.setOnClickListener(onClickListener)
-        photographerName.text = "By " + photos!!.user.name
+
+        photographerName.text = "By " + photos.user.name
 //        detailed_user_location.text = photos.user.location
 //        published_date.text = photos.created_at.split("T")[0]
 //        likes_details.text = NumberFormat.getInstance(Locale.US).format(photos.likes) + " Likes"
@@ -141,8 +162,7 @@ class PhotoDetails : AppCompatActivity(), RetrofitClient.OnReportDownloadListene
 
         Glide.with(this@PhotoDetails)
                 .load(photos!!.user.profile_image.large)
-                .apply(RequestOptions().priority(Priority.HIGH)
-                        .placeholder(R.drawable.ic_account_circle))
+                .apply(RequestOptions().priority(Priority.HIGH).placeholder(R.drawable.ic_account_circle))
                 .into(photographerImg)
 
         // Sharing the Photo Event goes Here
@@ -161,33 +181,41 @@ class PhotoDetails : AppCompatActivity(), RetrofitClient.OnReportDownloadListene
         favoriteButton()
         createCustomAnimation()
         bottomSheetBehavior()
-        //hide the bottomSheet if it was Expanded
+        //hide the bottomSheet if it was Expanded when clicked out side the View
         imageView.setOnClickListener {
-            if (bottomSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED){
+            if (bottomSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED) {
                 bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
             }
         }
+
+
     }
 
     //Requesting the image details here
     override fun onRequestPhotoDetailsSuccess(call: Call<PhotoDetails>, response: Response<PhotoDetails>) {
         if (response.isSuccessful) {
-            photoDetails = response.body()
-            likedByUser = photoDetails!!.liked_by_user
+            val photoDetails: PhotoDetails = response.body()!!
+
+            likedByUser = photoDetails.liked_by_user
+
+            if (photoDetails != null) {
+                camera_make.text = photoDetails.exif.make
+                camera_make_title.text = "Camera Model"
+            }
             if (likedByUser as Boolean) {
                 like_details_btn.isChecked = true
             }
         } else if (response.code() == 403) {
             PhotoConstants.showSnack(coordinatorLayout!!, "Can not make request.")
         } else {
-            retrofitClient!!.requestPhotoDetails(photos!!.id, this@PhotoDetails)
+            retrofitClient!!.requestPhotoDetails(photos.id, this@PhotoDetails)
         }
     }
 
     override fun onRequestPhotoDetailsFailed(call: Call<PhotoDetails>, t: Throwable) {
         t.printStackTrace()
         Log.d(TAG, t.message)
-        retrofitClient!!.requestPhotoDetails(photos!!.id, this@PhotoDetails)
+        retrofitClient!!.requestPhotoDetails(photos.id, this@PhotoDetails)
     }
 
     private val onClickListener = View.OnClickListener { view ->
@@ -289,14 +317,20 @@ class PhotoDetails : AppCompatActivity(), RetrofitClient.OnReportDownloadListene
     /**
      * Defining the BottomSheet Behavior
      */
-    private fun bottomSheetBehavior(){
+    private fun bottomSheetBehavior() {
+
+        views = findViewById(R.id.NumberDeco_views)
+        likes = findViewById(R.id.NumberDeco_likes)
+        downloads = findViewById(R.id.NumberDeco_downloads)
+
+
         //BottomSheet Goes here
         bottomSheet = coordinatorLayout!!.findViewById(R.id.bottom_sheet) as FrameLayout
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+
         bottomSheetBehavior.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
             override fun onStateChanged(bottomSheet: View, newState: Int) {
-
 
                 // React to state change
                 when (newState) {
@@ -308,6 +342,7 @@ class PhotoDetails : AppCompatActivity(), RetrofitClient.OnReportDownloadListene
 
                 }
             }
+
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
 
                 // React to dragging events
@@ -315,7 +350,6 @@ class PhotoDetails : AppCompatActivity(), RetrofitClient.OnReportDownloadListene
             }
         })
     }
-
 
 
     /**
@@ -346,6 +380,27 @@ class PhotoDetails : AppCompatActivity(), RetrofitClient.OnReportDownloadListene
                 TODO("not implemented")
             }
         })
+    }
+
+    override fun onRequestStatsSuccess(call: Call<Stats>, response: Response<Stats>) {
+        if (response.isSuccessful) {
+            val stats: Stats = response.body()!!
+            // here we have to define some info for the bottomSheet View
+            likes.setEnableAnim(true)
+            downloads.setEnableAnim(true)
+            views.setEnableAnim(true)
+            // setting the data
+            likes.setNumberString(stats.likes.toString())
+            views.setNumberString(stats.views.toString())
+            downloads.setNumberString(stats.downloads.toString())
+
+        }
+    }
+
+    override fun onRequestStatsFailed(call: Call<Stats>, t: Throwable) {
+        t.printStackTrace()
+        Log.e(TAG, t.message)
+        retrofitClient!!.requestStats(photos!!.id, this@PhotoDetails)
     }
 
     override fun onReportDownloadSuccess(call: Call<ResponseBody>, response: Response<ResponseBody>) {
