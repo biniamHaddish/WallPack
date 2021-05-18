@@ -7,15 +7,14 @@
 package com.berhane.biniam.wallpack.wallpack.utils
 
 import android.content.Context
-import android.content.res.TypedArray
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.LinearGradient
 import android.graphics.Paint
 import android.graphics.Shader
-import android.support.v4.graphics.ColorUtils
 import android.util.AttributeSet
 import android.widget.LinearLayout
+import androidx.core.graphics.ColorUtils
 
 import com.berhane.biniam.wallpack.wallpack.R
 

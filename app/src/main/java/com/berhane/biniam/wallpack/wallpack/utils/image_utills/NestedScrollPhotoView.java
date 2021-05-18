@@ -7,13 +7,14 @@
 package com.berhane.biniam.wallpack.wallpack.utils.image_utills;
 
 import android.content.Context;
-import android.support.v4.view.MotionEventCompat;
-import android.support.v4.view.NestedScrollingParent2;
-import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.ViewConfiguration;
 import android.widget.ImageView;
+
+import androidx.core.view.MotionEventCompat;
+import androidx.core.view.NestedScrollingParent2;
+import androidx.core.view.ViewCompat;
 
 import com.berhane.biniam.wallpack.wallpack.utils.SwipeBackCoordinatorLayout;
 import com.berhane.biniam.wallpack.wallpack.utils.image_utills.photoView.PhotoView;
@@ -68,7 +69,7 @@ public class NestedScrollPhotoView extends PhotoView {
                 if (getInfo().getScale() == 1) {
                     isBeingDragged = false;
                     oldY = ev.getY();
-                    parent.onStartNestedScroll(this, this, ViewCompat.SCROLL_AXIS_VERTICAL, 0);
+                    parent.onStartNestedScroll(this, this, ViewCompat.SCROLL_AXIS_VERTICAL, ViewCompat.TYPE_TOUCH);
                     isNestedScrolling = true;
                 }
                 break;
@@ -83,10 +84,10 @@ public class NestedScrollPhotoView extends PhotoView {
                 if (isBeingDragged) {
                     int[] total = new int[] {0, deltaY};
                     int[] consumed = new int[] {0, 0};
-                    parent.onNestedPreScroll(this, total[0], total[1], consumed, 0);
+                    parent.onNestedPreScroll(this, total[0], total[1], consumed, ViewCompat.TYPE_TOUCH);
                     total[0] -= consumed[0];
                     total[1] -= consumed[1];
-                    parent.onNestedScroll(this, consumed[0], consumed[1], total[0], total[1], 0);
+                    parent.onNestedScroll(this, consumed[0], consumed[1], total[0], total[1], ViewCompat.TYPE_TOUCH);
                 }
                 oldY = ev.getY();
                 break;
@@ -98,7 +99,7 @@ public class NestedScrollPhotoView extends PhotoView {
                     if (parent instanceof SwipeBackCoordinatorLayout) {
                         ((SwipeBackCoordinatorLayout) parent).reset();
                     } else {
-                        parent.onStopNestedScroll(this, 0);
+                        parent.onStopNestedScroll(this, ViewCompat.TYPE_TOUCH);
                     }
                 }
                 break;
@@ -108,7 +109,7 @@ public class NestedScrollPhotoView extends PhotoView {
                 isBeingDragged = false;
                 if (isNestedScrolling) {
                     isNestedScrolling = false;
-                    parent.onStopNestedScroll(this, 0);
+                    parent.onStopNestedScroll(this, ViewCompat.TYPE_TOUCH);
                 }
                 break;
         }

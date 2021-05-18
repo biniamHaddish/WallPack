@@ -6,15 +6,11 @@
 
 package com.berhane.biniam.wallpack.wallpack.utils
 
-import android.app.Activity
-import android.content.Context
-import android.support.design.widget.Snackbar
 import android.view.View
-import android.widget.Toast
 import com.berhane.biniam.wallpack.wallpack.BuildConfig
-import com.berhane.biniam.wallpack.wallpack.api.UnSplashApi
 import com.berhane.biniam.wallpack.wallpack.model.data.Me
 import com.berhane.biniam.wallpack.wallpack.model.data.User
+import com.google.android.material.snackbar.Snackbar
 
 
 object PhotoConstants {

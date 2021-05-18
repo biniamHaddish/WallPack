@@ -38,11 +38,11 @@
         <activity
             android:name=".activities.PhotoDetails"
             android:parentActivityName=".activities.MainActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="fullSensor" />
         <activity android:name=".activities.CollectionActivity" />
 
         <provider
-            android:name="android.support.v4.content.FileProvider"
+            android:name="androidx.core.content.FileProvider"
             android:authorities="com.biniam.berhane.wallpack.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
@@ -53,7 +53,7 @@
 
         <activity
             android:name=".activities.PhotographerActivity"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor"
             android:theme="@style/WallPackTheme_light" />
         <activity
             android:name=".activities.CollectionDetailsActivity"

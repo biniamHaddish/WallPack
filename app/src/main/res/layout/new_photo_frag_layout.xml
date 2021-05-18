@@ -3,7 +3,7 @@
   ~ Year:2018 :
   ~ Author:bini :
   -->
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/newPhotoFragment"
@@ -36,7 +36,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/design_title_text_size"
                     />
-                <android.support.v7.widget.Toolbar
+                <Toolbar
                     android:id="@+id/main_toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -51,7 +51,7 @@
                         android:src="@drawable/ic_account_circle"
                         android:onClick="getUserDetails"
                         />
-                </android.support.v7.widget.Toolbar>
+                </Toolbar>
             </LinearLayout>
 
         </com.berhane.biniam.wallpack.wallpack.utils.NestedScrollAppBarLayout>
@@ -67,7 +67,7 @@
             app:loadingBackgroundColor="#FFFFFF"
             >
 
-            <android.support.v7.widget.RecyclerView
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/photo_recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -78,5 +78,5 @@
     </com.berhane.biniam.wallpack.wallpack.utils.SwipeBackCoordinatorLayout>
 
 
-</android.support.design.widget.CoordinatorLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
 

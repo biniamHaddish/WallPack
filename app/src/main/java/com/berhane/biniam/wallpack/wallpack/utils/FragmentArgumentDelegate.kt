@@ -8,8 +8,8 @@ package com.berhane.biniam.wallpack.wallpack.utils
 
 import android.os.Binder
 import android.os.Bundle
-import android.support.v4.app.BundleCompat
-import android.support.v4.app.Fragment
+import androidx.core.app.BundleCompat
+import androidx.fragment.app.Fragment
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
 

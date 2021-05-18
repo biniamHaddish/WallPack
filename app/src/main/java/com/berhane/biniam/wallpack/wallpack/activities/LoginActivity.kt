@@ -9,15 +9,11 @@ package com.berhane.biniam.wallpack.wallpack.activities
 import android.content.Intent
 import android.content.SharedPreferences
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
-import android.support.constraint.ConstraintLayout
-import android.support.customtabs.CustomTabsIntent
-import android.support.design.widget.Snackbar
-import android.support.v7.app.AppCompatActivity
 import android.text.TextUtils
 import android.util.Log
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.browser.customtabs.CustomTabsIntent
 import com.berhane.biniam.wallpack.wallpack.R
 import com.berhane.biniam.wallpack.wallpack.model.data.AccessToken
 import com.berhane.biniam.wallpack.wallpack.model.data.Me
@@ -86,10 +82,11 @@ class LoginActivity : AppCompatActivity(), RetrofitClient.OnRequestAccessTokenLi
      * New Intent coming here
      */
     override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
         setIntent(intent)
-        if (intent.data != null && !TextUtils.isEmpty(intent.data.authority)
-                && PhotoConstants.HOST == intent.data.authority) {
-            getAccessToken(intent.data.getQueryParameter("code"))
+        if (intent.data != null && !TextUtils.isEmpty(intent.data!!.authority)
+                && PhotoConstants.HOST == intent.data!!.authority) {
+            intent.data?.getQueryParameter("code")?.let { getAccessToken(it) }
         }
     }
 
@@ -106,7 +103,7 @@ class LoginActivity : AppCompatActivity(), RetrofitClient.OnRequestAccessTokenLi
 
     override fun onRequestAccessTokenFailed(call: Call<AccessToken>, t: Throwable) {
         t.printStackTrace()
-        Log.e(TAG, t.message)
+        t.message?.let { Log.e(TAG, it) }
         PhotoConstants.showSnack(container_login, "Request AccessToken Failed")
     }
 
@@ -125,7 +122,7 @@ class LoginActivity : AppCompatActivity(), RetrofitClient.OnRequestAccessTokenLi
             retrofitClient!!.requestMeProfile(this)
         }
         t.printStackTrace()
-        Log.e(TAG, t.message)
+        t.message?.let { Log.e(TAG, it) }
         PhotoConstants.showSnack(container_login, "Request Me Profile Failed")
     }
 
@@ -139,7 +136,7 @@ class LoginActivity : AppCompatActivity(), RetrofitClient.OnRequestAccessTokenLi
 
     override fun onRequestUserProfileFailed(call: Call<User>, t: Throwable) {
         t.printStackTrace()
-        Log.e(TAG, t.message)
+        t.message?.let { Log.e(TAG, it) }
         PhotoConstants.showSnack(container_login, "Request User Profile Failed")
     }
 

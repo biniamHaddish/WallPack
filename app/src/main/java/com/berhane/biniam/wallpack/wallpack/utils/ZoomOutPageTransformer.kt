@@ -6,8 +6,8 @@
 
 package com.berhane.biniam.wallpack.wallpack.utils
 
-import android.support.v4.view.ViewPager
 import android.view.View
+import androidx.viewpager.widget.ViewPager
 
 private const val MIN_SCALE = 0.85f
 private const val MIN_ALPHA = 0.5f

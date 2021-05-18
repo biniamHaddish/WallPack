@@ -8,14 +8,13 @@ package com.berhane.biniam.wallpack.wallpack.utils
 
 import android.app.Application
 import android.content.Context
-import android.support.v4.content.ContextCompat
-import android.support.v4.widget.CircularProgressDrawable
 import com.berhane.biniam.wallpack.wallpack.R
-import android.support.v4.app.ActivityCompat
 import android.content.pm.PackageManager
 import android.os.Build
 import android.app.Activity
-
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 
 
 class WallPack : Application() {
