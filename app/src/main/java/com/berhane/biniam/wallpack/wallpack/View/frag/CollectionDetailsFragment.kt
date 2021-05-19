@@ -7,18 +7,18 @@
 package com.berhane.biniam.wallpack.wallpack.View.frag
 
 import android.app.Activity
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.DefaultItemAnimator
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.StaggeredGridLayoutManager
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.berhane.biniam.wallpack.wallpack.R
 import com.berhane.biniam.wallpack.wallpack.model.View.WallPackViewModel
 import com.berhane.biniam.wallpack.wallpack.model.data.PhotoCollection
@@ -53,7 +53,7 @@ class CollectionDetailsFragment : Fragment() {
         }
     }
 
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         super.onAttach(context)
         Log.d(TAG, "fragment Attached")
     }
@@ -88,7 +88,7 @@ class CollectionDetailsFragment : Fragment() {
         // Ids to show while the loading view is showing
         excludeViewWhileLoading()
         scrollListener = object : EndlessRecyclerViewScrollListener(linearLayoutManager) {
-            override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView) {
+            override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView?) {
                 // Triggered only when new data needs to be appended to the list
                 // Add whatever code is needed to append new items to the bottom of the list
                 progress_layout.showContent()
@@ -127,9 +127,9 @@ class CollectionDetailsFragment : Fragment() {
      */
     private fun loadDetailedPhotoCollections(moreCollection: Boolean) {
         val args = arguments
-        var collection: PhotoCollection = args!!.getParcelable("collectionWithId")
-        Log.d(TAG, "coll_id" + collection.id)
-        viewModel.getPhotoCollectionById(collection, pageNumber, PhotoConstants.PERPAGE)!!.observe(this@CollectionDetailsFragment,
+        var collection: PhotoCollection? = args?.getParcelable("collectionWithId")
+        Log.d(TAG, "coll_id" + collection?.id)
+        collection?.let { viewModel.getPhotoCollectionById(it, pageNumber, PhotoConstants.PERPAGE) }!!.observe(this@CollectionDetailsFragment,
                 Observer<List<Photos>> { t: List<Photos>? ->
                     if (viewAdapter == null) {
                         viewAdapter = WallPackPhotoAdapter((t as MutableList<Photos>?)!!, activity as Activity)

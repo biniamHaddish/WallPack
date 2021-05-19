@@ -4,7 +4,7 @@
   ~ Author:bini :
   -->
 
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -70,7 +70,7 @@
                         android:layout_height="wrap_content"
                         app:sbv_fill_in_mode="true" />
 
-                    <android.support.v7.widget.Toolbar
+                    <Toolbar
                         android:id="@+id/toolbar_collection_detail"
                         android:layout_width="match_parent"
                         android:layout_height="?attr/actionBarSize"
@@ -166,4 +166,4 @@
         android:layout_height="wrap_content"
         app:sbv_translucent_mode="true" />
 
-</android.support.design.widget.CoordinatorLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

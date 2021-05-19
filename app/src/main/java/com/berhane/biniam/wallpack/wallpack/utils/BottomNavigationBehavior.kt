@@ -7,12 +7,12 @@
 package com.berhane.biniam.wallpack.wallpack.utils
 
 import android.content.Context
-import android.support.design.widget.CoordinatorLayout
-import android.support.design.widget.Snackbar
-import android.support.v4.view.ViewCompat
 import android.util.AttributeSet
 import android.view.Gravity
 import android.view.View
+import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.core.view.ViewCompat
+import com.google.android.material.snackbar.Snackbar
 import java.lang.Math.max
 import java.lang.Math.min
 

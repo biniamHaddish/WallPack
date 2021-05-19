@@ -11,20 +11,16 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.support.annotation.ColorRes
-import android.support.design.widget.TabLayout
-import android.support.v4.app.Fragment
-import android.support.v4.content.ContextCompat
-import android.support.v4.view.ViewPager
-import android.support.v7.app.AppCompatActivity
 import android.view.View
-import android.widget.Toast
+import androidx.annotation.ColorRes
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.viewpager.widget.ViewPager
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem
 import com.berhane.biniam.wallpack.wallpack.R
 import com.berhane.biniam.wallpack.wallpack.View.frag.FeaturedPageAdapter
-import com.berhane.biniam.wallpack.wallpack.View.frag.NewPhotosFragment
-import com.berhane.biniam.wallpack.wallpack.utils.ZoomOutPageTransformer
+import com.google.android.material.tabs.TabLayout
 
 class FeaturedActivity : AppCompatActivity() {
 

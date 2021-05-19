@@ -7,20 +7,20 @@
 package com.berhane.biniam.wallpack.wallpack.View.frag
 
 import android.app.Activity
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.DefaultItemAnimator
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.StaggeredGridLayoutManager
 import android.text.TextUtils
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.berhane.biniam.wallpack.wallpack.R
 import com.berhane.biniam.wallpack.wallpack.activities.LoginActivity
 import com.berhane.biniam.wallpack.wallpack.activities.PhotographerActivity
@@ -137,18 +137,19 @@ class NewPhotosFragment : Fragment() {
      */
     private fun loadPhotos(onLoadNext: Boolean) {
         viewModel.getPhotosList(pageNumber, categoryId)!!.observe(this@NewPhotosFragment,
-                Observer<List<Photos>> { t: List<Photos>? ->
-                    if (viewAdapter == null) {
-                        viewAdapter = WallPackPhotoAdapter((t as MutableList<Photos>?)!!, activity as Activity)
-                        mRecyclerView.adapter = viewAdapter
+            { t: List<Photos>? ->
+                if (viewAdapter == null) {
+                    viewAdapter =
+                        (t as MutableList<Photos>?)?.let { WallPackPhotoAdapter(it, activity as Activity) }
+                    mRecyclerView.adapter = viewAdapter
+                } else {
+                    if (onLoadNext) {
+                        viewAdapter!!.addAll(t!!)
                     } else {
-                        if (onLoadNext) {
-                            viewAdapter!!.addAll(t!!)
-                        } else {
-                            viewAdapter!!.setImageInfo((t as MutableList<Photos>?)!!)
-                        }
+                        viewAdapter!!.setImageInfo((t as MutableList<Photos>?)!!)
                     }
-                })
+                }
+            })
         isLoading = false
         scrollListener!!.resetState()
 
@@ -156,9 +157,11 @@ class NewPhotosFragment : Fragment() {
 
     private fun loadProfileInfo() {
         if (!TextUtils.isEmpty(avatarInfo)) {
-            Glide.with(context)
+            context?.let {
+                Glide.with(it)
                     .load(avatarInfo)
                     .into(AccountImage)
+            }
         }
 
     }

@@ -6,8 +6,9 @@
 
 package com.berhane.biniam.wallpack.wallpack.utils.image_utills
 
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+
 
 class ScrollToTopDataObserver(val layoutManager: LinearLayoutManager, val recyclerView: RecyclerView) : RecyclerView.AdapterDataObserver() {
 

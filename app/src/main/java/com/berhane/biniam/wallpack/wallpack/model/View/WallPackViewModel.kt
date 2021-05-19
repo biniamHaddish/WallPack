@@ -6,8 +6,8 @@
 
 package com.berhane.biniam.wallpack.wallpack.model.View
 
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.ViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModel
 import com.berhane.biniam.wallpack.wallpack.model.data.*
 import com.berhane.biniam.wallpack.wallpack.utils.PhotoConstants
 import com.berhane.biniam.wallpack.wallpack.utils.connectivity.RetrofitClient

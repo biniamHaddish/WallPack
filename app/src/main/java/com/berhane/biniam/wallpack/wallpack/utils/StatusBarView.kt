@@ -8,15 +8,14 @@ package com.berhane.biniam.wallpack.wallpack.utils
 
 import android.animation.ObjectAnimator
 import android.content.Context
-import android.content.res.TypedArray
 import android.graphics.Canvas
 import android.graphics.Color
 import android.os.Build
-import android.support.annotation.FloatRange
-import android.support.annotation.RequiresApi
 import android.util.AttributeSet
 import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
+import androidx.annotation.FloatRange
+import androidx.annotation.RequiresApi
 
 import com.berhane.biniam.wallpack.wallpack.R
 import com.berhane.biniam.wallpack.wallpack.utils.image_utills.DisplayUtils

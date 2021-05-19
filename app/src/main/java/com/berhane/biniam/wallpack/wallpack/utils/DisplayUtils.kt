@@ -11,18 +11,15 @@ import android.app.ActivityManager
 import android.content.Context
 import android.content.res.Configuration
 import android.content.res.Resources
-import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.Point
 import android.graphics.Typeface
 import android.os.Build
-import android.support.annotation.Size
-import android.view.Display
 import android.view.View
 import android.view.WindowManager
 import android.widget.TextView
-
+import androidx.annotation.Size
 import com.berhane.biniam.wallpack.wallpack.R
 
 class DisplayUtils(context: Context) {

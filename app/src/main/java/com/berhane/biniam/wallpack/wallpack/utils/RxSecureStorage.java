@@ -10,8 +10,9 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.security.KeyPairGeneratorSpec;
-import android.support.annotation.Nullable;
 import android.util.Base64;
+
+import androidx.annotation.Nullable;
 
 import com.f2prateek.rx.preferences2.RxSharedPreferences;
 

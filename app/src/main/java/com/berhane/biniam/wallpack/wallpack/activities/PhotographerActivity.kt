@@ -9,12 +9,11 @@ package com.berhane.biniam.wallpack.wallpack.activities
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.support.design.widget.TabLayout
-import android.support.v4.view.ViewPager
-import android.support.v7.app.AppCompatActivity
 import android.text.TextUtils
 import android.util.Log
 import android.widget.ImageView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.viewpager.widget.ViewPager
 import com.berhane.biniam.wallpack.wallpack.R
 import com.berhane.biniam.wallpack.wallpack.R.id.*
 import com.berhane.biniam.wallpack.wallpack.View.frag.PhotographerPager
@@ -24,8 +23,8 @@ import com.berhane.biniam.wallpack.wallpack.model.data.User
 import com.berhane.biniam.wallpack.wallpack.utils.PhotoConstants
 import com.berhane.biniam.wallpack.wallpack.utils.connectivity.RetrofitClient
 import com.bumptech.glide.Glide
+import com.google.android.material.tabs.TabLayout
 import com.google.gson.Gson
-import kotlinx.android.synthetic.main.notification_template_icon_group.*
 import kotlinx.android.synthetic.main.photographer_activity.*
 import retrofit2.Call
 import retrofit2.Response
@@ -52,8 +51,8 @@ class PhotographerActivity : AppCompatActivity(), RetrofitClient.OnRequestUserPr
         authPref = context.getSharedPreferences(PhotoConstants.PREFERENCE_NAME, 0)
         avatarInfo = authPref!!.getString(PhotoConstants.KEY_AVATAR_PATH, "")
         accessToken = authPref!!.getString(PhotoConstants.KEY_ACCESS_TOKEN, "")
-        username = authPref!!.getString(PhotoConstants.KEY_USERNAME, "")
-        email = authPref!!.getString(PhotoConstants.KEY_EMAIL, "")
+        username = authPref!!.getString(PhotoConstants.KEY_USERNAME, "").toString()
+        email = authPref!!.getString(PhotoConstants.KEY_EMAIL, "").toString()
 
 
         val photographerImg = findViewById<ImageView>(R.id.photographer_img)
@@ -149,6 +148,6 @@ class PhotographerActivity : AppCompatActivity(), RetrofitClient.OnRequestUserPr
 
     override fun onRequestUserProfileFailed(call: Call<User>, t: Throwable) {
         t.printStackTrace()
-        Log.d(TAG, t.message)
+        t.message?.let { Log.d(TAG, it) }
     }
 }

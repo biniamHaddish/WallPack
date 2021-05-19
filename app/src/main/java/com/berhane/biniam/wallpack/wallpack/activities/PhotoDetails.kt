@@ -15,12 +15,6 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.PorterDuff
 import android.os.Bundle
-import android.support.design.widget.BottomSheetBehavior
-import android.support.design.widget.CoordinatorLayout
-import android.support.v4.content.ContextCompat
-import android.support.v4.graphics.drawable.DrawableCompat
-import android.support.v4.widget.CircularProgressDrawable
-import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
 import android.view.WindowManager
@@ -32,6 +26,11 @@ import android.widget.CompoundButton
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.DrawableCompat
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.berhane.biniam.wallpack.wallpack.R
 import com.berhane.biniam.wallpack.wallpack.model.data.PhotoDetails
 import com.berhane.biniam.wallpack.wallpack.model.data.PhotoLike
@@ -48,6 +47,7 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import com.github.clans.fab.FloatingActionButton
 import com.github.clans.fab.FloatingActionMenu
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.detailed_photo.*
 import okhttp3.ResponseBody
@@ -186,7 +186,7 @@ class PhotoDetails : AppCompatActivity(), RetrofitClient.OnReportDownloadListene
 
     override fun onRequestPhotoDetailsFailed(call: Call<PhotoDetails>, t: Throwable) {
         t.printStackTrace()
-        Log.d(TAG, t.message)
+        t.message?.let { Log.d(TAG, it) }
         retrofitClient!!.requestPhotoDetails(photos!!.id, this@PhotoDetails)
     }
 

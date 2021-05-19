@@ -6,11 +6,9 @@
 
 package com.berhane.biniam.wallpack.wallpack.View.frag
 
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import com.berhane.biniam.wallpack.wallpack.model.data.Photos
-import com.berhane.biniam.wallpack.wallpack.model.data.User
-import com.berhane.biniam.wallpack.wallpack.utils.PhotoConstants
 import com.berhane.biniam.wallpack.wallpack.utils.SmartFragmentStatePagerAdapter
 
 class PhotographerPager(fm: FragmentManager, Photographer: Photos) : SmartFragmentStatePagerAdapter(fm) {

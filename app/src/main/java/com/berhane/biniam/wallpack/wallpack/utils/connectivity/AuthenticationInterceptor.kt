@@ -26,7 +26,9 @@ class AuthenticationInterceptor : Interceptor {
 
         val request: Request
         if (!TextUtils.isEmpty(accessToken)) {
-            Log.d("AuthenticationT", accessToken)
+            if (accessToken != null) {
+                Log.d("AuthenticationT", accessToken)
+            }
             request = chain.request()
                     .newBuilder()
                     .addHeader("Authorization", "Bearer $accessToken")

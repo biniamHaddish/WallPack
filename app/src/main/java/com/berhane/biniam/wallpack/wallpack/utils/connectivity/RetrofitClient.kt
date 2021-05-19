@@ -6,16 +6,17 @@
 
 package com.berhane.biniam.wallpack.wallpack.utils.connectivity
 
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MutableLiveData
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.berhane.biniam.wallpack.wallpack.api.Authorization
 import com.berhane.biniam.wallpack.wallpack.api.UnSplashApi
 import com.berhane.biniam.wallpack.wallpack.model.data.*
 import com.berhane.biniam.wallpack.wallpack.utils.PhotoConstants
-import com.berhane.biniam.wallpack.wallpack.utils.TLSUtill
+import com.berhane.biniam.wallpack.wallpack.utils.TLSUtil
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
+import okhttp3.ResponseBody
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
 import retrofit2.Callback
@@ -23,11 +24,9 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
-import android.content.ClipData.Item
-import okhttp3.ResponseBody
 
 
-class RetrofitClient : TLSUtill() {
+class RetrofitClient : TLSUtil() {
 
 
     val TAG = "RetrofitClient"
@@ -101,7 +100,7 @@ class RetrofitClient : TLSUtill() {
 
             override fun onFailure(call: Call<List<Photos>>, t: Throwable) {
                 t.printStackTrace()
-                Log.e("Retrofit", t.message)
+                t.message?.let { Log.e("Retrofit", it) }
             }
         })
         return data
@@ -121,7 +120,7 @@ class RetrofitClient : TLSUtill() {
 
             override fun onFailure(call: Call<List<Photos>>, t: Throwable) {
                 t.printStackTrace()
-                Log.e("Retrofit", t.message)
+                t.message?.let { Log.e("Retrofit", it) }
             }
         })
         return data
@@ -141,7 +140,7 @@ class RetrofitClient : TLSUtill() {
 
             override fun onFailure(call: Call<List<PhotoCollection>>, t: Throwable) {
                 t.printStackTrace()
-                Log.e(TAG, t.message)
+                t.message?.let { Log.e(TAG, it) }
             }
         })
         return data
@@ -183,7 +182,7 @@ class RetrofitClient : TLSUtill() {
 
             override fun onFailure(call: Call<List<PhotoCollection>>, t: Throwable) {
                 t.printStackTrace()
-                Log.e(TAG, t.message)
+                t.message?.let { Log.e(TAG, it) }
             }
         })
         return data
@@ -198,7 +197,7 @@ class RetrofitClient : TLSUtill() {
         PhotographerPhotos.enqueue(object : Callback<List<Photos>> {
             override fun onFailure(call: Call<List<Photos>>, t: Throwable) {
                 t.printStackTrace()
-                Log.e(TAG, t.message)
+                t.message?.let { Log.e(TAG, it) }
             }
 
             override fun onResponse(call: Call<List<Photos>>, response: Response<List<Photos>>) {
@@ -224,7 +223,7 @@ class RetrofitClient : TLSUtill() {
         getPhotographerLikes.enqueue(object : Callback<List<Photos>> {
             override fun onFailure(call: Call<List<Photos>>, t: Throwable) {
                 t.printStackTrace()
-                Log.e(TAG, t.message)
+                t.message?.let { Log.e(TAG, it) }
             }
 
             override fun onResponse(call: Call<List<Photos>>, response: Response<List<Photos>>) {
@@ -245,7 +244,7 @@ class RetrofitClient : TLSUtill() {
         getPhotographerCollection.enqueue(object : Callback<List<PhotoCollection>> {
             override fun onFailure(call: Call<List<PhotoCollection>>, t: Throwable) {
                 t.printStackTrace()
-                Log.e(TAG, t.message)
+                t.message?.let { Log.e(TAG, it) }
             }
 
             override fun onResponse(call: Call<List<PhotoCollection>>, response: Response<List<PhotoCollection>>) {
@@ -271,7 +270,7 @@ class RetrofitClient : TLSUtill() {
 
             override fun onFailure(call: Call<List<PhotoCollection>>, t: Throwable) {
                 t.printStackTrace()
-                Log.e(TAG, t.message)
+                t.message?.let { Log.e(TAG, it) }
             }
         })
         return data
@@ -287,7 +286,7 @@ class RetrofitClient : TLSUtill() {
         getSearchedPhotos.enqueue(object : Callback<SearchResult> {
             override fun onFailure(call: Call<SearchResult>, t: Throwable) {
                 t.printStackTrace()
-                Log.e(TAG, t.message)
+                t.message?.let { Log.e(TAG, it) }
             }
 
             override fun onResponse(call: Call<SearchResult>, response: Response<SearchResult>) {
@@ -310,7 +309,7 @@ class RetrofitClient : TLSUtill() {
         getSearchedPhotos.enqueue(object : Callback<SearchUserResult> {
             override fun onFailure(call: Call<SearchUserResult>, t: Throwable) {
                 t.printStackTrace()
-                Log.e(TAG, t.message)
+                t.message?.let { Log.e(TAG, it) }
             }
 
             override fun onResponse(call: Call<SearchUserResult>, response: Response<SearchUserResult>) {
@@ -337,7 +336,7 @@ class RetrofitClient : TLSUtill() {
 
             override fun onFailure(call: Call<CollectionSerachResult>, t: Throwable) {
                 t.printStackTrace()
-                Log.e(TAG, t.message)
+                t.message?.let { Log.e(TAG, it) }
             }
         })
         return data
@@ -352,7 +351,7 @@ class RetrofitClient : TLSUtill() {
         getCuratedPhotos.enqueue(object : Callback<List<Photos>> {
             override fun onFailure(call: Call<List<Photos>>, t: Throwable) {
                 t.printStackTrace()
-                Log.e(TAG, t.message)
+                t.message?.let { Log.e(TAG, it) }
             }
 
             override fun onResponse(call: Call<List<Photos>>, response: Response<List<Photos>>) {
